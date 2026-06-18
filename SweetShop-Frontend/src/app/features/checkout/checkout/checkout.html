@@ -1,0 +1,155 @@
+<div class="checkout-container">
+  <h1>💳 Plaćanje</h1>
+
+  @if (isLoading()) {
+    <div class="loading">
+      <mat-spinner></mat-spinner>
+    </div>
+  } @else {
+    @let cart = cartService.cart();
+
+    @if (!cart || cart.items.length === 0) {
+      <div class="empty-cart-warning">
+        <mat-icon>shopping_cart</mat-icon>
+        <p>Vaša korpa je prazna.</p>
+        <a mat-raised-button color="primary" routerLink="/products">Idi na proizvode</a>
+      </div>
+    } @else {
+      <div class="checkout-grid">
+
+        <!-- Glavni deo -->
+        <div class="checkout-main">
+
+          <!-- Korak 1: Adresa -->
+          @if (currentStep() === 'address') {
+            <mat-card class="step-card">
+              <mat-card-header>
+                <mat-card-title>1. Adresa isporuke</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                @if (addresses().length === 0) {
+                  <div class="no-addresses">
+                    <p>Niste još dodali adresu isporuke.</p>
+                    <a mat-raised-button color="primary" routerLink="/addresses" [queryParams]="{returnUrl: '/checkout'}">
+                      <mat-icon>add_location</mat-icon>
+                      Dodaj adresu
+                    </a>
+                  </div>
+                } @else {
+                  <mat-radio-group [value]="selectedAddressId()" (change)="selectedAddressId.set($event.value)">
+                    @for (address of addresses(); track address.id) {
+                      <div class="address-option" [class.selected]="selectedAddressId() === address.id">
+                        <mat-radio-button [value]="address.id" color="primary">
+                          <div class="address-content">
+                            <div class="address-header">
+                              <strong>{{ address.recipientName }}</strong>
+                              @if (address.isDefault) {
+                                <span class="default-tag">Podrazumevana</span>
+                              }
+                            </div>
+                            <div>{{ address.street }}</div>
+                            <div>{{ address.postalCode }} {{ address.city }}, {{ address.country }}</div>
+                            @if (address.phoneNumber) {
+                              <div class="phone">📞 {{ address.phoneNumber }}</div>
+                            }
+                          </div>
+                        </mat-radio-button>
+                      </div>
+                    }
+                  </mat-radio-group>
+
+                  <a mat-button routerLink="/addresses" [queryParams]="{returnUrl: '/checkout'}" class="add-new-link">
+                    <mat-icon>add</mat-icon>
+                    Dodaj novu adresu
+                  </a>
+
+                  <button mat-raised-button color="primary" (click)="goToPayment()" [disabled]="!selectedAddressId() || isCreatingOrder()" class="next-button">
+                    @if (isCreatingOrder()) {
+                      <mat-spinner diameter="20"></mat-spinner>
+                      <span>Priprema plaćanja...</span>
+                    } @else {
+                      <span>Nastavi na plaćanje</span>
+                      <mat-icon>arrow_forward</mat-icon>
+                    }
+                  </button>
+                }
+              </mat-card-content>
+            </mat-card>
+          }
+
+          <!-- Korak 2: Plaćanje -->
+          @if (currentStep() === 'payment' && clientSecret()) {
+            <mat-card class="step-card">
+              <mat-card-header>
+                <mat-card-title>2. Podaci o plaćanju</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <div class="selected-address-info">
+                  <mat-icon>location_on</mat-icon>
+                  <div>
+                    <strong>Isporuka na:</strong>
+                    {{ getSelectedAddress()?.street }}, {{ getSelectedAddress()?.city }}
+                    <button mat-button (click)="backToAddress()" class="change-link">Izmeni</button>
+                  </div>
+                </div>
+
+                <mat-divider class="my-divider"></mat-divider>
+
+                <h3>Plaćanje karticom</h3>
+                <p class="test-card-info">
+                  💡 <strong>Test kartica:</strong> 4242 4242 4242 4242 | bilo koji datum u budućnosti | bilo koji CVC
+                </p>
+
+                <app-stripe-payment
+                  [clientSecret]="clientSecret()!"
+                  (paymentSuccess)="onPaymentSuccess()"
+                  (paymentError)="onPaymentError($event)">
+                </app-stripe-payment>
+              </mat-card-content>
+            </mat-card>
+          }
+        </div>
+
+        <!-- Sažetak -->
+        <div class="checkout-summary">
+          <mat-card class="summary-card">
+            <mat-card-content>
+              <h2>Sažetak</h2>
+
+              <div class="items-list">
+                @for (item of cart.items; track item.id) {
+                  <div class="summary-item">
+                    <div class="item-info">
+                      <strong>{{ item.productName }}</strong>
+                      <small>{{ item.quantity }} x {{ item.unitPrice | number:'1.2-2' }} €</small>
+                    </div>
+                    <span>{{ item.subtotal | number:'1.2-2' }} €</span>
+                  </div>
+                }
+              </div>
+
+              <mat-divider></mat-divider>
+
+              <div class="summary-line">
+                <span>Proizvodi ({{ cart.totalItems }}):</span>
+                <span>{{ cart.totalPrice | number:'1.2-2' }} €</span>
+              </div>
+
+              <div class="summary-line">
+                <span>Dostava:</span>
+                <span class="free">Besplatna 🚚</span>
+              </div>
+
+              <mat-divider></mat-divider>
+
+              <div class="summary-total">
+                <span>Ukupno:</span>
+                <strong>{{ cart.totalPrice | number:'1.2-2' }} €</strong>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    }
+  }
+</div>

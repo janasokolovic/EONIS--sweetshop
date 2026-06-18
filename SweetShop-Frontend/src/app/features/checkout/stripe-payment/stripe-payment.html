@@ -1,0 +1,35 @@
+<div class="stripe-payment-container">
+  @if (isLoading()) {
+    <div class="loading">
+      <mat-spinner diameter="40"></mat-spinner>
+      <p>Učitavanje formulara za plaćanje...</p>
+    </div>
+  }
+
+  <!-- Stripe Elements će se mount-ovati ovde -->
+  <div #paymentElement class="payment-element" [style.display]="isLoading() ? 'none' : 'block'"></div>
+
+  @if (errorMessage()) {
+    <div class="error-message">
+      <mat-icon>error_outline</mat-icon>
+      {{ errorMessage() }}
+    </div>
+  }
+
+  @if (!isLoading()) {
+    <button mat-raised-button color="primary" class="pay-button" (click)="submitPayment()" [disabled]="isProcessing()">
+      @if (isProcessing()) {
+        <mat-spinner diameter="20"></mat-spinner>
+        <span>Obrada plaćanja...</span>
+      } @else {
+        <mat-icon>lock</mat-icon>
+        <span>Plati sigurno</span>
+      }
+    </button>
+
+    <p class="security-note">
+      <mat-icon>security</mat-icon>
+      Plaćanje je obezbeđeno preko Stripe-a. Vaši podaci o kartici nikada ne idu preko našeg servera.
+    </p>
+  }
+</div>

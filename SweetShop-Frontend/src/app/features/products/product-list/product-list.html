@@ -1,0 +1,132 @@
+<div class="product-list-container">
+  <!-- Hero sekcija -->
+  <section class="hero">
+    <h1>🍬 Dobrodošli u SweetShop!</h1>
+    <p>Otkrijte najukusnije slatkiše po najboljim cenama</p>
+  </section>
+
+  <!-- Filteri -->
+  <section class="filters">
+    <mat-form-field appearance="outline" class="search-field">
+      <mat-label>Pretraga proizvoda</mat-label>
+      <input matInput [formControl]="searchControl" placeholder="Pretražite po nazivu ili opisu...">
+      <mat-icon matPrefix>search</mat-icon>
+      @if (searchControl.value) {
+        <button mat-icon-button matSuffix (click)="clearSearch()" type="button">
+          <mat-icon>close</mat-icon>
+        </button>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="filter-field">
+      <mat-label>Kategorija</mat-label>
+      <mat-select [(value)]="selectedCategoryId" (selectionChange)="onCategoryChange($event.value)">
+        <mat-option [value]="null">Sve kategorije</mat-option>
+        @for (cat of categories(); track cat.id) {
+          <mat-option [value]="cat.id">{{ cat.name }} ({{ cat.productCount }})</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="filter-field">
+      <mat-label>Sortiranje</mat-label>
+      <mat-select [value]="sortBy + ':' + (sortDescending ? 'desc' : 'asc')" (selectionChange)="onSortChange($event.value)">
+        <mat-option value="createdAt:desc">Najnoviji</mat-option>
+        <mat-option value="name:asc">Naziv A-Z</mat-option>
+        <mat-option value="name:desc">Naziv Z-A</mat-option>
+        <mat-option value="price:asc">Cena: niža → viša</mat-option>
+        <mat-option value="price:desc">Cena: viša → niža</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </section>
+
+  <!-- Aktivni filteri (chip) -->
+  @if (selectedCategoryId !== null || searchControl.value) {
+    <mat-chip-set class="active-filters">
+      @if (selectedCategoryId !== null) {
+        <mat-chip (removed)="onCategoryChange(null)">
+          Kategorija
+          <button matChipRemove><mat-icon>cancel</mat-icon></button>
+        </mat-chip>
+      }
+      @if (searchControl.value) {
+        <mat-chip (removed)="clearSearch()">
+          "{{ searchControl.value }}"
+          <button matChipRemove><mat-icon>cancel</mat-icon></button>
+        </mat-chip>
+      }
+    </mat-chip-set>
+  }
+
+  <!-- Učitavanje -->
+  @if (isLoading()) {
+    <div class="loading">
+      <mat-spinner></mat-spinner>
+    </div>
+  }
+
+  <!-- Lista proizvoda -->
+  @if (!isLoading()) {
+    @if (products().length === 0) {
+      <div class="empty-state">
+        <mat-icon>sentiment_dissatisfied</mat-icon>
+        <h3>Nema proizvoda</h3>
+        <p>Probajte da promenite filtere ili pretragu.</p>
+      </div>
+    } @else {
+      <div class="products-grid">
+        @for (product of products(); track product.id) {
+          <mat-card class="product-card" [routerLink]="['/products', product.id]">
+            <div class="product-image">
+              @if (product.images.length > 0) {
+                <img [src]="getPrimaryImage(product)" [alt]="product.name" (error)="$any($event.target).style.display='none'">
+              } @else {
+                <div class="no-image">
+                  <mat-icon>image_not_supported</mat-icon>
+                </div>
+              }
+              @if (product.stockQuantity === 0) {
+                <span class="out-of-stock-badge">Rasprodato</span>
+              } @else if (product.stockQuantity < 10) {
+                <span class="low-stock-badge">Samo {{ product.stockQuantity }} kom!</span>
+              }
+            </div>
+
+            <mat-card-content>
+              <div class="category-chip">{{ product.categoryName }}</div>
+              <h3 class="product-name">{{ product.name }}</h3>
+              <p class="product-description">{{ product.description }}</p>
+
+              @if (product.reviewCount > 0) {
+                <div class="rating">
+                  <mat-icon class="star">star</mat-icon>
+                  <span>{{ product.averageRating | number:'1.1-1' }}</span>
+                  <span class="review-count">({{ product.reviewCount }})</span>
+                </div>
+              }
+
+              <div class="product-bottom">
+                <span class="price">{{ product.price | number:'1.2-2' }} €</span>
+                <button mat-raised-button color="primary" (click)="addToCart(product, $event)" [disabled]="product.stockQuantity === 0">
+                  <mat-icon>add_shopping_cart</mat-icon>
+                  Dodaj
+                </button>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        }
+      </div>
+
+      <!-- Paginacija -->
+      <mat-paginator
+        [length]="totalCount()"
+        [pageSize]="pageSize"
+        [pageSizeOptions]="[12, 24, 48]"
+        [pageIndex]="page - 1"
+        (page)="onPageChange($event)"
+        showFirstLastButtons
+        aria-label="Izaberi stranicu">
+      </mat-paginator>
+    }
+  }
+</div>

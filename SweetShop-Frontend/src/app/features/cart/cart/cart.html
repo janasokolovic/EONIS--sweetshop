@@ -1,0 +1,107 @@
+<div class="cart-container">
+  <h1>🛒 Vaša korpa</h1>
+
+  @if (isLoading()) {
+    <div class="loading">
+      <mat-spinner></mat-spinner>
+    </div>
+  } @else {
+    @let cart = cartService.cart();
+
+    @if (!cart || cart.items.length === 0) {
+      <!-- Prazna korpa -->
+      <div class="empty-cart">
+        <mat-icon>shopping_cart</mat-icon>
+        <h2>Vaša korpa je prazna</h2>
+        <p>Dodajte slatkiše iz našeg asortimana!</p>
+        <a mat-raised-button color="primary" routerLink="/products">
+          <mat-icon>storefront</mat-icon>
+          Pregledaj proizvode
+        </a>
+      </div>
+    } @else {
+      <div class="cart-content">
+        <!-- Lista stavki -->
+        <div class="cart-items">
+          @for (item of cart.items; track item.id) {
+            <mat-card class="cart-item">
+              <div class="item-image">
+                @if (item.productImageUrl) {
+                  <img [src]="item.productImageUrl" [alt]="item.productName" (error)="$any($event.target).style.display='none'">
+                } @else {
+                  <div class="no-image">
+                    <mat-icon>image_not_supported</mat-icon>
+                  </div>
+                }
+              </div>
+
+              <div class="item-info">
+                <a [routerLink]="['/products', item.productId]" class="item-name">{{ item.productName }}</a>
+                <div class="item-price">{{ item.unitPrice | number:'1.2-2' }} € / kom</div>
+                @if (item.availableStock < 10) {
+                  <small class="stock-warning">Još samo {{ item.availableStock }} kom na zalihama</small>
+                }
+              </div>
+
+              <div class="item-quantity">
+                <button mat-icon-button (click)="decreaseQuantity(item)" [disabled]="updatingItemId() === item.id">
+                  <mat-icon>remove</mat-icon>
+                </button>
+                <span class="qty-value">{{ item.quantity }}</span>
+                <button mat-icon-button (click)="increaseQuantity(item)" [disabled]="updatingItemId() === item.id || item.quantity >= item.availableStock">
+                  <mat-icon>add</mat-icon>
+                </button>
+              </div>
+
+              <div class="item-subtotal">
+                <strong>{{ item.subtotal | number:'1.2-2' }} €</strong>
+              </div>
+
+              <button mat-icon-button class="remove-btn" (click)="removeItem(item)" [disabled]="updatingItemId() === item.id" aria-label="Ukloni">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </mat-card>
+          }
+
+          <button mat-button color="warn" (click)="clearCart()" class="clear-cart-btn">
+            <mat-icon>delete_sweep</mat-icon>
+            Isprazni korpu
+          </button>
+        </div>
+
+        <!-- Sažetak -->
+        <mat-card class="cart-summary">
+          <mat-card-content>
+            <h2>Sažetak narudžbine</h2>
+
+            <div class="summary-line">
+              <span>Broj proizvoda:</span>
+              <span>{{ cart.totalItems }}</span>
+            </div>
+
+            <div class="summary-line">
+              <span>Dostava:</span>
+              <span class="free">Besplatna 🚚</span>
+            </div>
+
+            <mat-divider></mat-divider>
+
+            <div class="summary-total">
+              <span>Ukupno:</span>
+              <strong>{{ cart.totalPrice | number:'1.2-2' }} €</strong>
+            </div>
+
+            <button mat-raised-button color="primary" class="checkout-btn" (click)="goToCheckout()">
+              <mat-icon>payment</mat-icon>
+              Idi na plaćanje
+            </button>
+
+            <a mat-button routerLink="/products" class="continue-shopping">
+              Nastavi kupovinu
+            </a>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    }
+  }
+</div>

@@ -1,0 +1,84 @@
+<div class="admin-reviews-container">
+  <header class="page-header">
+    <div>
+      <h1>Moderacija recenzija</h1>
+      <p>Pregled i odobravanje recenzija pre objave</p>
+    </div>
+  </header>
+
+  @if (isLoading()) {
+    <div class="loading">
+      <mat-spinner></mat-spinner>
+    </div>
+  } @else {
+    @if (pendingReviews().length === 0) {
+      <mat-card class="empty-state-card">
+        <mat-card-content>
+          <div class="empty-state">
+            <mat-icon>check_circle</mat-icon>
+            <h3>Sve je sređeno! 🎉</h3>
+            <p>Nema recenzija koje čekaju moderaciju.</p>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    } @else {
+      <div class="info-banner">
+        <mat-icon>info</mat-icon>
+        <span><strong>{{ pendingReviews().length }}</strong> {{ pendingReviews().length === 1 ? 'recenzija čeka' : 'recenzija čeka' }} na vašu odluku</span>
+      </div>
+
+      <div class="reviews-list">
+        @for (review of pendingReviews(); track review.id) {
+          <mat-card class="review-card">
+            <mat-card-content>
+              <div class="review-header">
+                <div class="reviewer-info">
+                  <mat-icon class="avatar">account_circle</mat-icon>
+                  <div>
+                    <strong>{{ review.customerName }}</strong>
+                    <small>{{ review.createdAt | date:'dd.MM.yyyy. HH:mm' }}</small>
+                  </div>
+                </div>
+
+                <div class="rating-display">
+                  @for (filled of getStars(review.rating); track $index) {
+                    <mat-icon [class.filled]="filled === 1">{{ filled === 1 ? 'star' : 'star_border' }}</mat-icon>
+                  }
+                  <span class="rating-text">{{ review.rating }}/5</span>
+                </div>
+              </div>
+
+              <mat-divider class="my-divider"></mat-divider>
+
+              <div class="product-info">
+                <mat-icon>inventory_2</mat-icon>
+                <strong>{{ review.productName }}</strong>
+              </div>
+
+              <div class="comment-block">
+                <p>{{ review.comment }}</p>
+              </div>
+
+              <mat-divider class="my-divider"></mat-divider>
+
+              <div class="card-actions">
+                <button mat-raised-button color="primary" (click)="approveReview(review)" [disabled]="processingReviewId() === review.id">
+                  @if (processingReviewId() === review.id) {
+                    <mat-spinner diameter="20"></mat-spinner>
+                  } @else {
+                    <mat-icon>check_circle</mat-icon>
+                    <span>Odobri recenziju</span>
+                  }
+                </button>
+                <button mat-stroked-button color="warn" (click)="rejectReview(review)" [disabled]="processingReviewId() === review.id">
+                  <mat-icon>cancel</mat-icon>
+                  <span>Odbij recenziju</span>
+                </button>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        }
+      </div>
+    }
+  }
+</div>

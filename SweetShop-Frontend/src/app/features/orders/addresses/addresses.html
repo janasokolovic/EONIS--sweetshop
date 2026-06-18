@@ -1,0 +1,159 @@
+<div class="addresses-container">
+  <div class="header-row">
+    <h1>📍 Moje adrese</h1>
+    @if (!showForm()) {
+      <button mat-raised-button color="primary" (click)="openAddForm()">
+        <mat-icon>add_location</mat-icon>
+        Dodaj novu adresu
+      </button>
+    }
+  </div>
+
+  @if (returnUrl) {
+    <div class="info-banner">
+      <mat-icon>info</mat-icon>
+      Izaberite adresu za isporuku kako biste nastavili sa porudžbinom.
+    </div>
+  }
+
+  @if (isLoading()) {
+    <div class="loading">
+      <mat-spinner></mat-spinner>
+    </div>
+  } @else {
+
+    <!-- Forma za dodavanje/izmenu -->
+    @if (showForm()) {
+      <mat-card class="form-card">
+        <mat-card-header>
+          <mat-card-title>{{ editingAddress() ? 'Izmena adrese' : 'Nova adresa' }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <form [formGroup]="addressForm" (ngSubmit)="submitForm()" class="address-form">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Ime i prezime primaoca</mat-label>
+              <input matInput formControlName="recipientName">
+              @if (addressForm.get('recipientName')?.hasError('required') && addressForm.get('recipientName')?.touched) {
+                <mat-error>Obavezno polje</mat-error>
+              }
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Ulica i broj</mat-label>
+              <input matInput formControlName="street">
+              @if (addressForm.get('street')?.hasError('required') && addressForm.get('street')?.touched) {
+                <mat-error>Obavezno polje</mat-error>
+              }
+            </mat-form-field>
+
+            <div class="form-row">
+              <mat-form-field appearance="outline">
+                <mat-label>Grad</mat-label>
+                <input matInput formControlName="city">
+                @if (addressForm.get('city')?.hasError('required') && addressForm.get('city')?.touched) {
+                  <mat-error>Obavezno</mat-error>
+                }
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Poštanski broj</mat-label>
+                <input matInput formControlName="postalCode">
+                @if (addressForm.get('postalCode')?.hasError('required') && addressForm.get('postalCode')?.touched) {
+                  <mat-error>Obavezno</mat-error>
+                }
+              </mat-form-field>
+            </div>
+
+            <div class="form-row">
+              <mat-form-field appearance="outline">
+                <mat-label>Država</mat-label>
+                <input matInput formControlName="country">
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Telefon (opciono)</mat-label>
+                <input matInput formControlName="phoneNumber" placeholder="+381...">
+              </mat-form-field>
+            </div>
+
+            <mat-checkbox formControlName="isDefault" color="primary">
+              Postavi kao podrazumevanu adresu
+            </mat-checkbox>
+
+            <div class="form-actions">
+              <button mat-button type="button" (click)="closeForm()" [disabled]="isSubmitting()">Otkaži</button>
+              <button mat-raised-button color="primary" type="submit" [disabled]="isSubmitting()">
+                @if (isSubmitting()) {
+                  <mat-spinner diameter="20"></mat-spinner>
+                } @else {
+                  <span>{{ editingAddress() ? 'Sačuvaj izmene' : 'Dodaj adresu' }}</span>
+                }
+              </button>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    }
+
+    <!-- Lista adresa -->
+    @if (addresses().length === 0 && !showForm()) {
+      <div class="empty-state">
+        <mat-icon>location_off</mat-icon>
+        <h3>Nemate sačuvanih adresa</h3>
+        <p>Dodajte adresu za isporuku kako biste mogli da poručujete.</p>
+      </div>
+    } @else if (addresses().length > 0) {
+      <div class="addresses-list">
+        @for (address of addresses(); track address.id) {
+          <mat-card class="address-card" [class.default]="address.isDefault">
+            <mat-card-content>
+              @if (address.isDefault) {
+                <div class="default-badge">
+                  <mat-icon>star</mat-icon>
+                  Podrazumevana
+                </div>
+              }
+
+              <h3>{{ address.recipientName }}</h3>
+              <p class="address-line">
+                <mat-icon>home</mat-icon>
+                {{ address.street }}
+              </p>
+              <p class="address-line">
+                <mat-icon>location_city</mat-icon>
+                {{ address.city }}, {{ address.postalCode }}
+              </p>
+              <p class="address-line">
+                <mat-icon>public</mat-icon>
+                {{ address.country }}
+              </p>
+              @if (address.phoneNumber) {
+                <p class="address-line">
+                  <mat-icon>phone</mat-icon>
+                  {{ address.phoneNumber }}
+                </p>
+              }
+
+              <div class="card-actions">
+                @if (returnUrl) {
+                  <button mat-raised-button color="primary" (click)="selectAndReturn(address)">
+                    <mat-icon>check</mat-icon>
+                    Izaberi za isporuku
+                  </button>
+                }
+                <button mat-button (click)="openEditForm(address)">
+                  <mat-icon>edit</mat-icon>
+                  Izmeni
+                </button>
+                <button mat-button color="warn" (click)="deleteAddress(address)">
+                  <mat-icon>delete</mat-icon>
+                  Obriši
+                </button>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        }
+      </div>
+    }
+  }
+</div>

@@ -1,0 +1,85 @@
+.header-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  padding: 0 24px;
+  gap: 8px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 24px;
+
+  .logo-icon {
+    font-size: 32px;
+  }
+
+  .logo-text {
+    letter-spacing: 0.5px;
+  }
+}
+
+.spacer {
+  flex: 1;
+}
+
+.nav-links {
+  display: flex;
+  gap: 8px;
+
+  a {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    &.active {
+      background-color: rgba(255, 255, 255, 0.15);
+    }
+  }
+}
+
+.cart-button {
+  margin: 0 8px;
+}
+
+.user-menu-button {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  .user-name {
+    margin: 0 4px;
+  }
+}
+
+.menu-header {
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  strong {
+    font-size: 14px;
+  }
+
+  small {
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.6);
+  }
+}
+
+// Responsive - sakri tekst na manjim ekranima
+@media (max-width: 768px) {
+  .logo-text,
+  .nav-links span,
+  .user-name {
+    display: none;
+  }
+}

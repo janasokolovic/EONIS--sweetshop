@@ -1,0 +1,178 @@
+<div class="admin-orders-container">
+  <header class="page-header">
+    <div>
+      <h1>Porudžbine</h1>
+      <p>Upravljaj porudžbinama kupaca</p>
+    </div>
+  </header>
+
+  <!-- FILTERI -->
+  <mat-card class="filters-card">
+    <mat-card-content>
+      <div class="filters-row">
+        <mat-form-field appearance="outline" class="search-field">
+          <mat-label>Pretraga (kupac, email...)</mat-label>
+          <input matInput [formControl]="searchControl">
+          <mat-icon matPrefix>search</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="status-field">
+          <mat-label>Status</mat-label>
+          <mat-select [(value)]="statusFilter" (selectionChange)="onStatusFilterChange($event.value)">
+            <mat-option [value]="null">Svi statusi</mat-option>
+            <mat-option value="Pending">Na čekanju</mat-option>
+            <mat-option value="Paid">Plaćeno</mat-option>
+            <mat-option value="Processing">U obradi</mat-option>
+            <mat-option value="Shipped">Poslato</mat-option>
+            <mat-option value="Delivered">Isporučeno</mat-option>
+            <mat-option value="Cancelled">Otkazano</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- LISTA -->
+  @if (isLoading()) {
+    <div class="loading">
+      <mat-spinner></mat-spinner>
+    </div>
+  } @else {
+    @if (orders().length === 0) {
+      <mat-card class="empty-state-card">
+        <mat-card-content>
+          <div class="empty-state">
+            <mat-icon>receipt_long</mat-icon>
+            <h3>Nema porudžbina</h3>
+            <p>{{ statusFilter ? 'Nema porudžbina sa odabranim statusom.' : 'Još nije pristigla nijedna porudžbina.' }}</p>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    } @else {
+      <div class="orders-list">
+        @for (order of orders(); track order.id) {
+          <mat-card class="order-card">
+            <mat-card-content>
+              <!-- Header rola -->
+              <div class="order-summary">
+                <div class="order-id-block">
+                  <strong>#{{ order.id }}</strong>
+                  <small>{{ order.orderDate | date:'dd.MM.yyyy. HH:mm' }}</small>
+                </div>
+
+                <div class="customer-block">
+                  <mat-icon>person</mat-icon>
+                  <div>
+                    <strong>{{ order.customerName }}</strong>
+                    <small>{{ order.customerEmail }}</small>
+                  </div>
+                </div>
+
+                <div class="amount-block">
+                  <span>Iznos</span>
+                  <strong>{{ order.totalAmount | number:'1.2-2' }} €</strong>
+                </div>
+
+                <div class="status-block">
+                  <span class="status-badge" [ngClass]="getStatusClass(order.status)">
+                    <mat-icon>{{ getStatusIcon(order.status) }}</mat-icon>
+                    {{ getStatusLabel(order.status) }}
+                  </span>
+                </div>
+
+                <div class="status-change-block">
+  @if (getAvailableStatuses(order.status).length > 0) {
+    <button mat-stroked-button color="primary" [matMenuTriggerFor]="statusMenu" [disabled]="updatingOrderId() === order.id" class="status-btn">
+      @if (updatingOrderId() === order.id) {
+        <mat-spinner diameter="20"></mat-spinner>
+      } @else {
+        <mat-icon>edit</mat-icon>
+        Promeni status
+      }
+    </button>
+    <mat-menu #statusMenu="matMenu">
+      @for (s of getAvailableStatuses(order.status); track s.value) {
+        <button mat-menu-item (click)="updateStatus(order, s.value)">
+          <mat-icon>{{ s.icon }}</mat-icon>
+          <span>{{ s.label }}</span>
+        </button>
+      }
+    </mat-menu>
+  } @else {
+    <span class="no-actions">—</span>
+  }
+</div>
+
+<div class="expand-block">
+  <button mat-icon-button (click)="toggleExpand(order.id)" matTooltip="Detalji">
+    <mat-icon>{{ expandedOrderId() === order.id ? 'expand_less' : 'expand_more' }}</mat-icon>
+  </button>
+</div>
+              </div>
+
+              <!-- Detalji (expand) -->
+              @if (expandedOrderId() === order.id) {
+                <mat-divider class="my-divider"></mat-divider>
+
+                <div class="order-details">
+                  <!-- Adresa isporuke -->
+                  <div class="detail-section">
+                    <h4><mat-icon>location_on</mat-icon> Adresa isporuke</h4>
+                    <div class="address-info">
+                      <strong>{{ order.shippingAddress.recipientName }}</strong>
+                      <div>{{ order.shippingAddress.street }}</div>
+                      <div>{{ order.shippingAddress.postalCode }} {{ order.shippingAddress.city }}, {{ order.shippingAddress.country }}</div>
+                      @if (order.shippingAddress.phoneNumber) {
+                        <div>📞 {{ order.shippingAddress.phoneNumber }}</div>
+                      }
+                    </div>
+                  </div>
+
+                  <!-- Stavke -->
+                  <div class="detail-section">
+                    <h4><mat-icon>shopping_basket</mat-icon> Stavke ({{ order.items.length }})</h4>
+                    <div class="items-list">
+                      @for (item of order.items; track item.id) {
+                        <div class="item-row">
+                          <div class="item-info">
+                            <strong>{{ item.productName }}</strong>
+                            <small>{{ item.quantity }} × {{ item.unitPrice | number:'1.2-2' }} €</small>
+                          </div>
+                          <span class="item-subtotal">{{ item.subtotal | number:'1.2-2' }} €</span>
+                        </div>
+                      }
+                    </div>
+                  </div>
+
+                  <!-- Plaćanje -->
+                  @if (order.payment) {
+                    <div class="detail-section">
+                      <h4><mat-icon>payment</mat-icon> Plaćanje</h4>
+                      <div class="payment-info">
+                        <div><strong>Stripe ID:</strong> <code>{{ order.payment.stripePaymentIntentId }}</code></div>
+                        <div><strong>Iznos:</strong> {{ order.payment.amount | number:'1.2-2' }} {{ order.payment.currency.toUpperCase() }}</div>
+                        <div><strong>Status:</strong> {{ order.payment.status }}</div>
+                        @if (order.payment.paidAt) {
+                          <div><strong>Plaćeno:</strong> {{ order.payment.paidAt | date:'dd.MM.yyyy. HH:mm' }}</div>
+                        }
+                      </div>
+                    </div>
+                  }
+                </div>
+              }
+            </mat-card-content>
+          </mat-card>
+        }
+      </div>
+
+      <mat-paginator
+        [length]="totalCount()"
+        [pageSize]="pageSize"
+        [pageSizeOptions]="[10, 25, 50]"
+        [pageIndex]="page - 1"
+        (page)="onPageChange($event)"
+        showFirstLastButtons>
+      </mat-paginator>
+    }
+  }
+</div>

@@ -1,0 +1,194 @@
+.admin-reviews-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.page-header {
+  margin-bottom: 24px;
+
+  h1 {
+    margin: 0 0 4px;
+    color: #3D2817;
+    font-size: 28px;
+  }
+
+  p {
+    margin: 0;
+    color: #999;
+  }
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  padding: 80px 0;
+}
+
+.empty-state-card {
+  margin-top: 24px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 80px 24px;
+
+  mat-icon {
+    font-size: 96px;
+    width: 96px;
+    height: 96px;
+    color: #81C784;
+    margin-bottom: 24px;
+  }
+
+  h3 {
+    color: #3D2817;
+    margin-bottom: 8px;
+    font-size: 24px;
+  }
+
+  p {
+    color: #999;
+    margin: 0;
+  }
+}
+
+.info-banner {
+  background-color: #FFF8E1;
+  color: #5D4037;
+  padding: 14px 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-left: 4px solid #F4C430;
+
+  mat-icon {
+    color: #F4C430;
+  }
+
+  strong {
+    color: #3D2817;
+  }
+}
+
+.reviews-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.review-card {
+  transition: all 0.3s;
+
+  &:hover {
+    box-shadow: 0 4px 16px rgba(255, 107, 157, 0.1);
+  }
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.reviewer-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  .avatar {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+    color: #FF6B9D;
+  }
+
+  strong {
+    display: block;
+    font-size: 16px;
+    color: #3D2817;
+  }
+
+  small {
+    display: block;
+    color: #999;
+    font-size: 13px;
+  }
+}
+
+.rating-display {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  mat-icon {
+    font-size: 22px;
+    width: 22px;
+    height: 22px;
+    color: #DDD;
+
+    &.filled {
+      color: #F4C430;
+    }
+  }
+
+  .rating-text {
+    margin-left: 8px;
+    color: #555;
+    font-weight: 600;
+  }
+}
+
+.my-divider {
+  margin: 16px 0;
+}
+
+.product-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+
+  mat-icon {
+    color: #FF6B9D;
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+  }
+
+  strong {
+    color: #FF6B9D;
+    font-size: 16px;
+  }
+}
+
+.comment-block {
+  background-color: #FFF5F7;
+  padding: 16px 20px;
+  border-radius: 8px;
+  border-left: 4px solid #FFB6C1;
+
+  p {
+    margin: 0;
+    color: #3D2817;
+    line-height: 1.6;
+    font-size: 15px;
+    font-style: italic;
+  }
+}
+
+.card-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+
+  button {
+    flex: 1;
+    min-width: 200px;
+    height: 48px;
+  }
+}

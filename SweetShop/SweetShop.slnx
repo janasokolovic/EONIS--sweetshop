@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="SweetShop.API/SweetShop.API.csproj" />
+  <Project Path="SweetShop.Application/SweetShop.Application.csproj" Id="b6416bd7-f4f1-4c9b-8e3d-4c0651cc6135" />
+  <Project Path="SweetShop.Domain/SweetShop.Domain.csproj" Id="33a89168-5274-4b7f-bd4b-c63e3b642813" />
+  <Project Path="SweetShop.Infrastructure/SweetShop.Infrastructure.csproj" Id="a5dc28c4-8672-4c11-b324-665023e899a8" />
+</Solution>

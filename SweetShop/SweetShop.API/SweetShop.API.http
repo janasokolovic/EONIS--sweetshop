@@ -1,0 +1,74 @@
+@SweetShop.API_HostAddress = https://localhost:7052
+
+### ⚠️ ZALEPI TOKEN OVDE (umesto TVOJ_TOKEN_OVDE)
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjIiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJ0ZXN0QHRlc3QuY29tIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQ3VzdG9tZXIiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9naXZlbm5hbWUiOiJNYXJpamEiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9zdXJuYW1lIjoiTWFya292acSHIiwiZXhwIjoxNzgwOTQzODE3LCJpc3MiOiJTd2VldFNob3AuQVBJIiwiYXVkIjoiU3dlZXRTaG9wLkNsaWVudCJ9.VVG8DRcYVjCRZW_yZ7RGWyXdGtAu1lSyF0v6F6wuHYc
+
+### ============= JAVNI ENDPOINTS =============
+
+### Login (ako trebaš novi token)
+POST {{SweetShop.API_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "test@test.com",
+  "password": "Test123!"
+}
+
+### Lista proizvoda
+GET {{SweetShop.API_HostAddress}}/api/products
+Accept: application/json
+
+### Lista kategorija
+GET {{SweetShop.API_HostAddress}}/api/categories
+Accept: application/json
+
+### ============= ZAŠTIĆENI ENDPOINTS =============
+
+### Pregled svojih adresa
+GET {{SweetShop.API_HostAddress}}/api/shipping-addresses
+Authorization: Bearer {{token}}
+Accept: application/json
+
+### Pregled svoje korpe
+GET {{SweetShop.API_HostAddress}}/api/cart
+Authorization: Bearer {{token}}
+Accept: application/json
+
+### Dodaj proizvod u korpu (Milka Mliječna - id=1)
+POST {{SweetShop.API_HostAddress}}/api/cart/items
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "productId": 1,
+  "quantity": 2
+}
+
+### Dodaj još jedan proizvod (Lindt - id=2)
+POST {{SweetShop.API_HostAddress}}/api/cart/items
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "productId": 2,
+  "quantity": 1
+}
+
+### Kreiraj porudžbinu (zameni shippingAddressId sa stvarnim id-jem iz baze)
+POST {{SweetShop.API_HostAddress}}/api/orders
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "shippingAddressId": 1
+}
+
+### Pregled svojih porudžbina
+GET {{SweetShop.API_HostAddress}}/api/orders/my
+Authorization: Bearer {{token}}
+Accept: application/json
+
+### Kreiraj Stripe PaymentIntent (zameni 1 sa stvarnim orderId)
+POST {{SweetShop.API_HostAddress}}/api/payments/create-intent/1
+Authorization: Bearer {{token}}
+Accept: application/json

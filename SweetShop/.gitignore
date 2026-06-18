@@ -1,0 +1,16 @@
+﻿bin/
+obj/
+*.user
+*.suo
+.vs/
+.vscode/
+packages/
+[Dd]ebug/
+[Rr]elease/
+*.log
+appsettings.Production.json
+appsettings.Local.json
+*.mdf
+*.ldf
+Stripe/
+stripe.exe

@@ -112,7 +112,7 @@ export class AdminProducts implements OnInit {
       categoryId: this.selectedCategoryId ?? undefined,
       sortBy: 'createdAt',
       sortDescending: true,
-      includeInactive: true  // ← admin vidi i neaktivne proizvode
+      includeInactive: true  
     }).subscribe({
       next: (result) => {
         this.products.set(result.items);

@@ -71,7 +71,18 @@ export class AdminCategories implements OnInit {
     this.editingCategory.set(null);
     this.categoryForm.reset({ name: '', description: '', imageUrl: '' });
     this.showForm.set(true);
+    setTimeout(() => {
+    const adminContent = document.querySelector('.admin-content') as HTMLElement;
+    if (adminContent) {
+      adminContent.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    // Backup - skroluj i window i .mat-sidenav-content
+    const sidenavContent = document.querySelector('.mat-sidenav-content') as HTMLElement;
+    if (sidenavContent) {
+      sidenavContent.scrollTo({ top: 0, behavior: 'smooth' });
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, 50);
   }
 
   openEditForm(category: CategoryDto): void {
@@ -82,7 +93,18 @@ export class AdminCategories implements OnInit {
       imageUrl: category.imageUrl || ''
     });
     this.showForm.set(true);
+      setTimeout(() => {
+    const adminContent = document.querySelector('.admin-content') as HTMLElement;
+    if (adminContent) {
+      adminContent.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    // Backup - skroluj i window i .mat-sidenav-content
+    const sidenavContent = document.querySelector('.mat-sidenav-content') as HTMLElement;
+    if (sidenavContent) {
+      sidenavContent.scrollTo({ top: 0, behavior: 'smooth' });
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, 50);
   }
 
   closeForm(): void {
@@ -196,4 +218,8 @@ getImagePreviewUrl(): string {
   const url = this.categoryForm.get('imageUrl')?.value;
   return this.uploadService.getFullUrl(url);
 }
+getCategoryImage(category: CategoryDto): string {
+  return this.uploadService.getFullUrl(category.imageUrl);
+}
+
 }

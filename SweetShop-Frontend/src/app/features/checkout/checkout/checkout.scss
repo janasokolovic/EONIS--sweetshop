@@ -1,86 +1,238 @@
+// ============================================================
+// Checkout Styles — SweetShop
+// Wizard progress, adresa, plaćanje
+// ============================================================
+
 .checkout-container {
-  max-width: 1200px;
+  max-width: 1100px;
   margin: 0 auto;
-  padding: 24px;
+  padding: 32px 24px 56px;
+}
+
+// ============================================================
+// PAGE HEADER + WIZARD
+// ============================================================
+.page-header {
+  margin-bottom: 36px;
 
   h1 {
-    margin-bottom: 32px;
-    color: #3D2817;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin: 0 0 24px;
   }
 }
 
+.wizard-progress {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  max-width: 380px;
+}
+
+.wizard-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+
+  .step-circle {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border: 2.5px solid rgba(255, 107, 157, 0.25);
+    background: white;
+    color: var(--text-light);
+    transition: all var(--transition-base);
+    box-shadow: var(--shadow-soft);
+
+    mat-icon {
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .step-label {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text-light);
+    transition: color var(--transition-base);
+  }
+
+  &.active {
+    .step-circle {
+      background: var(--gradient-pink);
+      border-color: var(--sweet-pink);
+      color: white;
+      box-shadow: var(--shadow-pink-md);
+      animation: pulse-pink 2s ease-in-out infinite;
+    }
+    .step-label { color: var(--sweet-pink); }
+  }
+
+  &.done {
+    .step-circle {
+      background: var(--gradient-pink);
+      border-color: var(--sweet-pink);
+      color: white;
+      box-shadow: var(--shadow-pink-sm);
+    }
+    .step-label { color: var(--sweet-pink); }
+  }
+}
+
+.wizard-line {
+  flex: 1;
+  height: 3px;
+  background: rgba(255, 107, 157, 0.2);
+  border-radius: var(--radius-pill);
+  margin: 0 10px;
+  margin-bottom: 22px;
+  transition: background var(--transition-slow);
+  position: relative;
+  overflow: hidden;
+
+  &.done {
+    background: var(--gradient-pink);
+  }
+}
+
+// ============================================================
+// LOADER + EMPTY
+// ============================================================
 .loading {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   padding: 80px 0;
+  gap: 20px;
+
+  .loading-text {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 1.1rem;
+    color: var(--text-medium);
+    margin: 0;
+  }
 }
 
 .empty-cart-warning {
   text-align: center;
-  padding: 60px 24px;
+  padding: 64px 24px;
 
-  mat-icon {
-    font-size: 64px;
-    width: 64px;
-    height: 64px;
-    color: #FFB6C1;
-    margin-bottom: 16px;
+  .empty-emoji {
+    font-size: 5rem;
+    display: block;
+    margin-bottom: 20px;
+    animation: float 3s ease-in-out infinite;
   }
 
   p {
-    color: #666;
+    color: var(--text-medium);
     margin-bottom: 24px;
+    font-size: 1rem;
   }
 }
 
+// ============================================================
+// GRID
+// ============================================================
 .checkout-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 32px;
+  grid-template-columns: 1fr 360px;
+  gap: 28px;
+  align-items: start;
 
   @media (max-width: 968px) {
     grid-template-columns: 1fr;
   }
 }
 
+// ============================================================
+// STEP CARD
+// ============================================================
 .step-card {
-  margin-bottom: 24px;
+  border-radius: var(--radius-lg) !important;
+  border: 1.5px solid rgba(255, 107, 157, 0.12) !important;
+  box-shadow: var(--shadow-pink-sm) !important;
+  overflow: visible !important;
 
-  mat-card-title {
-    color: #FF6B9D;
+  mat-card-header {
+    padding: 20px 24px 0;
+
+    mat-card-title {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      .step-title-icon {
+        font-size: 1.4rem;
+      }
+    }
+  }
+
+  mat-card-content {
+    padding: 20px 24px 24px !important;
   }
 }
 
+// ============================================================
+// ADRESNE OPCIJE
+// ============================================================
 .no-addresses {
   text-align: center;
-  padding: 32px 16px;
+  padding: 40px 16px;
+
+  .no-addr-emoji {
+    font-size: 4rem;
+    display: block;
+    margin-bottom: 16px;
+    animation: float 3s ease-in-out infinite;
+  }
 
   p {
-    color: #666;
-    margin-bottom: 16px;
+    color: var(--text-medium);
+    margin-bottom: 20px;
+    font-size: 0.95rem;
   }
 }
 
 .address-option {
   margin-bottom: 12px;
-  padding: 16px;
-  border: 2px solid #FFE5EC;
-  border-radius: 8px;
+  padding: 16px 18px;
+  border: 2px solid rgba(255, 107, 157, 0.2);
+  border-radius: var(--radius-md);
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all var(--transition-base);
+  background: white;
 
   &:hover {
-    background-color: #FFF5F7;
+    background: var(--bg-cream);
+    border-color: rgba(255, 107, 157, 0.4);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-pink-sm);
   }
 
   &.selected {
-    border-color: #FF6B9D;
-    background-color: #FFF5F7;
+    border-color: var(--sweet-pink);
+    background: var(--sweet-pink-pale);
+    box-shadow: var(--shadow-pink-sm);
   }
 
-  mat-radio-button {
-    display: block;
-  }
+  mat-radio-button { display: block; }
 
   .address-content {
     margin-left: 8px;
@@ -90,103 +242,170 @@
   .address-header {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     margin-bottom: 4px;
+
+    strong {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1rem;
+      color: var(--text-dark);
+    }
   }
 
   .default-tag {
-    background-color: #FF6B9D;
+    background: var(--gradient-pink);
     color: white;
     padding: 2px 10px;
-    border-radius: 12px;
-    font-size: 11px;
+    border-radius: var(--radius-pill);
+    font-family: 'Fredoka', sans-serif;
+    font-size: 0.72rem;
     font-weight: 600;
+    letter-spacing: 0.3px;
   }
 
-  .phone {
-    color: #666;
-    font-size: 14px;
+  .address-line {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.88rem;
+    color: var(--text-medium);
+  }
+
+  .address-phone {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.82rem;
+    color: var(--text-light);
     margin-top: 4px;
   }
 }
 
 .add-new-link {
-  margin-top: 16px;
-  margin-bottom: 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin: 12px 0 20px;
+  font-family: 'Quicksand', sans-serif !important;
+  color: var(--sweet-pink) !important;
+  font-size: 0.88rem !important;
+  border-radius: var(--radius-pill) !important;
+
+  &:hover { background: var(--sweet-pink-pale) !important; }
 }
 
 .next-button {
   width: 100%;
-  height: 56px;
-  font-size: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
+  height: 52px !important;
+  font-family: 'Fredoka', sans-serif !important;
+  font-size: 1.05rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  border-radius: var(--radius-pill) !important;
 }
 
+// ============================================================
+// KORAK 2 - PLAĆANJE
+// ============================================================
 .selected-address-info {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 12px;
-  padding: 16px;
-  background-color: #FFF5F7;
-  border-radius: 8px;
+  padding: 14px 18px;
+  background: var(--bg-cream);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 107, 157, 0.15);
   margin-bottom: 16px;
 
   mat-icon {
-    color: #FF6B9D;
+    color: var(--sweet-pink);
+    font-size: 22px;
+    flex-shrink: 0;
+    margin-top: 2px;
   }
 
   div {
     flex: 1;
-  }
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.9rem;
+    color: var(--text-medium);
+    line-height: 1.5;
 
-  strong {
-    display: block;
-    margin-bottom: 4px;
+    strong {
+      display: block;
+      color: var(--text-dark);
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.95rem;
+      margin-bottom: 2px;
+    }
   }
 
   .change-link {
-    margin-left: 16px;
+    font-family: 'Quicksand', sans-serif !important;
+    color: var(--sweet-pink) !important;
+    font-size: 0.82rem !important;
+    padding: 0 8px !important;
+    border-radius: var(--radius-pill) !important;
+    height: auto !important;
+    min-height: unset !important;
   }
 }
 
-.my-divider {
-  margin: 16px 0;
-}
+.my-divider { margin: 16px 0; }
 
 h3 {
-  color: #3D2817;
-  margin: 16px 0 8px;
+  font-family: 'Fredoka', sans-serif;
+  font-size: 1.15rem;
+  color: var(--text-dark);
+  margin: 16px 0 10px;
 }
 
 .test-card-info {
-  background-color: #FFF8E1;
+  background: rgba(244, 196, 48, 0.12);
   padding: 12px 16px;
-  border-radius: 8px;
-  font-size: 13px;
+  border-radius: var(--radius-md);
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.85rem;
   color: #5D4037;
-  margin: 0 0 16px;
-  border-left: 4px solid #F4C430;
+  margin: 0 0 20px;
+  border-left: 4px solid var(--sweet-gold);
+  line-height: 1.5;
 }
 
+// ============================================================
+// CHECKOUT SUMMARY
+// ============================================================
 .checkout-summary {
-  .summary-card {
-    position: sticky;
-    top: 88px;
-    height: fit-content;
+  position: sticky;
+  top: 88px;
+}
+
+.summary-card {
+  border-radius: var(--radius-lg) !important;
+  border: 1.5px solid rgba(255, 107, 157, 0.15) !important;
+  overflow: hidden;
+
+  // Gradient top traka
+  &::before {
+    content: '';
+    display: block;
+    height: 4px;
+    background: var(--gradient-pink);
+  }
+
+  mat-card-content {
+    padding: 20px 22px 22px !important;
   }
 
   h2 {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--text-dark);
     margin: 0 0 16px;
-    color: #3D2817;
-    font-size: 22px;
   }
 }
 
 .items-list {
-  margin-bottom: 16px;
+  margin-bottom: 8px;
 }
 
 .summary-item {
@@ -194,11 +413,9 @@ h3 {
   justify-content: space-between;
   align-items: flex-start;
   padding: 8px 0;
-  border-bottom: 1px solid #FFF5F7;
+  border-bottom: 1px dashed rgba(255, 107, 157, 0.15);
 
-  &:last-child {
-    border-bottom: none;
-  }
+  &:last-child { border-bottom: none; }
 
   .item-info {
     flex: 1;
@@ -206,36 +423,76 @@ h3 {
 
     strong {
       display: block;
-      font-size: 14px;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.9rem;
+      color: var(--text-dark);
       margin-bottom: 2px;
     }
 
     small {
-      color: #999;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 0.78rem;
+      color: var(--text-light);
     }
   }
+
+  .item-total {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    white-space: nowrap;
+  }
+}
+
+.summary-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 107, 157, 0.3), transparent);
+  margin: 10px 0;
 }
 
 .summary-line {
   display: flex;
   justify-content: space-between;
-  margin: 12px 0;
-  color: #555;
+  align-items: center;
+  padding: 6px 0;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.9rem;
+  color: var(--text-medium);
 
   .free {
-    color: #2E7D32;
-    font-weight: 600;
+    color: #0a6b52;
+    font-weight: 700;
+    font-size: 0.85rem;
   }
 }
 
 .summary-total {
   display: flex;
   justify-content: space-between;
-  margin: 16px 0 0;
-  font-size: 20px;
+  align-items: center;
+  padding: 12px 0 0;
+
+  span {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-dark);
+  }
 
   strong {
-    color: #FF6B9D;
-    font-size: 24px;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--sweet-pink);
   }
+}
+
+// ============================================================
+// RESPONSIVE
+// ============================================================
+@media (max-width: 768px) {
+  .checkout-container { padding: 16px; }
+  .checkout-summary { position: static; }
+  .wizard-progress { max-width: 100%; }
 }

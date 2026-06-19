@@ -111,7 +111,8 @@ export class AdminProducts implements OnInit {
       searchTerm: this.searchControl.value || undefined,
       categoryId: this.selectedCategoryId ?? undefined,
       sortBy: 'createdAt',
-      sortDescending: true
+      sortDescending: true,
+      includeInactive: true  // ← admin vidi i neaktivne proizvode
     }).subscribe({
       next: (result) => {
         this.products.set(result.items);

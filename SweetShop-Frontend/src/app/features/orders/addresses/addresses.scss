@@ -1,160 +1,510 @@
+// ============================================================
+// Addresses Styles — SweetShop
+// ============================================================
+
 .addresses-container {
   max-width: 1000px;
   margin: 0 auto;
-  padding: 24px;
+  padding: 32px 24px 64px;
 }
 
+// Header Row
 .header-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 24px;
+  margin-bottom: 32px;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 20px;
 
-  h1 {
-    margin: 0;
-    color: #3D2817;
+  .title-area {
+    h1 {
+      font-size: 32px;
+      font-weight: 800;
+      color: #3D2817;
+      margin: 0 0 6px 0;
+    }
+
+    .subtitle {
+      font-size: 15px;
+      color: #8C7A6B;
+      margin: 0;
+    }
+  }
+
+  .add-address-btn {
+    background: linear-gradient(135deg, #FF6B9D 0%, #FF4F87 100%);
+    color: white;
+    padding: 0 24px;
+    height: 46px;
+    line-height: 46px;
+    border-radius: 23px;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 107, 157, 0.4);
+    }
+
+    mat-icon {
+      margin-right: 6px;
+    }
   }
 }
 
+// Info Banner (Address selection for checkout)
 .info-banner {
-  background-color: #E3F2FD;
+  background-color: rgba(#E3F2FD, 0.85);
   color: #1565C0;
-  padding: 16px;
-  border-radius: 8px;
-  margin-bottom: 24px;
+  border: 1px solid rgba(#1565C0, 0.15);
+  padding: 16px 20px;
+  border-radius: 16px;
+  margin-bottom: 32px;
   display: flex;
   align-items: center;
   gap: 12px;
-}
-
-.loading {
-  display: flex;
-  justify-content: center;
-  padding: 80px 0;
-}
-
-.empty-state {
-  text-align: center;
-  padding: 80px 24px;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(21, 101, 192, 0.04);
+  backdrop-filter: blur(4px);
 
   mat-icon {
-    font-size: 96px;
-    width: 96px;
-    height: 96px;
-    color: #FFB6C1;
-    margin-bottom: 16px;
-  }
-
-  h3 {
-    font-size: 24px;
-    color: #3D2817;
-    margin-bottom: 8px;
-  }
-
-  p {
-    color: #999;
+    color: #1976D2;
+    flex-shrink: 0;
   }
 }
 
+// Loading state
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 0;
+  gap: 16px;
+
+  mat-spinner {
+    ::ng-deep circle {
+      stroke: #FF6B9D !important;
+    }
+  }
+
+  .loading-text {
+    color: #8C7A6B;
+    font-weight: 500;
+    margin: 0;
+  }
+}
+
+// Form Card (Add/Edit Address)
 .form-card {
-  margin-bottom: 32px;
-  background-color: #FFF5F7;
+  border-radius: 24px !important;
+  border: 1px solid #FFE5EC;
+  background: linear-gradient(180deg, #FFF9FA 0%, #FFFFFF 100%) !important;
+  box-shadow: 0 10px 30px rgba(255, 107, 157, 0.06) !important;
+  margin-bottom: 40px;
+  padding: 8px;
+
+  mat-card-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #3D2817;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 16px 8px;
+
+    .form-title-icon {
+      font-size: 24px;
+    }
+  }
 }
 
 .address-form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  margin-top: 16px;
-}
-
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-
-  @media (max-width: 600px) {
-    grid-template-columns: 1fr;
-  }
-}
-
-.full-width {
-  width: 100%;
-}
-
-.form-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 12px;
-  margin-top: 16px;
-}
-
-.addresses-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 20px;
-}
+  padding: 16px;
 
-.address-card {
-  position: relative;
-  transition: all 0.3s;
-
-  &.default {
-    border: 2px solid #FF6B9D;
+  .full-width {
+    width: 100%;
   }
 
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba(255, 107, 157, 0.15);
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+
+    @media (max-width: 600px) {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
   }
 
-  h3 {
-    margin: 0 0 16px;
-    color: #3D2817;
+  // Material Form Field Customize
+  ::ng-deep {
+    .mat-mdc-form-field-focus-indicator {
+      display: none;
+    }
+    .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__leading,
+    .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__notch,
+    .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__trailing {
+      border-color: #FFE5EC !important;
+      border-width: 1.5px !important;
+    }
+    .mdc-text-field--outlined:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-notched-outline__leading,
+    .mdc-text-field--outlined:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-notched-outline__notch,
+    .mdc-text-field--outlined:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-notched-outline__trailing {
+      border-color: #FFB6C1 !important;
+    }
+    .mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-notched-outline__leading,
+    .mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-notched-outline__notch,
+    .mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-notched-outline__trailing {
+      border-color: #FF6B9D !important;
+    }
+    .mat-mdc-form-field.mat-focused .mat-mdc-select-arrow {
+      color: #FF6B9D !important;
+    }
+    .mat-mdc-form-field-prefix {
+      margin-right: 8px;
+      .mat-icon {
+        color: #FFB6C1;
+      }
+    }
+    .mat-focused .mat-mdc-form-field-prefix .mat-icon {
+      color: #FF6B9D;
+    }
+    .mat-mdc-form-field-label {
+      color: #8C7A6B !important;
+    }
   }
 
-  .default-badge {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    background-color: #FF6B9D;
-    color: white;
-    padding: 4px 12px;
-    border-radius: 12px;
-    font-size: 12px;
-    font-weight: 600;
+  .checkbox-wrapper {
+    padding: 4px 0;
+  }
+
+  .form-actions {
     display: flex;
-    align-items: center;
-    gap: 4px;
+    justify-content: flex-end;
+    gap: 16px;
+    margin-top: 8px;
+    border-top: 1px solid #FFE5EC;
+    padding-top: 20px;
 
-    mat-icon {
-      font-size: 14px;
-      width: 14px;
-      height: 14px;
+    .cancel-btn {
+      color: #8C7A6B;
+      font-weight: 600;
+      border-radius: 20px;
+      padding: 0 20px;
+      height: 40px;
+      line-height: 40px;
+    }
+
+    .submit-btn {
+      background: linear-gradient(135deg, #FF6B9D 0%, #FF4F87 100%);
+      color: white;
+      font-weight: 600;
+      border-radius: 20px;
+      padding: 0 24px;
+      height: 40px;
+      line-height: 40px;
+      box-shadow: 0 4px 12px rgba(255, 107, 157, 0.2);
+
+      &:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 6px 15px rgba(255, 107, 157, 0.3);
+      }
+
+      &[disabled] {
+        background: #F5EAEF;
+        color: #C2B4B9;
+      }
     }
   }
 }
 
+// Empty State
+.empty-state {
+  text-align: center;
+  padding: 64px 24px;
+  background: white;
+  border-radius: 24px;
+  border: 1px solid #FFE5EC;
+  box-shadow: 0 8px 24px rgba(255, 107, 157, 0.04);
+  max-width: 500px;
+  margin: 40px auto;
+
+  .empty-icon-wrapper {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .empty-emoji {
+    font-size: 72px;
+    line-height: 1;
+    z-index: 2;
+  }
+
+  .floating-candies {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+
+    .candy-piece {
+      position: absolute;
+      font-size: 24px;
+      animation: floatCandy 4s ease-in-out infinite;
+
+      &:nth-child(1) {
+        top: 10%;
+        left: 5%;
+        animation-delay: 0s;
+      }
+      &:nth-child(2) {
+        top: 20%;
+        right: 5%;
+        animation-delay: 1.3s;
+      }
+      &:nth-child(3) {
+        bottom: 10%;
+        left: 30%;
+        animation-delay: 2.6s;
+      }
+    }
+  }
+
+  h3 {
+    font-size: 24px;
+    color: #3D2817;
+    font-weight: 700;
+    margin: 0 0 12px 0;
+  }
+
+  p {
+    color: #8C7A6B;
+    font-size: 15px;
+    line-height: 1.5;
+    margin: 0 0 28px 0;
+  }
+
+  .add-address-btn {
+    background: linear-gradient(135deg, #FF6B9D 0%, #FF4F87 100%);
+    color: white;
+    padding: 0 24px;
+    height: 46px;
+    line-height: 46px;
+    border-radius: 23px;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 107, 157, 0.4);
+    }
+
+    mat-icon {
+      margin-right: 6px;
+    }
+  }
+}
+
+// Addresses Grid List
+.addresses-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+// Address Card
+.address-card {
+  border-radius: 20px !important;
+  border: 1px solid #FFE5EC;
+  background: white;
+  box-shadow: 0 6px 20px rgba(255, 107, 157, 0.03) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+
+  &.default {
+    border: 2px solid #FF6B9D;
+    background: linear-gradient(180deg, #FFFDFE 0%, #FFFFFF 100%);
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #FF6B9D, #FF4F87);
+    }
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(255, 107, 157, 0.08) !important;
+    border-color: #FFC0D3;
+  }
+
+  .recipient-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: #3D2817;
+    margin: 4px 0 16px 0;
+    padding-right: 120px; // Spacing for default badge
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .default-badge {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: linear-gradient(135deg, #FF6B9D 0%, #FF4F87 100%);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    box-shadow: 0 2px 8px rgba(255, 107, 157, 0.25);
+
+    mat-icon {
+      font-size: 12px;
+      width: 12px;
+      height: 12px;
+      color: #FFEB3B;
+    }
+  }
+}
+
+// Address details wrapper
+.address-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #FFF5F7;
+  padding-bottom: 16px;
+}
+
+// Address lines
 .address-line {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin: 8px 0;
-  color: #555;
+  gap: 10px;
+  margin: 0;
+  color: #604F43;
+  font-size: 14px;
 
   mat-icon {
     font-size: 18px;
     width: 18px;
     height: 18px;
-    color: #FF6B9D;
+    color: #FFB6C1;
+    flex-shrink: 0;
   }
 }
 
+// Card Actions Footer
 .card-actions {
   display: flex;
-  gap: 8px;
-  margin-top: 16px;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 12px;
+
+  .select-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #FF6B9D 0%, #FF4F87 100%);
+    color: white;
+    font-weight: 600;
+    border-radius: 20px;
+    height: 38px;
+    line-height: 38px;
+    box-shadow: 0 4px 10px rgba(255, 107, 157, 0.2);
+    transition: all 0.3s ease;
+
+    &:hover {
+      box-shadow: 0 6px 15px rgba(255, 107, 157, 0.3);
+      transform: translateY(-1px);
+    }
+
+    mat-icon {
+      margin-right: 4px;
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  .action-buttons-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+
+    .edit-btn {
+      color: #FF6B9D;
+      font-weight: 600;
+      font-size: 13px;
+      border-radius: 16px;
+      height: 32px;
+      line-height: 32px;
+      padding: 0 12px;
+
+      &:hover {
+        background-color: #FFF5F7;
+      }
+
+      mat-icon {
+        font-size: 16px;
+        width: 16px;
+        height: 16px;
+        margin-right: 4px;
+      }
+    }
+
+    .delete-btn {
+      color: #E53935;
+      font-weight: 600;
+      font-size: 13px;
+      border-radius: 16px;
+      height: 32px;
+      line-height: 32px;
+      padding: 0 12px;
+
+      &:hover {
+        background-color: #FFEBEE;
+      }
+
+      mat-icon {
+        font-size: 16px;
+        width: 16px;
+        height: 16px;
+        margin-right: 4px;
+      }
+    }
+  }
+}
+
+// Keyframes
+@keyframes floatCandy {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(15deg);
+  }
 }

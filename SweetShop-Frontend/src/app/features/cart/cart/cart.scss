@@ -1,206 +1,383 @@
+// ============================================================
+// Cart Styles — SweetShop
+// ============================================================
+
 .cart-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 24px;
+  padding: 32px 24px 56px;
+}
+
+.page-header {
+  margin-bottom: 32px;
 
   h1 {
-    margin-bottom: 32px;
-    color: #3D2817;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin: 0;
   }
 }
 
 .loading {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   padding: 80px 0;
+  gap: 20px;
+
+  .loading-text {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 1.1rem;
+    color: var(--text-medium);
+    margin: 0;
+  }
 }
 
+// ============================================================
+// PRAZNA KORPA
+// ============================================================
 .empty-cart {
   text-align: center;
-  padding: 80px 24px;
+  padding: 72px 24px;
 
-  mat-icon {
-    font-size: 96px;
-    width: 96px;
-    height: 96px;
-    color: #FFB6C1;
-    margin-bottom: 24px;
+  .empty-cart-visual {
+    margin-bottom: 28px;
+
+    .empty-cart-emoji {
+      font-size: 6rem;
+      display: block;
+      margin-bottom: 16px;
+      animation: floatSlow 3s ease-in-out infinite;
+    }
+
+    .empty-candy-row {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      font-size: 1.8rem;
+    }
   }
 
   h2 {
-    font-size: 28px;
-    color: #3D2817;
-    margin-bottom: 12px;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 1.9rem;
+    color: var(--text-dark);
+    margin: 0 0 12px;
   }
 
   p {
-    color: #999;
-    margin-bottom: 24px;
+    color: var(--text-light);
+    font-size: 1rem;
+    margin-bottom: 28px;
   }
 }
 
+// ============================================================
+// GRID: Stavke + Sažetak
+// ============================================================
 .cart-content {
   display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 32px;
+  grid-template-columns: 1fr 380px;
+  gap: 28px;
+  align-items: start;
 
   @media (max-width: 968px) {
     grid-template-columns: 1fr;
   }
 }
 
+// ============================================================
+// CART ITEMS
+// ============================================================
 .cart-items {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
 }
 
 .cart-item {
   display: grid;
-  grid-template-columns: 100px 1fr auto auto auto;
-  gap: 20px;
+  grid-template-columns: 90px 1fr auto auto auto;
+  gap: 18px;
   align-items: center;
-  padding: 16px !important;
+  padding: 16px 20px !important;
+  border-radius: var(--radius-lg) !important;
+  border: 1.5px solid rgba(255, 107, 157, 0.1) !important;
+  transition: all var(--transition-base);
 
-  @media (max-width: 600px) {
-    grid-template-columns: 80px 1fr;
+  &:hover {
+    border-color: rgba(255, 107, 157, 0.25) !important;
+    box-shadow: var(--shadow-pink-md) !important;
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 640px) {
+    grid-template-columns: 70px 1fr;
     grid-template-rows: auto auto auto;
+    gap: 12px;
 
-    .item-quantity {
-      grid-column: 1 / -1;
-    }
-
-    .item-subtotal,
-    .remove-btn {
-      grid-column: 2;
-    }
+    .item-quantity { grid-column: 1 / -1; justify-self: start; }
+    .item-subtotal { grid-column: 2; justify-self: start; }
+    .remove-btn    { grid-column: 2; justify-self: end; grid-row: 1; }
   }
 }
 
 .item-image {
-  width: 100px;
-  height: 100px;
-  background-color: #FFF5F7;
-  border-radius: 8px;
+  width: 90px;
+  height: 90px;
+  background: var(--bg-cream);
+  border-radius: var(--radius-md);
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 107, 157, 0.1);
 
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
   }
 
-  .no-image mat-icon {
-    font-size: 48px;
-    width: 48px;
-    height: 48px;
-    color: #ccc;
+  .no-image {
+    font-size: 2.2rem;
+    animation: float 3s ease-in-out infinite;
   }
 }
 
 .item-info {
+  min-width: 0;
+
   .item-name {
     display: block;
-    font-size: 18px;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 1.05rem;
     font-weight: 600;
-    color: #3D2817;
+    color: var(--text-dark);
     text-decoration: none;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color var(--transition-fast);
 
-    &:hover {
-      color: #FF6B9D;
-    }
+    &:hover { color: var(--sweet-pink); }
   }
 
   .item-price {
-    color: #666;
-    font-size: 14px;
+    font-family: 'Quicksand', sans-serif;
+    color: var(--text-light);
+    font-size: 0.88rem;
+    font-weight: 500;
   }
 
   .stock-warning {
     display: block;
-    color: #F4C430;
-    margin-top: 4px;
+    color: #7a5c00;
+    font-size: 0.78rem;
     font-weight: 600;
+    margin-top: 4px;
+    background: rgba(244, 196, 48, 0.12);
+    padding: 2px 8px;
+    border-radius: var(--radius-pill);
+    width: fit-content;
   }
 }
 
 .item-quantity {
   display: flex;
   align-items: center;
-  border: 2px solid #FFE5EC;
-  border-radius: 8px;
-  padding: 2px;
+  border: 2px solid rgba(255, 107, 157, 0.2);
+  border-radius: var(--radius-pill);
+  padding: 2px 6px;
+  background: white;
+  gap: 4px;
 
   .qty-value {
-    width: 40px;
+    width: 36px;
     text-align: center;
-    font-weight: 600;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-dark);
+  }
+
+  button {
+    color: var(--sweet-pink) !important;
+    width: 32px !important;
+    height: 32px !important;
+    line-height: 32px !important;
+
+    mat-icon { font-size: 18px; }
   }
 }
 
 .item-subtotal {
-  font-size: 18px;
-  color: #FF6B9D;
-  min-width: 80px;
   text-align: right;
+  min-width: 80px;
+
+  strong {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--sweet-pink);
+  }
 }
 
 .remove-btn {
-  color: #E63946 !important;
+  color: var(--sweet-red) !important;
+  transition: all var(--transition-fast) !important;
+  border-radius: var(--radius-pill) !important;
+
+  &:hover {
+    background: rgba(230, 57, 70, 0.1) !important;
+    transform: scale(1.1);
+  }
 }
 
-.clear-cart-btn {
-  align-self: flex-end;
-  margin-top: 8px;
+.cart-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 4px;
+
+  .clear-cart-btn {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.85rem;
+    color: var(--sweet-red) !important;
+    border-radius: var(--radius-pill) !important;
+
+    &:hover { background: rgba(230, 57, 70, 0.08) !important; }
+  }
+}
+
+// ============================================================
+// CART SUMMARY
+// ============================================================
+.cart-summary-wrapper {
+  position: sticky;
+  top: 88px;
 }
 
 .cart-summary {
-  position: sticky;
-  top: 88px;
-  height: fit-content;
+  border-radius: var(--radius-lg) !important;
+  border: 1.5px solid rgba(255, 107, 157, 0.15) !important;
+  background: white !important;
+  overflow: hidden;
+
+  // Dekorativni gradient traka na vrhu
+  &::before {
+    content: '';
+    display: block;
+    height: 4px;
+    background: var(--gradient-pink);
+  }
+
+  mat-card-content {
+    padding: 24px !important;
+  }
 
   h2 {
-    font-size: 22px;
-    margin: 0 0 24px;
-    color: #3D2817;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin: 0 0 20px;
   }
 }
 
 .summary-line {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 16px;
-  color: #555;
+  align-items: center;
+  padding: 8px 0;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.92rem;
+  color: var(--text-medium);
+
+  .summary-val {
+    font-weight: 600;
+    color: var(--text-dark);
+  }
 
   .free {
-    color: #2E7D32;
+    color: #0a6b52;
     font-weight: 600;
+    font-size: 0.88rem;
   }
+}
+
+.summary-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,107,157,0.3), transparent);
+  margin: 12px 0;
 }
 
 .summary-total {
   display: flex;
   justify-content: space-between;
-  margin: 16px 0 24px;
-  font-size: 20px;
+  align-items: center;
+  padding: 12px 0 20px;
+
+  span {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-dark);
+  }
 
   strong {
-    color: #FF6B9D;
-    font-size: 24px;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--sweet-pink);
   }
 }
 
 .checkout-btn {
   width: 100%;
-  height: 56px;
-  font-size: 16px;
-  margin-bottom: 8px;
+  height: 52px !important;
+  font-family: 'Fredoka', sans-serif !important;
+  font-size: 1.05rem !important;
+  border-radius: var(--radius-pill) !important;
+  margin-bottom: 10px;
 }
 
 .continue-shopping {
   width: 100%;
+  justify-content: center;
+  font-family: 'Quicksand', sans-serif !important;
+  color: var(--text-medium) !important;
+  font-size: 0.88rem !important;
+  border-radius: var(--radius-pill) !important;
+
+  &:hover { color: var(--sweet-pink) !important; }
+}
+
+.cart-trust {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 107, 157, 0.1);
+
+  span {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.75rem;
+    color: var(--text-light);
+    font-weight: 600;
+  }
+}
+
+// ============================================================
+// RESPONSIVE
+// ============================================================
+@media (max-width: 768px) {
+  .cart-container { padding: 16px; }
+  .cart-summary-wrapper { position: static; }
 }

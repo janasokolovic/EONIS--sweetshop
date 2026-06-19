@@ -1,21 +1,31 @@
 <footer class="footer">
   <div class="footer-content">
+    <!-- Brand kolona -->
     <div class="footer-section">
       <h3>
         <span class="logo-icon">🍬</span> SweetShop
       </h3>
-      <p>Vaša omiljena prodavnica slatkiša!</p>
+      <p>Vaša omiljena online prodavnica slatkiša. Dostavljamo sreću na vaša vrata! 🚪</p>
+      <div class="footer-tagline">
+        <span>🍭</span>
+        <span>🧁</span>
+        <span>🍫</span>
+        <span>🍰</span>
+        <span>🍩</span>
+      </div>
     </div>
 
+    <!-- Brzi linkovi -->
     <div class="footer-section">
-      <h4>Linkovi</h4>
+      <h4>Brzi linkovi</h4>
       <ul>
-        <li><a routerLink="/products">Proizvodi</a></li>
-        <li><a routerLink="/login">Prijava</a></li>
-        <li><a routerLink="/register">Registracija</a></li>
+        <li><mat-icon>storefront</mat-icon><a routerLink="/products">Svi proizvodi</a></li>
+        <li><mat-icon>login</mat-icon><a routerLink="/login">Prijava</a></li>
+        <li><mat-icon>person_add</mat-icon><a routerLink="/register">Registracija</a></li>
       </ul>
     </div>
 
+    <!-- Kontakt -->
     <div class="footer-section">
       <h4>Kontakt</h4>
       <ul>
@@ -26,9 +36,17 @@
     </div>
   </div>
 
-  <mat-divider></mat-divider>
+  <!-- Dekorativni candy strip -->
+  <div class="footer-candy-strip">
+    <span>🍬</span>
+    <span>🍭</span>
+    <span>🧁</span>
+    <span>🍫</span>
+    <span>🍰</span>
+    <span>🍩</span>
+  </div>
 
   <div class="footer-bottom">
-    <p>&copy; {{ currentYear }} SweetShop. Sva prava zadržana. 🍭</p>
+    <p>&copy; {{ currentYear }} SweetShop. Sva prava zadržana. Made with 💕</p>
   </div>
 </footer>

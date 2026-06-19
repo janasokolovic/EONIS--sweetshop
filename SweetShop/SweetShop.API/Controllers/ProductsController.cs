@@ -20,12 +20,22 @@ public class ProductsController : ControllerBase
     /// <summary>
     /// Vraća listu proizvoda sa paginacijom, sortiranjem i pretragom
     /// </summary>
+    /* [HttpGet]
+     public async Task<ActionResult<PagedResult<ProductDto>>> GetAll(
+         [FromQuery] PaginationParams paginationParams,
+         [FromQuery] int? categoryId = null)
+     {
+         var result = await _productService.GetAllAsync(paginationParams, categoryId);
+         return Ok(result);
+     }*/
     [HttpGet]
-    public async Task<ActionResult<PagedResult<ProductDto>>> GetAll(
-        [FromQuery] PaginationParams paginationParams,
-        [FromQuery] int? categoryId = null)
+    public async Task<IActionResult> GetAll([FromQuery] PaginationParams paginationParams, [FromQuery] int? categoryId = null, [FromQuery] bool includeInactive = false)
     {
-        var result = await _productService.GetAllAsync(paginationParams, categoryId);
+        // Samo admin može da vidi neaktivne proizvode
+        var isAdmin = User.IsInRole("Admin");
+        var showInactive = isAdmin && includeInactive;
+
+        var result = await _productService.GetAllAsync(paginationParams, categoryId, showInactive);
         return Ok(result);
     }
 

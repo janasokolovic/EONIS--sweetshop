@@ -1,34 +1,47 @@
+// ============================================================
+// Admin Orders Styles — SweetShop
+// ============================================================
+
 .admin-orders-container {
   max-width: 1400px;
   margin: 0 auto;
 }
 
+// Header
 .page-header {
-  margin-bottom: 24px;
+  margin-bottom: 32px;
 
   h1 {
-    margin: 0 0 4px;
-    color: #3D2817;
-    font-size: 28px;
+    margin: 0 0 6px 0;
+    color: #092436;
+    font-size: 32px;
+    font-weight: 800;
   }
 
   p {
     margin: 0;
-    color: #999;
+    color: #8C7A6B;
+    font-size: 15px;
+    font-weight: 500;
   }
 }
 
+// Filters card
 .filters-card {
-  margin-bottom: 16px;
+  margin-bottom: 24px;
+  border-radius: 20px !important;
+  border: 1px solid #FFE5EC;
+  box-shadow: 0 6px 20px rgba(255, 107, 157, 0.02) !important;
+  background: white;
 
   mat-card-content {
-    padding: 12px 16px !important;
+    padding: 12px 20px !important;
   }
 }
 
 .filters-row {
   display: flex;
-  gap: 16px;
+  gap: 20px;
   align-items: baseline;
   flex-wrap: wrap;
 
@@ -41,133 +54,217 @@
     flex: 1;
     min-width: 200px;
   }
+
+  // Material Form Field Customize
+  ::ng-deep {
+    .mat-mdc-form-field-focus-indicator {
+      display: none;
+    }
+    .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__leading,
+    .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__notch,
+    .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__trailing {
+      border-color: #FFE5EC !important;
+      border-width: 1.5px !important;
+    }
+    .mdc-text-field--outlined:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-notched-outline__leading,
+    .mdc-text-field--outlined:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-notched-outline__notch,
+    .mdc-text-field--outlined:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-notched-outline__trailing {
+      border-color: #FFB6C1 !important;
+    }
+    .mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-notched-outline__leading,
+    .mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-notched-outline__notch,
+    .mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-notched-outline__trailing {
+      border-color: #FF6B9D !important;
+    }
+    .mat-mdc-form-field.mat-focused .mat-mdc-select-arrow {
+      color: #FF6B9D !important;
+    }
+    .mat-mdc-form-field-prefix {
+      margin-right: 8px;
+      .mat-icon {
+        color: #FFB6C1;
+      }
+    }
+    .mat-mdc-form-field-label {
+      color: #8C7A6B !important;
+    }
+  }
 }
 
+// Loading state
 .loading {
   display: flex;
   justify-content: center;
   padding: 80px 0;
+
+  mat-spinner {
+    ::ng-deep circle {
+      stroke: #FF6B9D !important;
+    }
+  }
 }
 
+// Empty state
 .empty-state-card {
-  margin-top: 24px;
+  border-radius: 24px !important;
+  border: 1px solid #FFE5EC;
+  box-shadow: 0 8px 24px rgba(255, 107, 157, 0.03) !important;
+  background: white;
 }
 
 .empty-state {
   text-align: center;
   padding: 60px 24px;
+  color: #8C7A6B;
 
   mat-icon {
-    font-size: 96px;
-    width: 96px;
-    height: 96px;
+    font-size: 80px;
+    width: 80px;
+    height: 80px;
     color: #FFB6C1;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
   }
 
   h3 {
-    color: #3D2817;
+    font-size: 22px;
+    font-weight: 700;
+    color: #092436;
     margin-bottom: 8px;
   }
 
   p {
-    color: #999;
     margin: 0;
+    font-size: 14px;
   }
 }
 
+// Orders List flex container
 .orders-list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-bottom: 20px;
+  gap: 16px;
+  margin-bottom: 24px;
 }
 
+// Card style for orders list
 .order-card {
-  transition: all 0.2s;
+  border-radius: 20px !important;
+  border: 1px solid #FFE5EC;
+  background: white;
+  box-shadow: 0 6px 20px rgba(255, 107, 157, 0.02) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
 
   &:hover {
-    box-shadow: 0 4px 16px rgba(255, 107, 157, 0.1);
+    box-shadow: 0 10px 25px rgba(255, 107, 157, 0.07) !important;
+    border-color: #FFC0D3;
+  }
+
+  mat-card-content {
+    padding: 20px 24px !important;
   }
 }
 
+// Order Summary Grid Block
 .order-summary {
   display: grid;
-  grid-template-columns: 120px 1fr 130px 140px 200px 50px;
+  grid-template-columns: 120px 1fr 140px 150px 180px 50px;
   align-items: center;
-  gap: 16px;
+  gap: 20px;
 
   @media (max-width: 1100px) {
-    grid-template-columns: 100px 1fr 100px 130px 180px 40px;
+    grid-template-columns: 100px 1fr 110px 130px 160px 40px;
     gap: 12px;
   }
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr 1fr;
+    gap: 16px;
 
-    .actions-block {
+    .status-change-block {
       grid-column: 1 / -1;
-      justify-content: flex-end;
+      justify-content: flex-start;
+      margin-top: 8px;
+    }
+
+    .expand-block {
+      grid-column: 2;
+      grid-row: 1;
+      justify-self: end;
     }
   }
 }
 
+// ID Column
 .order-id-block {
   strong {
     display: block;
     font-size: 18px;
+    font-weight: 800;
     color: #FF6B9D;
   }
 
   small {
     display: block;
-    color: #999;
+    color: #8C7A6B;
     font-size: 12px;
+    margin-top: 2px;
   }
 }
 
+// Customer Column
 .customer-block {
   display: flex;
   align-items: center;
   gap: 12px;
 
   mat-icon {
-    color: #FF6B9D;
+    color: #FFB6C1;
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
     flex-shrink: 0;
   }
 
   strong {
     display: block;
-    color: #3D2817;
-    font-size: 14px;
+    color: #092436;
+    font-size: 15px;
+    font-weight: 700;
   }
 
   small {
     display: block;
-    color: #999;
+    color: #8C7A6B;
     font-size: 12px;
+    margin-top: 1px;
   }
 }
 
+// Amount Column
 .amount-block {
   text-align: right;
 
   span {
     display: block;
-    color: #999;
+    color: #8C7A6B;
     font-size: 12px;
+    margin-bottom: 2px;
   }
 
   strong {
     display: block;
-    color: #3D2817;
+    color: #092436;
     font-size: 18px;
+    font-weight: 800;
     white-space: nowrap;
   }
 }
 
+// Status Badges (Pill style)
 .status-block {
-  text-align: center;
+  display: flex;
+  justify-content: center;
 }
 
 .status-badge {
@@ -175,9 +272,10 @@
   align-items: center;
   gap: 6px;
   padding: 6px 14px;
-  border-radius: 16px;
+  border-radius: 20px;
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 700;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
 
   mat-icon {
     font-size: 16px;
@@ -188,53 +286,117 @@
   &.status-pending {
     background-color: #FFF8E1;
     color: #F57F17;
+    border: 1px solid rgba(#F57F17, 0.1);
   }
 
   &.status-paid {
     background-color: #E8F5E9;
     color: #2E7D32;
+    border: 1px solid rgba(#2E7D32, 0.1);
   }
 
   &.status-processing {
     background-color: #E3F2FD;
     color: #1565C0;
+    border: 1px solid rgba(#1565C0, 0.1);
   }
 
   &.status-shipped {
     background-color: #F3E5F5;
     color: #7B1FA2;
+    border: 1px solid rgba(#7B1FA2, 0.1);
   }
 
   &.status-delivered {
     background-color: #E0F2F1;
     color: #00695C;
+    border: 1px solid rgba(#00695C, 0.1);
   }
 
   &.status-cancelled {
     background-color: #FFEBEE;
     color: #C62828;
+    border: 1px solid rgba(#C62828, 0.1);
   }
 }
 
-.actions-block {
+// Status dropdown selector
+.status-change-block {
   display: flex;
-  gap: 8px;
   align-items: center;
-  justify-content: flex-end;
-  min-height: 40px;
+  justify-content: center;
+
+  .status-btn {
+    width: 100%;
+    border-color: #FFB6C1 !important;
+    color: #FF6B9D !important;
+    font-weight: 600;
+    border-radius: 16px;
+    height: 36px;
+    line-height: 34px;
+    transition: all 0.2s;
+
+    &:hover:not([disabled]) {
+      background-color: #FFF5F7;
+      border-color: #FF6B9D !important;
+    }
+
+    mat-spinner {
+      display: inline-block;
+      margin: 0 auto;
+
+      ::ng-deep circle {
+        stroke: #FF6B9D !important;
+      }
+    }
+
+    mat-icon {
+      font-size: 16px;
+      width: 16px;
+      height: 16px;
+      margin-right: 4px;
+    }
+  }
+
+  .no-actions {
+    color: #C2B4B9;
+    font-weight: 600;
+    font-size: 14px;
+  }
 }
 
+// Chevron toggler
+.expand-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  button {
+    color: #8C7A6B;
+
+    &:hover {
+      background-color: #FFF5F7;
+      color: #FF6B9D;
+    }
+  }
+}
+
+// Divider
 .my-divider {
-  margin: 20px 0;
+  margin: 16px 0;
+  border-top-color: #FFF0F3;
 }
 
+// Expanded details
 .order-details {
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-columns: 1fr 1.3fr 1fr;
   gap: 24px;
+  margin-top: 16px;
 
   @media (max-width: 968px) {
     grid-template-columns: 1fr;
+    gap: 20px;
   }
 }
 
@@ -242,42 +404,54 @@
   h4 {
     display: flex;
     align-items: center;
-    gap: 6px;
-    color: #FF6B9D;
-    margin: 0 0 12px;
-    font-size: 14px;
+    gap: 8px;
+    color: #092436;
+    margin: 0 0 12px 0;
+    font-size: 13px;
+    font-weight: 700;
     text-transform: uppercase;
+    letter-spacing: 0.5px;
 
     mat-icon {
       font-size: 18px;
       width: 18px;
       height: 18px;
+      color: #FF6B9D;
     }
   }
 }
 
+// Delivery box styling
 .address-info {
-  background-color: #FFF5F7;
-  padding: 12px;
-  border-radius: 8px;
+  background-color: #FFFDFE;
+  border: 1px solid #FFF0F3;
+  padding: 16px;
+  border-radius: 16px;
   font-size: 14px;
-  line-height: 1.6;
+  line-height: 1.5;
 
   strong {
     display: block;
-    margin-bottom: 4px;
-    color: #3D2817;
+    margin-bottom: 6px;
+    color: #092436;
+    font-weight: 600;
   }
 
   div {
-    color: #555;
+    color: #604F43;
+    margin-bottom: 2px;
   }
 }
 
+// Items list styling
 .items-list {
-  background-color: #FFF5F7;
-  padding: 12px;
-  border-radius: 8px;
+  background-color: #FFFDFE;
+  border: 1px solid #FFF0F3;
+  padding: 16px;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .item-row {
@@ -286,19 +460,29 @@
   align-items: center;
   padding: 8px 0;
   border-bottom: 1px dashed #FFE5EC;
+  font-size: 14px;
 
   &:last-child {
     border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  &:first-child {
+    padding-top: 0;
   }
 
   .item-info {
     strong {
       display: block;
-      font-size: 14px;
+      font-weight: 600;
+      color: #092436;
     }
 
     small {
-      color: #999;
+      color: #8C7A6B;
+      font-size: 12px;
+      display: block;
+      margin-top: 2px;
     }
   }
 
@@ -308,49 +492,43 @@
   }
 }
 
+// Payment box styling
 .payment-info {
   background-color: #E8F5E9;
-  padding: 12px;
-  border-radius: 8px;
+  border: 1px solid rgba(#2E7D32, 0.12);
+  padding: 16px;
+  border-radius: 16px;
   font-size: 13px;
-  line-height: 1.8;
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 
   div {
     color: #2E7D32;
+    font-weight: 500;
+
+    strong {
+      color: #1B5E20;
+    }
   }
 
   code {
-    background-color: #FFFFFF;
+    background-color: white;
+    border: 1px solid rgba(#2E7D32, 0.1);
     padding: 2px 6px;
-    border-radius: 4px;
+    border-radius: 6px;
     font-size: 11px;
-    color: #555;
+    color: #333;
+    font-family: monospace;
     word-break: break-all;
+    display: inline-block;
+    margin-top: 2px;
   }
 }
 
+// Paginator custom
 mat-paginator {
-  background-color: transparent;
-}
-
-.status-change-block {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  .status-btn {
-    width: 100%;
-    white-space: nowrap;
-  }
-
-  .no-actions {
-    color: #CCC;
-    font-size: 20px;
-  }
-}
-
-.expand-block {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: transparent;
+  color: #8C7A6B;
 }

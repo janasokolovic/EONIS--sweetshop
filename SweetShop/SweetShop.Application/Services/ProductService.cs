@@ -15,7 +15,65 @@ public class ProductService : IProductService
     {
         _context = context;
     }
+    public async Task<PagedResult<ProductDto>> GetAllAsync(PaginationParams paginationParams, int? categoryId = null, bool includeInactive = false)
+    {
+        var query = _context.Products
+            .Include(p => p.Category)
+            .Include(p => p.Images)
+            .Include(p => p.Reviews)
+            .AsQueryable();
 
+        // Filtriraj samo aktivne ako includeInactive nije true
+        if (!includeInactive)
+        {
+            query = query.Where(p => p.IsActive);
+        }
+
+        // Filtriranje po kategoriji
+        if (categoryId.HasValue)
+            query = query.Where(p => p.CategoryId == categoryId.Value);
+
+        // Pretraga po imenu ili opisu
+        if (!string.IsNullOrWhiteSpace(paginationParams.SearchTerm))
+        {
+            var searchTerm = paginationParams.SearchTerm.ToLower();
+            query = query.Where(p =>
+                p.Name.ToLower().Contains(searchTerm) ||
+                p.Description.ToLower().Contains(searchTerm));
+        }
+
+        // Sortiranje
+        query = paginationParams.SortBy?.ToLower() switch
+        {
+            "name" => paginationParams.SortDescending
+                ? query.OrderByDescending(p => p.Name)
+                : query.OrderBy(p => p.Name),
+            "price" => paginationParams.SortDescending
+                ? query.OrderByDescending(p => p.Price)
+                : query.OrderBy(p => p.Price),
+            "createdat" => paginationParams.SortDescending
+                ? query.OrderByDescending(p => p.CreatedAt)
+                : query.OrderBy(p => p.CreatedAt),
+            _ => query.OrderByDescending(p => p.CreatedAt)
+        };
+
+        var totalCount = await query.CountAsync();
+
+        var items = await query
+            .Skip((paginationParams.Page - 1) * paginationParams.PageSize)
+            .Take(paginationParams.PageSize)
+            .Select(p => MapToDto(p))
+            .ToListAsync();
+
+        return new PagedResult<ProductDto>
+        {
+            Items = items,
+            TotalCount = totalCount,
+            Page = paginationParams.Page,
+            PageSize = paginationParams.PageSize
+        };
+    }
+    /*
     public async Task<PagedResult<ProductDto>> GetAllAsync(PaginationParams paginationParams, int? categoryId = null)
     {
         var query = _context.Products
@@ -68,7 +126,7 @@ public class ProductService : IProductService
             Page = paginationParams.Page,
             PageSize = paginationParams.PageSize
         };
-    }
+    }*/
 
     public async Task<ProductDto> GetByIdAsync(int id)
     {

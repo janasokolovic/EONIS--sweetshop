@@ -16,6 +16,7 @@ export interface ProductSearchParams {
   sortBy?: string;
   sortDescending?: boolean;
   categoryId?: number;
+  includeInactive?: boolean;
 }
 
 @Injectable({
@@ -36,6 +37,7 @@ export class ProductService {
       if (params.sortBy) httpParams = httpParams.set('sortBy', params.sortBy);
       if (params.sortDescending !== undefined) httpParams = httpParams.set('sortDescending', params.sortDescending.toString());
       if (params.categoryId) httpParams = httpParams.set('categoryId', params.categoryId.toString());
+      if (params.includeInactive) httpParams = httpParams.set('includeInactive', 'true');
     }
 
     return this.http.get<PagedResult<ProductDto>>(this.apiUrl, { params: httpParams });

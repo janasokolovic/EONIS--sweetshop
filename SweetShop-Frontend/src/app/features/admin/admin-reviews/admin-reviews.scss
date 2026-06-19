@@ -1,157 +1,212 @@
+// ============================================================
+// Admin Reviews Styles — SweetShop
+// ============================================================
+
 .admin-reviews-container {
   max-width: 1000px;
   margin: 0 auto;
 }
 
+// Header
 .page-header {
-  margin-bottom: 24px;
+  margin-bottom: 32px;
 
   h1 {
-    margin: 0 0 4px;
-    color: #3D2817;
-    font-size: 28px;
+    margin: 0 0 6px 0;
+    color: #092436;
+    font-size: 32px;
+    font-weight: 800;
   }
 
   p {
     margin: 0;
-    color: #999;
+    color: #8C7A6B;
+    font-size: 15px;
+    font-weight: 500;
   }
 }
 
+// Spinner
 .loading {
   display: flex;
   justify-content: center;
   padding: 80px 0;
+
+  mat-spinner {
+    ::ng-deep circle {
+      stroke: #FF6B9D !important;
+    }
+  }
 }
 
+// Empty state moderation finished
 .empty-state-card {
-  margin-top: 24px;
+  border-radius: 24px !important;
+  border: 1px solid #FFE5EC;
+  box-shadow: 0 8px 24px rgba(255, 107, 157, 0.03) !important;
+  background: white;
 }
 
 .empty-state {
   text-align: center;
-  padding: 80px 24px;
+  padding: 64px 24px;
+  color: #8C7A6B;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
 
   mat-icon {
-    font-size: 96px;
-    width: 96px;
-    height: 96px;
+    font-size: 80px;
+    width: 80px;
+    height: 80px;
     color: #81C784;
-    margin-bottom: 24px;
+    margin-bottom: 8px;
   }
 
   h3 {
-    color: #3D2817;
-    margin-bottom: 8px;
-    font-size: 24px;
+    font-size: 22px;
+    font-weight: 700;
+    color: #092436;
+    margin: 0;
   }
 
   p {
-    color: #999;
     margin: 0;
+    font-size: 14px;
   }
 }
 
+// Banner showing remaining review count
 .info-banner {
-  background-color: #FFF8E1;
+  background-color: rgba(#FFF8E1, 0.9);
   color: #5D4037;
-  padding: 14px 20px;
-  border-radius: 8px;
-  margin-bottom: 20px;
+  padding: 16px 20px;
+  border-radius: 16px;
+  margin-bottom: 24px;
   display: flex;
   align-items: center;
   gap: 12px;
-  border-left: 4px solid #F4C430;
+  border: 1px solid rgba(#F4C430, 0.15);
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(244, 196, 48, 0.03);
 
   mat-icon {
     color: #F4C430;
+    flex-shrink: 0;
   }
 
   strong {
-    color: #3D2817;
+    color: #092436;
   }
 }
 
+// Reviews List
 .reviews-list {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
 }
 
+// Moderation Review Card
 .review-card {
-  transition: all 0.3s;
+  border-radius: 20px !important;
+  border: 1px solid #FFE5EC;
+  background: white;
+  box-shadow: 0 6px 20px rgba(255, 107, 157, 0.02) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
 
   &:hover {
-    box-shadow: 0 4px 16px rgba(255, 107, 157, 0.1);
+    box-shadow: 0 10px 25px rgba(255, 107, 157, 0.06) !important;
+    border-color: #FFC0D3;
+  }
+
+  mat-card-content {
+    padding: 24px !important;
   }
 }
 
+// Review Card Header
 .review-header {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   margin-bottom: 16px;
   flex-wrap: wrap;
   gap: 12px;
 }
 
+// Reviewer Info Section
 .reviewer-info {
   display: flex;
   align-items: center;
   gap: 12px;
 
   .avatar {
-    font-size: 48px;
-    width: 48px;
-    height: 48px;
-    color: #FF6B9D;
+    font-size: 44px;
+    width: 44px;
+    height: 44px;
+    color: #FFB6C1;
   }
 
   strong {
     display: block;
     font-size: 16px;
-    color: #3D2817;
+    font-weight: 700;
+    color: #092436;
   }
 
   small {
     display: block;
-    color: #999;
-    font-size: 13px;
+    color: #8C7A6B;
+    font-size: 12px;
+    margin-top: 1px;
   }
 }
 
+// Stars Rating Display
 .rating-display {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 3px;
 
   mat-icon {
-    font-size: 22px;
-    width: 22px;
-    height: 22px;
-    color: #DDD;
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    color: #E2DCD8;
 
     &.filled {
-      color: #F4C430;
+      color: #FFD166;
+      filter: drop-shadow(0 1px 2px rgba(255, 209, 102, 0.3));
     }
   }
 
   .rating-text {
     margin-left: 8px;
-    color: #555;
-    font-weight: 600;
+    color: #092436;
+    font-weight: 700;
+    font-size: 13px;
+    background-color: #FFF9FA;
+    padding: 2px 8px;
+    border-radius: 8px;
+    border: 1px solid #FFE5EC;
   }
 }
 
+// Divider
 .my-divider {
   margin: 16px 0;
+  border-top-color: #FFF0F3;
 }
 
+// Product review subject
 .product-info {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 
   mat-icon {
     color: #FF6B9D;
@@ -162,33 +217,81 @@
 
   strong {
     color: #FF6B9D;
-    font-size: 16px;
+    font-size: 15px;
+    font-weight: 700;
   }
 }
 
+// Review comment quotation block
 .comment-block {
-  background-color: #FFF5F7;
+  background-color: #FFF9FA;
   padding: 16px 20px;
-  border-radius: 8px;
-  border-left: 4px solid #FFB6C1;
+  border-radius: 16px;
+  border-left: 4px solid #FF9ebb;
+  margin-bottom: 20px;
 
   p {
     margin: 0;
-    color: #3D2817;
+    color: #092436;
     line-height: 1.6;
     font-size: 15px;
     font-style: italic;
+    font-weight: 500;
   }
 }
 
+// Actions buttons approve / reject
 .card-actions {
   display: flex;
-  gap: 12px;
+  gap: 16px;
   flex-wrap: wrap;
 
   button {
     flex: 1;
-    min-width: 200px;
-    height: 48px;
+    min-width: 180px;
+    height: 44px;
+    border-radius: 22px !important;
+    font-weight: 600;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    mat-icon {
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+      margin: 0;
+    }
+
+    &[color="primary"] {
+      background: linear-gradient(135deg, #FF6B9D 0%, #FF4F87 100%);
+      color: white;
+      box-shadow: 0 4px 12px rgba(255, 107, 157, 0.2);
+      border: none;
+
+      &:hover:not([disabled]) {
+        box-shadow: 0 6px 15px rgba(255, 107, 157, 0.3);
+        transform: translateY(-1px);
+      }
+
+      &[disabled] {
+        background: #F5EAEF;
+        color: #C2B4B9;
+        box-shadow: none;
+      }
+    }
+
+    &[color="warn"] {
+      border-color: #FFB6C1 !important;
+      color: #E53935 !important;
+      background: transparent;
+
+      &:hover:not([disabled]) {
+        background-color: #FFEBEE;
+        border-color: #E53935 !important;
+      }
+    }
   }
 }

@@ -1,16 +1,30 @@
-<div class="login-container">
+<div class="login-container page-enter">
+  <!-- Decorative floating candies in background -->
+  <div class="floating-bg-candies">
+    <span class="bg-candy">🍬</span>
+    <span class="bg-candy">🍭</span>
+    <span class="bg-candy">🧁</span>
+    <span class="bg-candy">🍩</span>
+    <span class="bg-candy">🌸</span>
+  </div>
+
   <mat-card class="login-card">
+    <div class="brand-header">
+      <div class="brand-logo">🍰</div>
+      <h2 class="brand-title">SweetShop</h2>
+    </div>
+
     <mat-card-header>
       <mat-card-title>Prijava na SweetShop 🍬</mat-card-title>
-      <mat-card-subtitle>Dobrodošli nazad!</mat-card-subtitle>
+      <mat-card-subtitle>Dobrodošli nazad! Unesite podatke za pristup nalogu</mat-card-subtitle>
     </mat-card-header>
 
     <mat-card-content>
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Email</mat-label>
+          <mat-icon matPrefix>email</mat-icon>
           <input matInput type="email" formControlName="email" placeholder="vasa@email.com" autocomplete="email">
-          <mat-icon matSuffix>email</mat-icon>
           @if (loginForm.get('email')?.hasError('required') && loginForm.get('email')?.touched) {
             <mat-error>Email je obavezan</mat-error>
           }
@@ -21,8 +35,9 @@
 
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Lozinka</mat-label>
+          <mat-icon matPrefix>lock</mat-icon>
           <input matInput [type]="hidePassword() ? 'password' : 'text'" formControlName="password" autocomplete="current-password">
-          <button mat-icon-button matSuffix (click)="togglePasswordVisibility()" type="button" [attr.aria-label]="'Toggle password visibility'">
+          <button mat-icon-button matSuffix (click)="togglePasswordVisibility()" type="button" [attr.aria-label]="'Toggle password visibility'" class="password-toggle-btn">
             <mat-icon>{{ hidePassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
           </button>
           @if (loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched) {
@@ -33,7 +48,7 @@
         @if (errorMessage()) {
           <div class="error-message">
             <mat-icon>error_outline</mat-icon>
-            {{ errorMessage() }}
+            <span>{{ errorMessage() }}</span>
           </div>
         }
 
@@ -49,7 +64,7 @@
 
     <mat-card-actions class="card-actions">
       <span>Nemate nalog?</span>
-      <a mat-button color="primary" routerLink="/register">Registrujte se</a>
+      <a mat-button color="primary" routerLink="/register" class="register-link">Registrujte se</a>
     </mat-card-actions>
   </mat-card>
 </div>

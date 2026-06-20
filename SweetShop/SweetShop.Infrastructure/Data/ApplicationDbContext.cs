@@ -27,6 +27,8 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     public DbSet<Payment> Payments => Set<Payment>();
     public DbSet<Review> Reviews => Set<Review>();
 
+    public DbSet<Voucher> Vouchers => Set<Voucher>();
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);

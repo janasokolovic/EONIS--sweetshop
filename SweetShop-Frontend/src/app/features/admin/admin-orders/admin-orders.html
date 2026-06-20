@@ -69,9 +69,15 @@
                 </div>
 
                 <div class="amount-block">
-                  <span>Iznos</span>
-                  <strong>{{ order.totalAmount | number:'1.2-2' }} €</strong>
-                </div>
+  <span>Iznos</span>
+  <strong>{{ order.totalAmount | number:'1.2-2' }} €</strong>
+  @if (order.voucherCode && order.discountAmount > 0) {
+    <small class="voucher-indicator">
+      <mat-icon>local_offer</mat-icon>
+      {{ order.voucherCode }}
+    </small>
+  }
+</div>
 
                 <div class="status-block">
                   <span class="status-badge" [ngClass]="getStatusClass(order.status)">
@@ -143,6 +149,26 @@
                       }
                     </div>
                   </div>
+                  <!-- Breakdown cene (sa popustom ako postoji) -->
+@if (order.voucherCode && order.discountAmount > 0) {
+  <div class="detail-section price-breakdown-section">
+    <h4><mat-icon>local_offer</mat-icon> Iskorišćen voucher</h4>
+    <div class="price-breakdown">
+      <div class="breakdown-row">
+        <span>Proizvodi:</span>
+        <span>{{ order.subtotalAmount | number:'1.2-2' }} €</span>
+      </div>
+      <div class="breakdown-row discount">
+        <span>🎟️ Popust ({{ order.voucherCode }}):</span>
+        <span>-{{ order.discountAmount | number:'1.2-2' }} €</span>
+      </div>
+      <div class="breakdown-row final">
+        <strong>Ukupno plaćeno:</strong>
+        <strong>{{ order.totalAmount | number:'1.2-2' }} €</strong>
+      </div>
+    </div>
+  </div>
+}
 
                   <!-- Plaćanje -->
                   @if (order.payment) {

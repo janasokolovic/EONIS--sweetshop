@@ -3,4 +3,5 @@
 public class CreateOrderDto
 {
     public int ShippingAddressId { get; set; }
+    public string? VoucherCode { get; set; }
 }

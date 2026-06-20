@@ -5,6 +5,7 @@ using SweetShop.Application.Interfaces;
 using SweetShop.Domain.Entities;
 using SweetShop.Domain.Enums;
 using SweetShop.Domain.Exceptions;
+using SweetShop.Application.DTOs.Vouchers;
 
 namespace SweetShop.Application.Services;
 
@@ -13,10 +14,13 @@ public class OrderService : IOrderService
     private readonly IApplicationDbContext _context;
     private readonly ICurrentUserService _currentUser;
 
-    public OrderService(IApplicationDbContext context, ICurrentUserService currentUser)
+    private readonly IVoucherService _voucherService;
+
+    public OrderService(IApplicationDbContext context, ICurrentUserService currentUser, IVoucherService voucherService)
     {
         _context = context;
         _currentUser = currentUser;
+        _voucherService = voucherService;
     }
 
     // ============= CUSTOMER METHODS =============
@@ -53,14 +57,37 @@ public class OrderService : IOrderService
                     $"a na zalihama je samo {item.Product.StockQuantity}.");
         }
 
-        // 4. Kreiraj porudžbinu
+        // 4. Izračunaj subtotal
+        var subtotal = cart.Items.Sum(i => i.UnitPrice * i.Quantity);
+        decimal discountAmount = 0;
+        string? appliedVoucherCode = null;
+
+        // 5. Primeni voucher ako je zadat
+        if (!string.IsNullOrWhiteSpace(dto.VoucherCode))
+        {
+            var voucherResult = await _voucherService.ApplyVoucherAsync(new ApplyVoucherDto
+            {
+                Code = dto.VoucherCode,
+                OrderSubtotal = subtotal
+            });
+
+            discountAmount = voucherResult.DiscountAmount;
+            appliedVoucherCode = voucherResult.Code;
+        }
+
+        var totalAmount = subtotal - discountAmount;
+
+        // 6. Kreiraj porudžbinu
         var order = new Order
         {
             CustomerId = customerId,
             OrderDate = DateTime.UtcNow,
             Status = OrderStatus.Pending,
             ShippingAddressId = dto.ShippingAddressId,
-            TotalAmount = cart.Items.Sum(i => i.UnitPrice * i.Quantity),
+            SubtotalAmount = subtotal,
+            DiscountAmount = discountAmount,
+            VoucherCode = appliedVoucherCode,
+            TotalAmount = totalAmount,
             Items = cart.Items.Select(i => new OrderItem
             {
                 ProductId = i.ProductId,
@@ -72,13 +99,19 @@ public class OrderService : IOrderService
 
         _context.Orders.Add(order);
 
-        // 5. BIZNIS PRAVILO: Smanji zalihe za svaki proizvod
+        // 7. BIZNIS PRAVILO: Smanji zalihe za svaki proizvod
         foreach (var item in cart.Items)
         {
             item.Product!.StockQuantity -= item.Quantity;
         }
 
-        // 6. Isprazni korpu
+        // 8. Inkrementuj broj korišćenja voucher-a (ako je korišćen)
+        if (!string.IsNullOrWhiteSpace(appliedVoucherCode))
+        {
+            await _voucherService.IncrementUsageCountAsync(appliedVoucherCode);
+        }
+
+        // 9. Isprazni korpu
         foreach (var item in cart.Items.ToList())
         {
             _context.CartItems.Remove(item);
@@ -233,6 +266,9 @@ public class OrderService : IOrderService
         OrderDate = order.OrderDate,
         Status = order.Status.ToString(),
         TotalAmount = order.TotalAmount,
+        SubtotalAmount = order.SubtotalAmount,
+        DiscountAmount = order.DiscountAmount,
+        VoucherCode = order.VoucherCode,
         CustomerId = order.CustomerId,
         CustomerName = $"{order.Customer?.FirstName} {order.Customer?.LastName}".Trim(),
         CustomerEmail = order.Customer?.Email ?? string.Empty,

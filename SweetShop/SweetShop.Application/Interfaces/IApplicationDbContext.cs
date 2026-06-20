@@ -19,5 +19,7 @@ public interface IApplicationDbContext
     DbSet<Payment> Payments { get; }
     DbSet<Review> Reviews { get; }
 
+    DbSet<Voucher> Vouchers { get; }
+
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }

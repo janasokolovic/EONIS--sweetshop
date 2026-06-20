@@ -62,7 +62,11 @@ export const routes: Routes = [
       {
         path: 'reviews',
         loadComponent: () => import('./features/admin/admin-reviews/admin-reviews').then(m => m.AdminReviews)
-      }
+      },
+      {
+  path: 'vouchers',
+  loadComponent: () => import('./features/admin/admin-vouchers/admin-vouchers').then(m => m.AdminVouchers)
+}
     ]
   },
   {

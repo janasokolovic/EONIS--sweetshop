@@ -56,6 +56,7 @@ builder.Services.AddScoped<IStripeService, StripeService>();
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddValidatorsFromAssemblyContaining<RegisterDtoValidator>();
 
+builder.Services.AddScoped<IVoucherService, VoucherService>();
 // JWT Authentication
 var jwtKey = builder.Configuration["Jwt:Key"]
     ?? throw new InvalidOperationException("JWT Key not configured.");

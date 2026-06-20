@@ -532,3 +532,58 @@ mat-paginator {
   background: transparent;
   color: #8C7A6B;
 }
+
+// Voucher indikator u summary redu
+.voucher-indicator {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #FF6B9D;
+  font-weight: 600;
+  font-size: 11px;
+  margin-top: 4px;
+
+  mat-icon {
+    font-size: 14px;
+    width: 14px;
+    height: 14px;
+  }
+}
+
+// Price breakdown u detaljima
+.price-breakdown-section {
+  background: linear-gradient(135deg, #FFF5F7 0%, #FFE5EC 100%);
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid #FFB6C1;
+}
+
+.price-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  .breakdown-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    color: #092436;
+
+    &.discount {
+      color: #FF6B9D;
+      font-weight: 600;
+    }
+
+    &.final {
+      border-top: 2px solid #FFB6C1;
+      padding-top: 8px;
+      margin-top: 4px;
+      font-size: 16px;
+
+      strong {
+        color: #FF6B9D;
+      }
+    }
+  }
+}

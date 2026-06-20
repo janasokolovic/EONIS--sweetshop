@@ -163,10 +163,53 @@
 
               <div class="summary-divider"></div>
 
+              <!-- VOUCHER SEKCIJA (samo u koraku Adresa) -->
+              @if (currentStep() === 'address') {
+                <div class="voucher-section">
+                  @if (!appliedVoucher()) {
+                    <div class="voucher-input-row">
+                      <mat-form-field appearance="outline" class="voucher-input">
+                        <mat-label>🎟️ Promo kod</mat-label>
+                        <input matInput [(ngModel)]="voucherCodeInput" placeholder="npr. WELCOME10" (keyup.enter)="applyVoucher()">
+                      </mat-form-field>
+                      <button mat-raised-button color="accent" (click)="applyVoucher()" [disabled]="isApplyingVoucher() || !voucherCodeInput" class="voucher-apply-btn">
+                        @if (isApplyingVoucher()) {
+                          <mat-spinner diameter="18"></mat-spinner>
+                        } @else {
+                          <span>Primeni</span>
+                        }
+                      </button>
+                    </div>
+                  } @else {
+                    <div class="voucher-applied">
+                      <div class="voucher-applied-info">
+                        <mat-icon>local_offer</mat-icon>
+                        <div>
+                          <strong>{{ appliedVoucher()!.code }}</strong>
+                          <small>{{ appliedVoucher()!.message }}</small>
+                        </div>
+                      </div>
+                      <button mat-icon-button (click)="removeVoucher()" matTooltip="Ukloni voucher">
+                        <mat-icon>close</mat-icon>
+                      </button>
+                    </div>
+                  }
+                </div>
+
+                <div class="summary-divider"></div>
+              }
+
               <div class="summary-line">
                 <span>Proizvodi ({{ cart.totalItems }})</span>
                 <span>{{ cart.totalPrice | number:'1.2-2' }} €</span>
               </div>
+
+              @if (appliedVoucher()) {
+                <div class="summary-line discount-line">
+                  <span>🎟️ Popust ({{ appliedVoucher()!.code }})</span>
+                  <span class="discount-value">-{{ appliedVoucher()!.discountAmount | number:'1.2-2' }} €</span>
+                </div>
+              }
 
               <div class="summary-line">
                 <span>Dostava</span>
@@ -177,7 +220,7 @@
 
               <div class="summary-total">
                 <span>Ukupno</span>
-                <strong>{{ cart.totalPrice | number:'1.2-2' }} €</strong>
+                <strong>{{ finalAmount() | number:'1.2-2' }} €</strong>
               </div>
             </mat-card-content>
           </mat-card>

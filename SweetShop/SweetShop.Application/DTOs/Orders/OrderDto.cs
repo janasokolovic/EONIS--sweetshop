@@ -6,6 +6,9 @@ public class OrderDto
     public DateTime OrderDate { get; set; }
     public string Status { get; set; } = string.Empty;
     public decimal TotalAmount { get; set; }
+    public decimal SubtotalAmount { get; set; }
+    public decimal DiscountAmount { get; set; }
+    public string? VoucherCode { get; set; }
 
     // Customer info
     public int CustomerId { get; set; }

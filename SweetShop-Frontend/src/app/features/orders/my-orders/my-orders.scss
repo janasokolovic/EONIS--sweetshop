@@ -451,3 +451,43 @@
     transform: translateY(-12px) rotate(15deg);
   }
 }
+
+.totals-breakdown {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  .total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    color: #092436;
+
+    &.discount-row {
+      color: #FF6B9D;
+      font-weight: 600;
+
+      .discount-value {
+        color: #FF6B9D;
+      }
+    }
+
+    &.final-row {
+      border-top: 2px solid #FFB6C1;
+      padding-top: 8px;
+      margin-top: 4px;
+      font-size: 18px;
+
+      strong {
+        color: #092436;
+      }
+
+      .final-total {
+        color: #FF6B9D;
+        font-size: 22px;
+      }
+    }
+  }
+}

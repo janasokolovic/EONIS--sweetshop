@@ -3,6 +3,9 @@ export interface OrderDto {
   orderDate: string;
   status: string;
   totalAmount: number;
+   subtotalAmount: number;
+  discountAmount: number;
+  voucherCode?: string;
   customerId: number;
   customerName: string;
   customerEmail: string;
@@ -40,6 +43,7 @@ export interface PaymentInfoDto {
 
 export interface CreateOrderDto {
   shippingAddressId: number;
+  voucherCode?: string;
 }
 
 export interface UpdateOrderStatusDto {

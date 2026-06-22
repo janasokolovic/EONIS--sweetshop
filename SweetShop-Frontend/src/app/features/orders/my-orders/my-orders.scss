@@ -491,3 +491,26 @@
     }
   }
 }
+
+.pay-now-section {
+  width: 100%;
+  margin-top: 12px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.pay-now-btn {
+  background: linear-gradient(135deg, #FF6B9D 0%, #FFB6C1 100%) !important;
+  color: white !important;
+  font-weight: 600 !important;
+  padding: 8px 24px !important;
+
+  mat-icon {
+    margin-right: 6px;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(255, 107, 157, 0.4);
+  }
+}

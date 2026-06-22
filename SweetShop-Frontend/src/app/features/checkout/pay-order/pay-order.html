@@ -1,0 +1,111 @@
+<div class="pay-order-container page-enter">
+
+  <div class="page-header">
+    <h1>💳 Plaćanje porudžbine</h1>
+    <a mat-button routerLink="/orders/my" class="back-link">
+      <mat-icon>arrow_back</mat-icon>
+      Nazad na moje porudžbine
+    </a>
+  </div>
+
+  @if (isLoading()) {
+    <div class="loading">
+      <mat-spinner diameter="48"></mat-spinner>
+      <p class="loading-text">Pripremamo plaćanje... 🍬</p>
+    </div>
+  } @else if (errorMessage()) {
+    <mat-card class="error-card">
+      <mat-card-content>
+        <div class="error-content">
+          <mat-icon>error_outline</mat-icon>
+          <h3>Greška</h3>
+          <p>{{ errorMessage() }}</p>
+          <a mat-raised-button color="primary" routerLink="/orders/my">Nazad na porudžbine</a>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  } @else if (order() && clientSecret()) {
+    <div class="pay-grid">
+
+      <!-- Glavni deo - Stripe forma -->
+      <div class="pay-main">
+        <mat-card class="step-card">
+          <mat-card-header>
+            <mat-card-title>
+              <span class="step-title-icon">💳</span> Podaci o plaćanju
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="selected-address-info">
+              <mat-icon>location_on</mat-icon>
+              <div>
+                <strong>Isporuka na:</strong>
+                {{ order()!.shippingAddress.street }}, {{ order()!.shippingAddress.city }}
+              </div>
+            </div>
+
+            <mat-divider class="my-divider"></mat-divider>
+
+            <h3>Plaćanje karticom</h3>
+
+            <app-stripe-payment
+              [clientSecret]="clientSecret()!"
+              (paymentSuccess)="onPaymentSuccess()"
+              (paymentError)="onPaymentError($event)">
+            </app-stripe-payment>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <!-- Sažetak porudžbine -->
+      <div class="pay-summary">
+        <mat-card class="summary-card">
+          <mat-card-content>
+            <h2>📋 Porudžbina #{{ order()!.id }}</h2>
+            <small class="order-date">{{ order()!.orderDate | date:'dd.MM.yyyy. HH:mm' }}</small>
+
+            <div class="summary-divider"></div>
+
+            <div class="items-list">
+              @for (item of order()!.items; track item.id) {
+                <div class="summary-item">
+                  <div class="item-info">
+                    <strong>{{ item.productName }}</strong>
+                    <small>{{ item.quantity }} x {{ item.unitPrice | number:'1.2-2' }} €</small>
+                  </div>
+                  <span class="item-total">{{ item.subtotal | number:'1.2-2' }} €</span>
+                </div>
+              }
+            </div>
+
+            <div class="summary-divider"></div>
+
+            @if (order()!.voucherCode && order()!.discountAmount > 0) {
+              <div class="summary-line">
+                <span>Proizvodi:</span>
+                <span>{{ order()!.subtotalAmount | number:'1.2-2' }} €</span>
+              </div>
+              <div class="summary-line discount-line">
+                <span>🎟️ Popust ({{ order()!.voucherCode }}):</span>
+                <span class="discount-value">-{{ order()!.discountAmount | number:'1.2-2' }} €</span>
+              </div>
+            }
+
+            <div class="summary-line">
+              <span>Dostava</span>
+              <span class="free">🚚 Besplatna</span>
+            </div>
+
+            <div class="summary-divider"></div>
+
+            <div class="summary-total">
+              <span>Ukupno za platiti</span>
+              <strong>{{ order()!.totalAmount | number:'1.2-2' }} €</strong>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+    </div>
+  }
+</div>

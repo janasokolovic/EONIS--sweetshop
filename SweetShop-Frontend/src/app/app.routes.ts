@@ -32,6 +32,11 @@ export const routes: Routes = [
     loadComponent: () => import('./features/checkout/checkout/checkout').then(m => m.Checkout),
     canActivate: [() => import('./core/guards/auth.guard').then(m => m.authGuard)]
   },
+     {
+  path: 'checkout/pay/:id',
+  loadComponent: () => import('./features/checkout/pay-order/pay-order').then(m => m.PayOrder),
+  canActivate: [() => import('./core/guards/auth.guard').then(m => m.authGuard)]
+},
   {
     path: 'orders/my',
     loadComponent: () => import('./features/orders/my-orders/my-orders').then(m => m.MyOrders),
@@ -63,6 +68,7 @@ export const routes: Routes = [
         path: 'reviews',
         loadComponent: () => import('./features/admin/admin-reviews/admin-reviews').then(m => m.AdminReviews)
       },
+   
       {
   path: 'vouchers',
   loadComponent: () => import('./features/admin/admin-vouchers/admin-vouchers').then(m => m.AdminVouchers)

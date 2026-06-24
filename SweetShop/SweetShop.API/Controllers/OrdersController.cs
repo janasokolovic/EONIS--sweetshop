@@ -18,11 +18,7 @@ public class OrdersController : ControllerBase
         _orderService = orderService;
     }
 
-    // ============= CUSTOMER ENDPOINTS =============
 
-    /// <summary>
-    /// Kreira porudžbinu iz korpe (Customer)
-    /// </summary>
     [HttpPost]
     public async Task<ActionResult<OrderDto>> CreateOrder([FromBody] CreateOrderDto dto)
     {
@@ -30,9 +26,7 @@ public class OrdersController : ControllerBase
         return CreatedAtAction(nameof(GetById), new { id = order.Id }, order);
     }
 
-    /// <summary>
-    /// Vraća sve porudžbine trenutno prijavljenog kupca (Customer)
-    /// </summary>
+   
     [HttpGet("my")]
     public async Task<ActionResult<List<OrderDto>>> GetMyOrders()
     {
@@ -40,9 +34,7 @@ public class OrdersController : ControllerBase
         return Ok(orders);
     }
 
-    /// <summary>
-    /// Vraća porudžbinu po ID-u (Customer može svoju, Admin sve)
-    /// </summary>
+   
     [HttpGet("{id}")]
     public async Task<ActionResult<OrderDto>> GetById(int id)
     {
@@ -50,11 +42,7 @@ public class OrdersController : ControllerBase
         return Ok(order);
     }
 
-    // ============= ADMIN ENDPOINTS =============
-
-    /// <summary>
-    /// Vraća sve porudžbine sa paginacijom (samo Admin)
-    /// </summary>
+ 
     [HttpGet]
     [Authorize(Roles = "Admin")]
     public async Task<ActionResult<PagedResult<OrderDto>>> GetAll(
@@ -64,9 +52,7 @@ public class OrdersController : ControllerBase
         return Ok(result);
     }
 
-    /// <summary>
-    /// Ažurira status porudžbine (samo Admin)
-    /// </summary>
+  
     [HttpPut("{id}/status")]
     [Authorize(Roles = "Admin")]
     public async Task<ActionResult<OrderDto>> UpdateStatus(int id, [FromBody] UpdateOrderStatusDto dto)

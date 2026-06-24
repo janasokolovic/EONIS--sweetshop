@@ -33,17 +33,16 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 
         builder.Property(u => u.Role)
             .IsRequired()
-            .HasConversion<int>(); // Sačuvaj enum kao broj u bazi
+            .HasConversion<int>(); 
 
         builder.Property(u => u.CreatedAt)
             .IsRequired();
 
-        // Email mora biti jedinstven (unique index)
+ 
         builder.HasIndex(u => u.Email)
             .IsUnique();
 
-        // Table-Per-Hierarchy (TPH) inheritance:
-        // User, Customer i Admin idu u istu tabelu Users sa "Discriminator" kolonom
+        
         builder.HasDiscriminator<int>("UserType")
             .HasValue<Customer>((int)Domain.Enums.UserRole.Customer)
             .HasValue<Admin>((int)Domain.Enums.UserRole.Admin);

@@ -22,19 +22,19 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
             .IsRequired()
             .HasPrecision(18, 2);
 
-        // Veza: Customer 1 -- 0..* Order
+       
         builder.HasOne(o => o.Customer)
             .WithMany(c => c.Orders)
             .HasForeignKey(o => o.CustomerId)
             .OnDelete(DeleteBehavior.Restrict); // Ne brisati kupca koji ima porudžbine
 
-        // Veza: ShippingAddress 1 -- 0..* Order
+   
         builder.HasOne(o => o.ShippingAddress)
             .WithMany()
             .HasForeignKey(o => o.ShippingAddressId)
             .OnDelete(DeleteBehavior.Restrict);
 
-        // Indeks za brži pregled porudžbina po kupcu
+      
         builder.HasIndex(o => o.CustomerId);
         builder.HasIndex(o => o.OrderDate);
         builder.HasIndex(o => o.Status);

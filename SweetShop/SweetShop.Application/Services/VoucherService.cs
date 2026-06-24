@@ -15,7 +15,7 @@ public class VoucherService : IVoucherService
         _context = context;
     }
 
-    // ============== ADMIN ==============
+
 
     public async Task<List<VoucherDto>> GetAllAsync()
     {
@@ -37,7 +37,7 @@ public class VoucherService : IVoucherService
 
     public async Task<VoucherDto> CreateAsync(CreateVoucherDto dto)
     {
-        // Validacije
+   
         if (string.IsNullOrWhiteSpace(dto.Code))
             throw new BadRequestException("Kod ne sme biti prazan.");
 
@@ -50,7 +50,6 @@ public class VoucherService : IVoucherService
         if (dto.ValidUntil <= dto.ValidFrom)
             throw new BadRequestException("Datum isteka mora biti posle datuma početka.");
 
-        // Code mora biti unikatan
         var normalizedCode = dto.Code.Trim().ToUpper();
         var exists = await _context.Vouchers.AnyAsync(v => v.Code == normalizedCode);
         if (exists)
@@ -83,7 +82,7 @@ public class VoucherService : IVoucherService
         if (voucher == null)
             throw new NotFoundException(nameof(Voucher), id);
 
-        // Validacije
+     
         if (dto.DiscountValue <= 0)
             throw new BadRequestException("Vrednost popusta mora biti veća od 0.");
 
@@ -94,7 +93,7 @@ public class VoucherService : IVoucherService
             throw new BadRequestException("Datum isteka mora biti posle datuma početka.");
 
         var normalizedCode = dto.Code.Trim().ToUpper();
-        // Ako je promenjen kod, proveri da nije već zauzet
+       
         if (voucher.Code != normalizedCode)
         {
             var exists = await _context.Vouchers.AnyAsync(v => v.Code == normalizedCode && v.Id != id);
@@ -127,7 +126,7 @@ public class VoucherService : IVoucherService
         await _context.SaveChangesAsync();
     }
 
-    // ============== CUSTOMER ==============
+
 
     public async Task<VoucherCalculationDto> ApplyVoucherAsync(ApplyVoucherDto dto)
     {
@@ -140,7 +139,7 @@ public class VoucherService : IVoucherService
         if (voucher == null)
             throw new NotFoundException($"Voucher sa kodom '{normalizedCode}' ne postoji.");
 
-        // Validacije
+      
         if (!voucher.IsActive)
             throw new BadRequestException("Voucher nije aktivan.");
 
@@ -159,7 +158,7 @@ public class VoucherService : IVoucherService
                 $"Minimalna vrednost porudžbine za ovaj voucher je {voucher.MinOrderAmount.Value:F2}€. " +
                 $"Trenutni iznos je {dto.OrderSubtotal:F2}€.");
 
-        // Kalkulacija popusta
+     
         decimal discountAmount;
         if (voucher.IsPercentage)
         {
@@ -167,7 +166,7 @@ public class VoucherService : IVoucherService
         }
         else
         {
-            // Fiksni iznos, ali ne više od subtotal-a (da ne ide u negativu)
+            
             discountAmount = Math.Min(voucher.DiscountValue, dto.OrderSubtotal);
         }
 
@@ -202,8 +201,7 @@ public class VoucherService : IVoucherService
         }
     }
 
-    // ============== MAPPING ==============
-
+  
     private static VoucherDto MapToDto(Voucher v) => new()
     {
         Id = v.Id,

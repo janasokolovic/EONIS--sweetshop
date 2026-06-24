@@ -22,10 +22,10 @@ public class ProductImageConfiguration : IEntityTypeConfiguration<ProductImage>
         builder.Property(pi => pi.DisplayOrder)
             .IsRequired();
 
-        // Veza: Product 1 -- 1..* ProductImage (kompozicija - cascade delete)
+      
         builder.HasOne(pi => pi.Product)
             .WithMany(p => p.Images)
             .HasForeignKey(pi => pi.ProductId)
-            .OnDelete(DeleteBehavior.Cascade); // Brisanje proizvoda briše i slike
+            .OnDelete(DeleteBehavior.Cascade); 
     }
 }

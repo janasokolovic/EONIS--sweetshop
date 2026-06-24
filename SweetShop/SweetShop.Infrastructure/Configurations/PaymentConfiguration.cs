@@ -22,19 +22,19 @@ public class PaymentConfiguration : IEntityTypeConfiguration<Payment>
 
         builder.Property(p => p.Currency)
             .IsRequired()
-            .HasMaxLength(3); // USD, EUR, RSD
+            .HasMaxLength(3); 
 
         builder.Property(p => p.Status)
             .IsRequired()
             .HasConversion<int>();
 
-        // Veza: Order 1 -- 1 Payment (kompozicija)
+        
         builder.HasOne(p => p.Order)
             .WithOne(o => o.Payment)
             .HasForeignKey<Payment>(p => p.OrderId)
             .OnDelete(DeleteBehavior.Cascade);
 
-        // Brza pretraga po Stripe ID
+      
         builder.HasIndex(p => p.StripePaymentIntentId).IsUnique();
     }
 }

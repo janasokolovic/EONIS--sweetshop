@@ -32,20 +32,20 @@ public class CartService : ICartService
         var customerId = GetCurrentCustomerId();
         var cart = await GetOrCreateCartAsync(customerId);
 
-        // Pronađi proizvod sa zalihama
+
         var product = await _context.Products
             .FirstOrDefaultAsync(p => p.Id == dto.ProductId && p.IsActive);
 
         if (product == null)
             throw new NotFoundException(nameof(Product), dto.ProductId);
 
-        // Pronađi postojeću stavku u korpi (ako postoji)
+    
         var existingItem = cart.Items.FirstOrDefault(i => i.ProductId == dto.ProductId);
 
-        // Izračunaj ukupnu količinu (postojeća + nova)
+  
         var totalQuantity = (existingItem?.Quantity ?? 0) + dto.Quantity;
 
-        // BIZNIS PRAVILO: ne dozvoli više nego što ima na zalihama
+        
         if (totalQuantity > product.StockQuantity)
             throw new BadRequestException(
                 $"Nedovoljna količina na zalihama. Trenutno imate {existingItem?.Quantity ?? 0} u korpi, " +
@@ -53,12 +53,12 @@ public class CartService : ICartService
 
         if (existingItem != null)
         {
-            // Ažuriraj postojeću stavku
+           
             existingItem.Quantity = totalQuantity;
         }
         else
         {
-            // Kreiraj novu stavku
+          
             var newItem = new CartItem
             {
                 CartId = cart.Id,

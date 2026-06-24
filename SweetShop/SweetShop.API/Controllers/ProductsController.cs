@@ -17,9 +17,7 @@ public class ProductsController : ControllerBase
         _productService = productService;
     }
 
-    /// <summary>
-    /// Vraća listu proizvoda sa paginacijom, sortiranjem i pretragom
-    /// </summary>
+   
     /* [HttpGet]
      public async Task<ActionResult<PagedResult<ProductDto>>> GetAll(
          [FromQuery] PaginationParams paginationParams,
@@ -31,7 +29,7 @@ public class ProductsController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetAll([FromQuery] PaginationParams paginationParams, [FromQuery] int? categoryId = null, [FromQuery] bool includeInactive = false)
     {
-        // Samo admin može da vidi neaktivne proizvode
+        
         var isAdmin = User.IsInRole("Admin");
         var showInactive = isAdmin && includeInactive;
 
@@ -39,9 +37,7 @@ public class ProductsController : ControllerBase
         return Ok(result);
     }
 
-    /// <summary>
-    /// Vraća proizvod po ID-u
-    /// </summary>
+  
     [HttpGet("{id}")]
     public async Task<ActionResult<ProductDto>> GetById(int id)
     {
@@ -49,9 +45,7 @@ public class ProductsController : ControllerBase
         return Ok(product);
     }
 
-    /// <summary>
-    /// Kreira novi proizvod (samo admin)
-    /// </summary>
+  
     [HttpPost]
     [Authorize(Roles = "Admin")]
     public async Task<ActionResult<ProductDto>> Create([FromBody] CreateProductDto dto)
@@ -60,9 +54,7 @@ public class ProductsController : ControllerBase
         return CreatedAtAction(nameof(GetById), new { id = product.Id }, product);
     }
 
-    /// <summary>
-    /// Ažurira proizvod (samo admin)
-    /// </summary>
+  
     [HttpPut("{id}")]
     [Authorize(Roles = "Admin")]
     public async Task<ActionResult<ProductDto>> Update(int id, [FromBody] UpdateProductDto dto)
@@ -71,9 +63,7 @@ public class ProductsController : ControllerBase
         return Ok(product);
     }
 
-    /// <summary>
-    /// Briše proizvod (samo admin)
-    /// </summary>
+   
     [HttpDelete("{id}")]
     [Authorize(Roles = "Admin")]
     public async Task<ActionResult> Delete(int id)

@@ -16,11 +16,7 @@ public class ReviewsController : ControllerBase
         _reviewService = reviewService;
     }
 
-    // ============= PUBLIC ENDPOINTS =============
-
-    /// <summary>
-    /// Vraća sve odobrene recenzije za proizvod (Public)
-    /// </summary>
+   
     [HttpGet("product/{productId}")]
     public async Task<ActionResult<List<ReviewDto>>> GetProductReviews(int productId)
     {
@@ -28,11 +24,7 @@ public class ReviewsController : ControllerBase
         return Ok(reviews);
     }
 
-    // ============= CUSTOMER ENDPOINTS =============
-
-    /// <summary>
-    /// Ostavlja novu recenziju (Customer)
-    /// </summary>
+   
     [HttpPost]
     [Authorize]
     public async Task<ActionResult<ReviewDto>> Create([FromBody] CreateReviewDto dto)
@@ -41,9 +33,7 @@ public class ReviewsController : ControllerBase
         return Ok(review);
     }
 
-    /// <summary>
-    /// Ažurira recenziju (Customer - samo svoju)
-    /// </summary>
+ 
     [HttpPut("{id}")]
     [Authorize]
     public async Task<ActionResult<ReviewDto>> Update(int id, [FromBody] UpdateReviewDto dto)
@@ -52,9 +42,7 @@ public class ReviewsController : ControllerBase
         return Ok(review);
     }
 
-    /// <summary>
-    /// Briše recenziju (Customer briše svoju, Admin može bilo koju)
-    /// </summary>
+
     [HttpDelete("{id}")]
     [Authorize]
     public async Task<ActionResult> Delete(int id)
@@ -63,11 +51,7 @@ public class ReviewsController : ControllerBase
         return NoContent();
     }
 
-    // ============= ADMIN ENDPOINTS =============
 
-    /// <summary>
-    /// Vraća sve recenzije koje čekaju moderaciju (Admin)
-    /// </summary>
     [HttpGet("pending")]
     [Authorize(Roles = "Admin")]
     public async Task<ActionResult<List<ReviewDto>>> GetPendingReviews()
@@ -76,9 +60,7 @@ public class ReviewsController : ControllerBase
         return Ok(reviews);
     }
 
-    /// <summary>
-    /// Odobrava recenziju (Admin)
-    /// </summary>
+ 
     [HttpPut("{id}/approve")]
     [Authorize(Roles = "Admin")]
     public async Task<ActionResult<ReviewDto>> Approve(int id)
@@ -87,9 +69,6 @@ public class ReviewsController : ControllerBase
         return Ok(review);
     }
 
-    /// <summary>
-    /// Odbacuje recenziju (Admin)
-    /// </summary>
     [HttpPut("{id}/reject")]
     [Authorize(Roles = "Admin")]
     public async Task<ActionResult> Reject(int id)

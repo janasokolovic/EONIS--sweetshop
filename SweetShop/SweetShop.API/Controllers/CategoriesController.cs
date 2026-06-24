@@ -16,9 +16,7 @@ public class CategoriesController : ControllerBase
         _categoryService = categoryService;
     }
 
-    /// <summary>
-    /// Vraća sve kategorije
-    /// </summary>
+   
     [HttpGet]
     public async Task<ActionResult<List<CategoryDto>>> GetAll()
     {
@@ -26,9 +24,7 @@ public class CategoriesController : ControllerBase
         return Ok(categories);
     }
 
-    /// <summary>
-    /// Vraća kategoriju po ID-u
-    /// </summary>
+ 
     [HttpGet("{id}")]
     public async Task<ActionResult<CategoryDto>> GetById(int id)
     {
@@ -36,9 +32,7 @@ public class CategoriesController : ControllerBase
         return Ok(category);
     }
 
-    /// <summary>
-    /// Kreira novu kategoriju (samo admin)
-    /// </summary>
+
     [HttpPost]
     [Authorize(Roles = "Admin")]
     public async Task<ActionResult<CategoryDto>> Create([FromBody] CreateCategoryDto dto)
@@ -47,9 +41,7 @@ public class CategoriesController : ControllerBase
         return CreatedAtAction(nameof(GetById), new { id = category.Id }, category);
     }
 
-    /// <summary>
-    /// Ažurira kategoriju (samo admin)
-    /// </summary>
+    
     [HttpPut("{id}")]
     [Authorize(Roles = "Admin")]
     public async Task<ActionResult<CategoryDto>> Update(int id, [FromBody] UpdateCategoryDto dto)
@@ -58,9 +50,7 @@ public class CategoriesController : ControllerBase
         return Ok(category);
     }
 
-    /// <summary>
-    /// Briše kategoriju (samo admin)
-    /// </summary>
+    
     [HttpDelete("{id}")]
     [Authorize(Roles = "Admin")]
     public async Task<ActionResult> Delete(int id)

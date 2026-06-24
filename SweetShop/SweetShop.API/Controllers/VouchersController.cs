@@ -16,9 +16,7 @@ public class VouchersController : ControllerBase
         _voucherService = voucherService;
     }
 
-    // ============== ADMIN ENDPOINTS ==============
-
-    /// <summary>Lista svih voucher-a (samo admin).</summary>
+ 
     [HttpGet]
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> GetAll()
@@ -27,7 +25,7 @@ public class VouchersController : ControllerBase
         return Ok(vouchers);
     }
 
-    /// <summary>Detalji voucher-a (samo admin).</summary>
+
     [HttpGet("{id}")]
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> GetById(int id)
@@ -36,7 +34,7 @@ public class VouchersController : ControllerBase
         return Ok(voucher);
     }
 
-    /// <summary>Kreiraj novi voucher (samo admin).</summary>
+ 
     [HttpPost]
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Create([FromBody] CreateVoucherDto dto)
@@ -45,7 +43,7 @@ public class VouchersController : ControllerBase
         return CreatedAtAction(nameof(GetById), new { id = voucher.Id }, voucher);
     }
 
-    /// <summary>Ažuriraj voucher (samo admin).</summary>
+
     [HttpPut("{id}")]
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Update(int id, [FromBody] UpdateVoucherDto dto)
@@ -54,7 +52,7 @@ public class VouchersController : ControllerBase
         return Ok(voucher);
     }
 
-    /// <summary>Obriši voucher (samo admin).</summary>
+
     [HttpDelete("{id}")]
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Delete(int id)
@@ -63,9 +61,7 @@ public class VouchersController : ControllerBase
         return NoContent();
     }
 
-    // ============== CUSTOMER ENDPOINT ==============
-
-    /// <summary>Validacija i primena voucher koda na zadati iznos (customer).</summary>
+   
     [HttpPost("apply")]
     [Authorize(Roles = "Customer")]
     public async Task<IActionResult> Apply([FromBody] ApplyVoucherDto dto)

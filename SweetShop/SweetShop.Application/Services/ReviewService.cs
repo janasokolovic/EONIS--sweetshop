@@ -18,7 +18,7 @@ public class ReviewService : IReviewService
         _currentUser = currentUser;
     }
 
-    // ============= PUBLIC METHODS =============
+
 
     public async Task<List<ReviewDto>> GetProductReviewsAsync(int productId)
     {
@@ -35,22 +35,22 @@ public class ReviewService : IReviewService
             .ToListAsync();
     }
 
-    // ============= CUSTOMER METHODS =============
+
 
     public async Task<ReviewDto> CreateAsync(CreateReviewDto dto)
     {
         var customerId = GetCurrentCustomerId();
 
-        // Validacija ocene
+ 
         if (dto.Rating < 1 || dto.Rating > 5)
             throw new BadRequestException("Ocena mora biti između 1 i 5.");
 
-        // Provera da li proizvod postoji
+
         var productExists = await _context.Products.AnyAsync(p => p.Id == dto.ProductId);
         if (!productExists)
             throw new NotFoundException(nameof(Product), dto.ProductId);
 
-        // BIZNIS PRAVILO: Kupac mora biti VERIFIKOVAN - mora imati plaćenu porudžbinu sa tim proizvodom
+      
         var hasPurchased = await _context.Orders
             .Where(o => o.CustomerId == customerId &&
                        (o.Status == OrderStatus.Paid ||
@@ -63,7 +63,7 @@ public class ReviewService : IReviewService
             throw new BadRequestException(
                 "Ne možete ostaviti recenziju za proizvod koji niste kupili.");
 
-        // BIZNIS PRAVILO: Jedna recenzija po proizvodu (od istog kupca)
+   
         var alreadyReviewed = await _context.Reviews
             .AnyAsync(r => r.CustomerId == customerId && r.ProductId == dto.ProductId);
 
@@ -78,7 +78,7 @@ public class ReviewService : IReviewService
             Rating = dto.Rating,
             Comment = dto.Comment,
             CreatedAt = DateTime.UtcNow,
-            IsApproved = false // Čeka moderaciju
+            IsApproved = false 
         };
 
         _context.Reviews.Add(review);
@@ -118,7 +118,7 @@ public class ReviewService : IReviewService
         if (review == null)
             throw new NotFoundException(nameof(Review), id);
 
-        // Customer može da briše samo svoje recenzije, Admin bilo koje
+      
         if (role != "Admin" && review.CustomerId != customerId)
             throw new UnauthorizedException("Nemate dozvolu za brisanje ove recenzije.");
 
@@ -126,7 +126,7 @@ public class ReviewService : IReviewService
         await _context.SaveChangesAsync();
     }
 
-    // ============= ADMIN METHODS =============
+  
 
     public async Task<List<ReviewDto>> GetPendingReviewsAsync()
     {
@@ -157,12 +157,12 @@ public class ReviewService : IReviewService
         if (review == null)
             throw new NotFoundException(nameof(Review), id);
 
-        // Odbacivanje briše recenziju
+        
         _context.Reviews.Remove(review);
         await _context.SaveChangesAsync();
     }
 
-    // ============= PRIVATE HELPERS =============
+    
 
     private int GetCurrentCustomerId()
     {

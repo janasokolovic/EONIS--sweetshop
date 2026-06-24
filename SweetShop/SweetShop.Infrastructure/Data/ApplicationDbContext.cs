@@ -12,7 +12,7 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     {
     }
 
-    // DbSet predstavlja tabelu u bazi
+
     public DbSet<User> Users => Set<User>();
     public DbSet<Customer> Customers => Set<Customer>();
     public DbSet<Admin> Admins => Set<Admin>();

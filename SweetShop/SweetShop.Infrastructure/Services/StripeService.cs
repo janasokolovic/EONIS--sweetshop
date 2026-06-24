@@ -25,7 +25,7 @@ public class StripeService : IStripeService
         _context = context;
         _logger = logger;
 
-        // Postavi Stripe API ključ globalno
+       
         StripeConfiguration.ApiKey = _configuration["Stripe:SecretKey"]
             ?? throw new InvalidOperationException("Stripe Secret Key not configured.");
 
@@ -34,7 +34,7 @@ public class StripeService : IStripeService
 
     public async Task<StripePaymentIntentResult> CreatePaymentIntentAsync(int orderId, decimal amount, string currency = "usd")
     {
-        // Pronađi porudžbinu i proveri da nema već uspešno plaćanje
+      
         var order = await _context.Orders
             .Include(o => o.Payment)
             .FirstOrDefaultAsync(o => o.Id == orderId);
@@ -45,7 +45,7 @@ public class StripeService : IStripeService
         if (order.Payment != null && order.Payment.Status == PaymentStatus.Succeeded)
             throw new BadRequestException("Ova porudžbina je već uspešno plaćena.");
 
-        // Stripe radi sa najmanjom jedinicom valute (USD u centima = amount × 100)
+        
         var amountInCents = (long)(amount * 100);
 
         var options = new PaymentIntentCreateOptions
@@ -67,7 +67,7 @@ public class StripeService : IStripeService
         var service = new PaymentIntentService();
         var paymentIntent = await service.CreateAsync(options);
 
-        // Sačuvaj Payment u našoj bazi
+  
         if (order.Payment == null)
         {
             var payment = new Domain.Entities.Payment
@@ -82,7 +82,7 @@ public class StripeService : IStripeService
         }
         else
         {
-            // Ako već postoji ali nije succeeded, ažuriraj
+
             order.Payment.StripePaymentIntentId = paymentIntent.Id;
             order.Payment.Amount = amount;
             order.Payment.Currency = currency.ToUpper();
@@ -106,7 +106,7 @@ public class StripeService : IStripeService
 
         try
         {
-            // Verifikuj digitalni potpis - garantuje da je zahtev stvarno od Stripe-a
+            
             stripeEvent = EventUtility.ConstructEvent(payload, signature, _webhookSecret);
         }
         catch (StripeException ex)
@@ -117,7 +117,7 @@ public class StripeService : IStripeService
 
         _logger.LogInformation("Stripe webhook received: {EventType}", stripeEvent.Type);
 
-        // Obradi različite tipove događaja
+
         switch (stripeEvent.Type)
         {
             case "payment_intent.succeeded":
@@ -134,7 +134,7 @@ public class StripeService : IStripeService
         }
     }
 
-    // ============= PRIVATE HANDLERS =============
+   
 
     private async Task HandlePaymentSucceededAsync(Event stripeEvent)
     {
@@ -153,11 +153,11 @@ public class StripeService : IStripeService
             return;
         }
 
-        // Ažuriraj status plaćanja
+   
         payment.Status = PaymentStatus.Succeeded;
         payment.PaidAt = DateTime.UtcNow;
 
-        // Ažuriraj status porudžbine
+     
         if (payment.Order != null && payment.Order.Status == OrderStatus.Pending)
         {
             payment.Order.Status = OrderStatus.Paid;

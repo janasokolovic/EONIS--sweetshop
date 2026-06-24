@@ -11,7 +11,7 @@ public class ShippingAddress
     public string? PhoneNumber { get; set; }
     public bool IsDefault { get; set; }
 
-    // Foreign key - svaka adresa pripada jednom kupcu
+    
     public int CustomerId { get; set; }
     public Customer Customer { get; set; } = null!;
 }

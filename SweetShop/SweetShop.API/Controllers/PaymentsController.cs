@@ -23,14 +23,12 @@ public class PaymentsController : ControllerBase
         _logger = logger;
     }
 
-    /// <summary>
-    /// Kreira PaymentIntent za porudžbinu (Customer)
-    /// </summary>
+    
     [HttpPost("create-intent/{orderId}")]
     [Authorize]
     public async Task<ActionResult<StripePaymentIntentResult>> CreatePaymentIntent(int orderId)
     {
-        // Pronađi porudžbinu (servis radi security check da je porudžbina vlasništvo prijavljenog kupca)
+        
         var order = await _orderService.GetByIdAsync(orderId);
 
         var result = await _stripeService.CreatePaymentIntentAsync(
@@ -42,17 +40,15 @@ public class PaymentsController : ControllerBase
         return Ok(result);
     }
 
-    /// <summary>
-    /// Stripe webhook endpoint - prima obaveštenja o plaćanjima
-    /// </summary>
+
     [HttpPost("webhook")]
     public async Task<IActionResult> StripeWebhook()
     {
-        // Pročitaj raw body (potreban za signature verification)
+     
         using var reader = new StreamReader(HttpContext.Request.Body);
         var payload = await reader.ReadToEndAsync();
 
-        // Stripe-Signature header sadrži digitalni potpis
+     
         var signature = Request.Headers["Stripe-Signature"].ToString();
 
         try

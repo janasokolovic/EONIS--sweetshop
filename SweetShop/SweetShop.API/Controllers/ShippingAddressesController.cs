@@ -17,9 +17,7 @@ public class ShippingAddressesController : ControllerBase
         _shippingAddressService = shippingAddressService;
     }
 
-    /// <summary>
-    /// Vraća sve adrese trenutno prijavljenog kupca
-    /// </summary>
+  
     [HttpGet]
     public async Task<ActionResult<List<ShippingAddressDetailsDto>>> GetMyAddresses()
     {
@@ -27,9 +25,7 @@ public class ShippingAddressesController : ControllerBase
         return Ok(addresses);
     }
 
-    /// <summary>
-    /// Vraća adresu po ID-u (samo svoju)
-    /// </summary>
+  
     [HttpGet("{id}")]
     public async Task<ActionResult<ShippingAddressDetailsDto>> GetById(int id)
     {
@@ -37,9 +33,7 @@ public class ShippingAddressesController : ControllerBase
         return Ok(address);
     }
 
-    /// <summary>
-    /// Kreira novu adresu
-    /// </summary>
+    
     [HttpPost]
     public async Task<ActionResult<ShippingAddressDetailsDto>> Create([FromBody] CreateShippingAddressDto dto)
     {
@@ -47,9 +41,7 @@ public class ShippingAddressesController : ControllerBase
         return CreatedAtAction(nameof(GetById), new { id = address.Id }, address);
     }
 
-    /// <summary>
-    /// Ažurira adresu
-    /// </summary>
+    
     [HttpPut("{id}")]
     public async Task<ActionResult<ShippingAddressDetailsDto>> Update(int id, [FromBody] UpdateShippingAddressDto dto)
     {
@@ -57,9 +49,7 @@ public class ShippingAddressesController : ControllerBase
         return Ok(address);
     }
 
-    /// <summary>
-    /// Briše adresu
-    /// </summary>
+
     [HttpDelete("{id}")]
     public async Task<ActionResult> Delete(int id)
     {

@@ -23,13 +23,13 @@ public class OrderService : IOrderService
         _voucherService = voucherService;
     }
 
-    // ============= CUSTOMER METHODS =============
+
 
     public async Task<OrderDto> CreateOrderAsync(CreateOrderDto dto)
     {
         var customerId = GetCurrentCustomerId();
 
-        // 1. Pronađi korpu kupca sa svim stavkama i proizvodima
+      
         var cart = await _context.Carts
             .Include(c => c.Items)
                 .ThenInclude(i => i.Product)
@@ -38,14 +38,14 @@ public class OrderService : IOrderService
         if (cart == null || !cart.Items.Any())
             throw new BadRequestException("Korpa je prazna. Dodajte proizvode pre kreiranja porudžbine.");
 
-        // 2. Validacija adrese - mora pripadati ovom kupcu
+     
         var address = await _context.ShippingAddresses
             .FirstOrDefaultAsync(sa => sa.Id == dto.ShippingAddressId && sa.CustomerId == customerId);
 
         if (address == null)
             throw new BadRequestException($"Adresa sa ID {dto.ShippingAddressId} ne postoji ili ne pripada vama.");
 
-        // 3. BIZNIS PRAVILO: Proveri da li ima dovoljno na zalihama za svaku stavku
+        
         foreach (var item in cart.Items)
         {
             if (item.Product == null || !item.Product.IsActive)
@@ -57,12 +57,12 @@ public class OrderService : IOrderService
                     $"a na zalihama je samo {item.Product.StockQuantity}.");
         }
 
-        // 4. Izračunaj subtotal
+       
         var subtotal = cart.Items.Sum(i => i.UnitPrice * i.Quantity);
         decimal discountAmount = 0;
         string? appliedVoucherCode = null;
 
-        // 5. Primeni voucher ako je zadat
+   
         if (!string.IsNullOrWhiteSpace(dto.VoucherCode))
         {
             var voucherResult = await _voucherService.ApplyVoucherAsync(new ApplyVoucherDto
@@ -77,7 +77,7 @@ public class OrderService : IOrderService
 
         var totalAmount = subtotal - discountAmount;
 
-        // 6. Kreiraj porudžbinu
+       
         var order = new Order
         {
             CustomerId = customerId,
@@ -99,19 +99,19 @@ public class OrderService : IOrderService
 
         _context.Orders.Add(order);
 
-        // 7. BIZNIS PRAVILO: Smanji zalihe za svaki proizvod
+
         foreach (var item in cart.Items)
         {
             item.Product!.StockQuantity -= item.Quantity;
         }
 
-        // 8. Inkrementuj broj korišćenja voucher-a (ako je korišćen)
+      
         if (!string.IsNullOrWhiteSpace(appliedVoucherCode))
         {
             await _voucherService.IncrementUsageCountAsync(appliedVoucherCode);
         }
 
-        // 9. Isprazni korpu
+
         foreach (var item in cart.Items.ToList())
         {
             _context.CartItems.Remove(item);
@@ -156,8 +156,7 @@ public class OrderService : IOrderService
         if (order == null)
             throw new NotFoundException(nameof(Order), id);
 
-        // Security: ako je korisnik Customer, mora videti samo svoje porudžbine
-        // Admin može videti sve
+
         var role = _currentUser.Role;
         if (role != "Admin" && order.CustomerId != _currentUser.UserId)
             throw new UnauthorizedException("Nemate dozvolu za pregled ove porudžbine.");
@@ -165,7 +164,7 @@ public class OrderService : IOrderService
         return MapToDto(order);
     }
 
-    // ============= ADMIN METHODS =============
+ 
 
     public async Task<PagedResult<OrderDto>> GetAllAsync(PaginationParams paginationParams)
     {
@@ -178,7 +177,7 @@ public class OrderService : IOrderService
             .Include(o => o.Payment)
             .AsQueryable();
 
-        // Pretraga po imenu kupca ili email-u
+     
         if (!string.IsNullOrWhiteSpace(paginationParams.SearchTerm))
         {
             var term = paginationParams.SearchTerm.ToLower();
@@ -188,7 +187,7 @@ public class OrderService : IOrderService
                 o.Customer.Email.ToLower().Contains(term));
         }
 
-        // Sortiranje
+ 
         query = paginationParams.SortBy?.ToLower() switch
         {
             "orderdate" => paginationParams.SortDescending
@@ -229,12 +228,12 @@ public class OrderService : IOrderService
         if (order == null)
             throw new NotFoundException(nameof(Order), id);
 
-        // Biznis pravilo: Ne dozvoli unazadno menjanje statusa
+
         if (order.Status == OrderStatus.Delivered || order.Status == OrderStatus.Cancelled)
             throw new BadRequestException(
                 $"Porudžbina sa statusom '{order.Status}' ne može više biti izmenjena.");
 
-        // Ako se otkazuje porudžbina (a već je plaćena), vrati zalihe
+
         if (dto.Status == OrderStatus.Cancelled && order.Status != OrderStatus.Pending)
         {
             foreach (var item in order.Items)
@@ -250,7 +249,7 @@ public class OrderService : IOrderService
         return await GetByIdAsync(order.Id);
     }
 
-    // ============= PRIVATE HELPERS =============
+
 
     private int GetCurrentCustomerId()
     {

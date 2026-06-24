@@ -14,7 +14,7 @@ public class VoucherConfiguration : IEntityTypeConfiguration<Voucher>
             .IsRequired()
             .HasMaxLength(50);
 
-        // Code mora biti UNIKATAN
+     
         builder.HasIndex(v => v.Code).IsUnique();
 
         builder.Property(v => v.Description)

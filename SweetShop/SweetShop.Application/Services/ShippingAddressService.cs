@@ -46,7 +46,7 @@ public class ShippingAddressService : IShippingAddressService
     {
         var customerId = GetCurrentCustomerId();
 
-        // Ako je ova adresa default, isključi default na svim drugim adresama
+      
         if (dto.IsDefault)
             await ClearDefaultAddressesAsync(customerId);
 
@@ -78,7 +78,6 @@ public class ShippingAddressService : IShippingAddressService
         if (address == null)
             throw new NotFoundException(nameof(ShippingAddress), id);
 
-        // Ako je ova adresa postala default, isključi default na svim drugim
         if (dto.IsDefault && !address.IsDefault)
             await ClearDefaultAddressesAsync(customerId);
 
@@ -105,7 +104,7 @@ public class ShippingAddressService : IShippingAddressService
         if (address == null)
             throw new NotFoundException(nameof(ShippingAddress), id);
 
-        // Provera da li je adresa povezana sa nekom porudžbinom
+   
         var isUsed = await _context.Orders.AnyAsync(o => o.ShippingAddressId == id);
         if (isUsed)
             throw new BadRequestException(
@@ -115,7 +114,7 @@ public class ShippingAddressService : IShippingAddressService
         await _context.SaveChangesAsync();
     }
 
-    // ============= PRIVATE HELPERS =============
+
 
     private int GetCurrentCustomerId()
     {

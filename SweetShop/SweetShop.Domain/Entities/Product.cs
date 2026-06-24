@@ -10,11 +10,11 @@ public class Product
     public bool IsActive { get; set; } = true;
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
-    // Foreign key - svaki proizvod pripada jednoj kategoriji
+   
     public int CategoryId { get; set; }
     public Category Category { get; set; } = null!;
 
-    // Navigacijske kolekcije
+ 
     public ICollection<ProductImage> Images { get; set; } = new List<ProductImage>();
     public ICollection<Review> Reviews { get; set; } = new List<Review>();
 }

@@ -23,17 +23,17 @@ public class ProductService : IProductService
             .Include(p => p.Reviews)
             .AsQueryable();
 
-        // Filtriraj samo aktivne ako includeInactive nije true
+    
         if (!includeInactive)
         {
             query = query.Where(p => p.IsActive);
         }
 
-        // Filtriranje po kategoriji
+
         if (categoryId.HasValue)
             query = query.Where(p => p.CategoryId == categoryId.Value);
 
-        // Pretraga po imenu ili opisu
+   
         if (!string.IsNullOrWhiteSpace(paginationParams.SearchTerm))
         {
             var searchTerm = paginationParams.SearchTerm.ToLower();
@@ -42,7 +42,7 @@ public class ProductService : IProductService
                 p.Description.ToLower().Contains(searchTerm));
         }
 
-        // Sortiranje
+
         query = paginationParams.SortBy?.ToLower() switch
         {
             "name" => paginationParams.SortDescending
@@ -144,7 +144,7 @@ public class ProductService : IProductService
 
     public async Task<ProductDto> CreateAsync(CreateProductDto dto)
     {
-        // Provera da li kategorija postoji
+  
         var categoryExists = await _context.Categories.AnyAsync(c => c.Id == dto.CategoryId);
         if (!categoryExists)
             throw new BadRequestException($"Kategorija sa ID {dto.CategoryId} ne postoji.");

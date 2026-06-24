@@ -37,7 +37,7 @@ public class ShippingAddressConfiguration : IEntityTypeConfiguration<ShippingAdd
 
         builder.Property(sa => sa.IsDefault).IsRequired();
 
-        // Veza: Customer 1 -- 0..* ShippingAddress
+
         builder.HasOne(sa => sa.Customer)
             .WithMany(c => c.ShippingAddresses)
             .HasForeignKey(sa => sa.CustomerId)

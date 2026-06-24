@@ -23,12 +23,12 @@ public class AuthService : IAuthService
 
     public async Task<AuthResponseDto> RegisterAsync(RegisterDto dto)
     {
-        // Provera da li email već postoji
+     
         var emailExists = await _context.Users.AnyAsync(u => u.Email == dto.Email);
         if (emailExists)
             throw new BadRequestException($"Korisnik sa email adresom '{dto.Email}' već postoji.");
 
-        // Kreiranje novog Customer-a (svi koji se registruju kroz API su Customer-i)
+       
         var customer = new Customer
         {
             Email = dto.Email,
@@ -43,7 +43,7 @@ public class AuthService : IAuthService
         _context.Users.Add(customer);
         await _context.SaveChangesAsync();
 
-        // Automatski kreiramo praznu korpu za novog kupca
+        
         var cart = new Cart
         {
             CustomerId = customer.Id,
@@ -53,7 +53,7 @@ public class AuthService : IAuthService
         _context.Carts.Add(cart);
         await _context.SaveChangesAsync();
 
-        // Generisanje JWT tokena
+     
         var token = _tokenService.GenerateToken(customer, out var expiresAt);
 
         return new AuthResponseDto
@@ -98,7 +98,7 @@ public class AuthService : IAuthService
     {
         var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
         if (user == null)
-            return; // Ne otkrivamo da li email postoji
+            return; 
 
         var token = Convert.ToHexString(RandomNumberGenerator.GetBytes(32));
         user.PasswordResetToken = token;

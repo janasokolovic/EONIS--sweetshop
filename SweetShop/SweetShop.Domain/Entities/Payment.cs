@@ -11,7 +11,7 @@ public class Payment
     public PaymentStatus Status { get; set; } = PaymentStatus.Pending;
     public DateTime? PaidAt { get; set; }
 
-    // Foreign key - jedno plaćanje pripada jednoj porudžbini
+ 
     public int OrderId { get; set; }
     public Order Order { get; set; } = null!;
 }

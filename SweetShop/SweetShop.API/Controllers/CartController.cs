@@ -7,7 +7,7 @@ namespace SweetShop.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-[Authorize] // Sve operacije sa korpom zahtevaju prijavu
+[Authorize] 
 public class CartController : ControllerBase
 {
     private readonly ICartService _cartService;
@@ -17,9 +17,7 @@ public class CartController : ControllerBase
         _cartService = cartService;
     }
 
-    /// <summary>
-    /// Vraća trenutnu korpu prijavljenog kupca
-    /// </summary>
+  
     [HttpGet]
     public async Task<ActionResult<CartDto>> GetCurrentCart()
     {
@@ -27,9 +25,7 @@ public class CartController : ControllerBase
         return Ok(cart);
     }
 
-    /// <summary>
-    /// Dodaje proizvod u korpu
-    /// </summary>
+ 
     [HttpPost("items")]
     public async Task<ActionResult<CartDto>> AddItem([FromBody] AddToCartDto dto)
     {
@@ -37,9 +33,7 @@ public class CartController : ControllerBase
         return Ok(cart);
     }
 
-    /// <summary>
-    /// Ažurira količinu stavke u korpi
-    /// </summary>
+
     [HttpPut("items/{itemId}")]
     public async Task<ActionResult<CartDto>> UpdateItem(int itemId, [FromBody] UpdateCartItemDto dto)
     {
@@ -47,9 +41,7 @@ public class CartController : ControllerBase
         return Ok(cart);
     }
 
-    /// <summary>
-    /// Uklanja stavku iz korpe
-    /// </summary>
+    
     [HttpDelete("items/{itemId}")]
     public async Task<ActionResult<CartDto>> RemoveItem(int itemId)
     {
@@ -57,9 +49,7 @@ public class CartController : ControllerBase
         return Ok(cart);
     }
 
-    /// <summary>
-    /// Prazni korpu
-    /// </summary>
+    
     [HttpDelete]
     public async Task<ActionResult> ClearCart()
     {

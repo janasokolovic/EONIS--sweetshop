@@ -51,7 +51,7 @@ public class CategoryService : ICategoryService
 
     public async Task<CategoryDto> CreateAsync(CreateCategoryDto dto)
     {
-        // Provera da li već postoji kategorija sa istim imenom
+       
         var exists = await _context.Categories.AnyAsync(c => c.Name == dto.Name);
         if (exists)
             throw new BadRequestException($"Kategorija sa nazivom '{dto.Name}' već postoji.");
@@ -82,7 +82,7 @@ public class CategoryService : ICategoryService
         if (category == null)
             throw new NotFoundException(nameof(Category), id);
 
-        // Provera da li druga kategorija ima isti naziv
+      
         var duplicate = await _context.Categories
             .AnyAsync(c => c.Name == dto.Name && c.Id != id);
         if (duplicate)
@@ -115,7 +115,7 @@ public class CategoryService : ICategoryService
         if (category == null)
             throw new NotFoundException(nameof(Category), id);
 
-        // Biznis logika: ne dozvoli brisanje kategorije koja ima proizvode
+      
         if (category.Products.Any())
             throw new BadRequestException(
                 $"Kategorija '{category.Name}' ne može biti obrisana jer sadrži {category.Products.Count} proizvoda.");

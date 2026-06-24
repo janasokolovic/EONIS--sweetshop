@@ -8,11 +8,11 @@ public class Review
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public bool IsApproved { get; set; } = false;
 
-    // Foreign key ka kupcu
+
     public int CustomerId { get; set; }
     public Customer Customer { get; set; } = null!;
 
-    // Foreign key ka proizvodu
+   
     public int ProductId { get; set; }
     public Product Product { get; set; } = null!;
 }

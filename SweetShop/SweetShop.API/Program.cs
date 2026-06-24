@@ -14,7 +14,7 @@ using SweetShop.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Forsiraj HTTP/1.1 za development da izbegne probleme sa HTTP/2 na localhost-u
+
 builder.WebHost.ConfigureKestrel(options =>
 {
     options.ConfigureEndpointDefaults(listenOptions =>
@@ -23,22 +23,22 @@ builder.WebHost.ConfigureKestrel(options =>
     });
 });
 
-// ============= SERVICES =============
+
 
 builder.Services.AddControllers();
 
-// HttpContextAccessor (za CurrentUserService)
+
 builder.Services.AddHttpContextAccessor();
 
-// DbContext
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// IApplicationDbContext interfejs koristi isti DbContext
+
 builder.Services.AddScoped<IApplicationDbContext>(provider =>
     provider.GetRequiredService<ApplicationDbContext>());
 
-// Application servisi
+
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IProductService, ProductService>();
@@ -47,19 +47,19 @@ builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IShippingAddressService, ShippingAddressService>();
 builder.Services.AddScoped<IReviewService, ReviewService>();
 
-// Infrastructure servisi
+
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
 builder.Services.AddScoped<IStripeService, StripeService>();
 
-// FluentValidation
+
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddValidatorsFromAssemblyContaining<RegisterDtoValidator>();
 
 builder.Services.AddScoped<IVoucherService, VoucherService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<ICustomerService, CustomerService>();
-// JWT Authentication
+
 var jwtKey = builder.Configuration["Jwt:Key"]
     ?? throw new InvalidOperationException("JWT Key not configured.");
 var jwtIssuer = builder.Configuration["Jwt:Issuer"];
@@ -83,7 +83,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 builder.Services.AddAuthorization();
 
-// CORS - dozvoli Angular aplikaciji da se konektuje
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngular", policy =>
@@ -95,7 +95,7 @@ builder.Services.AddCors(options =>
     });
 });
 
-// Swagger UI - pojednostavljena verzija
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
@@ -109,9 +109,7 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 
-// ============= MIDDLEWARE =============
 
-// Global exception handler - mora biti prvi
 app.UseMiddleware<GlobalExceptionMiddleware>();
 
 if (app.Environment.IsDevelopment())
@@ -120,7 +118,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(c =>
     {
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "SweetShop API v1");
-        c.RoutePrefix = string.Empty; // Swagger na root URL-u
+        c.RoutePrefix = string.Empty; 
     });
 }
 
@@ -133,7 +131,7 @@ app.UseAuthorization();
 
 app.MapControllers();
 app.UseStaticFiles();
-// Seed baze prilikom pokretanja
+
 using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();

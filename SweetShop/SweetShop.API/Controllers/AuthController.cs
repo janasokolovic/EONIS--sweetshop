@@ -21,9 +21,6 @@ public class AuthController : ControllerBase
         _config = config;
     }
 
-    /// <summary>
-    /// Registracija novog kupca
-    /// </summary>
     [HttpPost("register")]
     public async Task<ActionResult<AuthResponseDto>> Register([FromBody] RegisterDto dto)
     {
@@ -31,9 +28,7 @@ public class AuthController : ControllerBase
         return Ok(result);
     }
 
-    /// <summary>
-    /// Prijava na sistem
-    /// </summary>
+   
     [HttpPost("login")]
     public async Task<ActionResult<AuthResponseDto>> Login([FromBody] LoginDto dto)
     {
@@ -41,9 +36,7 @@ public class AuthController : ControllerBase
         return Ok(result);
     }
 
-    /// <summary>
-    /// Dohvata podatke o trenutno prijavljenom korisniku
-    /// </summary>
+  
     [HttpPost("forgot-password")]
     public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordDto dto)
     {

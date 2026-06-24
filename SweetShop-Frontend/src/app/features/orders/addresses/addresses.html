@@ -1,8 +1,8 @@
-<div class="addresses-container page-enter">
+<div class="addresses-container page-enter boutique-page">
   <div class="header-row">
     <div class="title-area">
-      <h1>📍 Moje adrese</h1>
-      <p class="subtitle">Upravljajte adresama za brzu isporuku Vaših slatkih porudžbina</p>
+      <h1 class="section-title">Moje adrese</h1>
+      <p class="subtitle">Upravljajte adresama za brzu isporuku</p>
     </div>
     @if (!showForm()) {
       <button mat-raised-button color="primary" class="add-address-btn" (click)="openAddForm()">
@@ -22,16 +22,14 @@
   @if (isLoading()) {
     <div class="loading">
       <mat-spinner diameter="48"></mat-spinner>
-      <p class="loading-text">Učitavamo adrese... 🚚</p>
+      <p class="loading-text">Učitavamo adrese...</p>
     </div>
   } @else {
 
-    <!-- Forma za dodavanje/izmenu -->
     @if (showForm()) {
       <mat-card class="form-card">
         <mat-card-header>
           <mat-card-title>
-            <span class="form-title-icon">{{ editingAddress() ? '📝' : '✨' }}</span>
             {{ editingAddress() ? 'Izmena adrese' : 'Nova adresa' }}
           </mat-card-title>
         </mat-card-header>
@@ -110,19 +108,11 @@
       </mat-card>
     }
 
-    <!-- Lista adresa -->
     @if (addresses().length === 0 && !showForm()) {
       <div class="empty-state">
-        <div class="empty-icon-wrapper">
-          <span class="empty-emoji">📍</span>
-          <div class="floating-candies">
-            <span class="candy-piece">🍭</span>
-            <span class="candy-piece">🍬</span>
-            <span class="candy-piece">🍩</span>
-          </div>
-        </div>
+        <mat-icon class="empty-icon">location_on</mat-icon>
         <h3>Nemate sačuvanih adresa</h3>
-        <p>Dodajte adresu za isporuku kako biste mogli da poručujete slatkiše.</p>
+        <p>Dodajte adresu za isporuku kako biste mogli da poručujete.</p>
         <button mat-raised-button color="primary" class="add-address-btn" (click)="openAddForm()">
           <mat-icon>add_location</mat-icon>
           Dodaj prvu adresu
@@ -141,7 +131,7 @@
               }
 
               <h3 class="recipient-name">{{ address.recipientName }}</h3>
-              
+
               <div class="address-details">
                 <p class="address-line">
                   <mat-icon>home</mat-icon>

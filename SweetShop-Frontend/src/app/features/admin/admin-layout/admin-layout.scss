@@ -1,167 +1,134 @@
 // ============================================================
-// Admin Layout Styles — SweetShop
+// Admin Layout — Refined Dark Sidebar
 // ============================================================
 
 .admin-container {
-  height: calc(100vh - 64px);
-  background: transparent !important;
+  height: calc(100vh - var(--header-height));
+  background: var(--bg-cream) !important;
 }
 
 .admin-sidenav {
-  width: 280px;
-  background: white;
-  border-right: 1px solid #FFE5EC;
+  width: 260px;
+  background: var(--color-espresso);
+  border-right: none;
   display: flex;
   flex-direction: column;
-  box-shadow: 4px 0 20px rgba(255, 107, 157, 0.02);
 
   @media (max-width: 768px) {
-    width: 240px;
+    width: 220px;
   }
 }
 
-// Sidenav Header
 .sidenav-header {
-  padding: 32px 24px;
-  background: linear-gradient(135deg, #FF9ebb 0%, #FF6B9D 100%);
-  color: white;
+  padding: 32px 24px 28px;
   text-align: center;
-  position: relative;
-  overflow: hidden;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -20%;
-    width: 140%;
-    height: 140%;
-    background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 60%);
-    pointer-events: none;
+  .admin-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--accent-gold);
+    border-radius: var(--radius-sm);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--accent-gold);
+    margin-bottom: 12px;
   }
 
   h2 {
-    margin: 0 0 6px;
-    font-size: 24px;
-    font-weight: 800;
-    letter-spacing: 0.5px;
-    text-shadow: 0 2px 4px rgba(229, 57, 53, 0.15);
+    margin: 0 0 4px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: white;
+    letter-spacing: 0.04em;
   }
 
   small {
-    opacity: 0.95;
-    font-size: 13px;
-    font-weight: 600;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.625rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
-    background: rgba(255, 255, 255, 0.2);
-    padding: 2px 10px;
-    border-radius: 20px;
-    display: inline-block;
+    color: rgba(255, 255, 255, 0.45);
   }
 }
 
-// Navigation List
 mat-nav-list {
-  padding: 24px 0 !important;
+  padding: 16px 0 !important;
   flex: 1;
 
   a[mat-list-item] {
-    margin: 6px 16px;
-    height: 48px;
-    line-height: 48px;
-    border-radius: 16px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    color: #092436;
-    font-weight: 600;
+    margin: 2px 12px;
+    height: 44px;
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-base);
+    color: white;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.8125rem;
+    font-weight: 500;
 
     mat-icon {
-      color: #FFB6C1;
-      transition: color 0.3s;
-      margin-right: 12px;
+      color: white;
+      transition: color var(--transition-base);
     }
 
     &:hover {
-      background-color: #FFF0F3;
-      color: #FF6B9D;
+      background: rgba(255, 255, 255, 0.06);
+      color: white;
 
-      mat-icon {
-        color: #FF6B9D;
-      }
+      mat-icon { color: var(--accent-gold); }
     }
 
     &.active-link {
-      background: linear-gradient(135deg, #FF6B9D 0%, #FF4F87 100%);
-      color: white;
-      box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
+      background: rgba(201, 169, 98, 0.12);
+      color: var(--accent-gold);
 
-      mat-icon {
-        color: white;
-      }
-
-      &:hover {
-        color: white;
-      }
+      mat-icon { color: var(--accent-gold); }
     }
   }
 }
 
-// Sidenav Footer
 .sidenav-footer {
-  padding: 16px 0 24px;
-  border-top: 1px solid #FFE5EC;
-  background-color: #FFFDFE;
+  padding: 12px 0 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
 
   a[mat-list-item] {
-    margin: 6px 16px;
-    height: 48px;
-    line-height: 48px;
-    border-radius: 16px;
-    font-weight: 600;
-    transition: all 0.3s;
-    color: #092436;
+    margin: 2px 12px;
+    height: 44px;
+    border-radius: var(--radius-sm);
+    font-family: 'Lato', sans-serif;
+    font-size: 0.8125rem;
+    color: white;
+    transition: all var(--transition-base);
 
-    mat-icon {
-      color: #A69587;
-      margin-right: 12px;
-    }
+    mat-icon { color: white; }
 
     &:hover {
-      background-color: #FFF0F3;
-      color: #FF6B9D;
-
-      mat-icon {
-        color: #FF6B9D;
-      }
+      background: rgba(255, 255, 255, 0.06);
+      color: white;
+      mat-icon { color: var(--accent-gold); }
     }
 
     &.logout-item {
       cursor: pointer;
-      color: #E53935;
-
-      mat-icon {
-        color: #FF8A80;
-      }
+      color: rgba(212, 165, 165, 0.8);
 
       &:hover {
-        background-color: #FFEBEE;
-        color: #C62828;
-
-        mat-icon {
-          color: #C62828;
-        }
+        background: rgba(158, 74, 74, 0.15);
+        color: #D4A5A5;
+        mat-icon { color: #D4A5A5; }
       }
     }
   }
 }
 
-// Content Area
 .admin-content {
-  background: transparent !important;
-  padding: 32px;
+  background: var(--bg-cream) !important;
+  padding: clamp(20px, 3vw, 36px);
   overflow-y: auto;
-
-  @media (max-width: 768px) {
-    padding: 20px;
-  }
 }

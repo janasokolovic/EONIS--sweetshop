@@ -13,7 +13,7 @@
 
   h1 {
     margin: 0 0 4px;
-    color: #092436;
+    color: var(--color-espresso);
     font-size: 28px;
   }
 
@@ -28,7 +28,7 @@
   background-color: #FFF5F7;
 
   mat-card-title {
-    color: #FF6B9D;
+    color: var(--color-chocolate);
   }
 }
 
@@ -60,7 +60,7 @@
 
   .section-label {
     font-weight: 500;
-    color: #092436;
+    color: var(--color-espresso);
     font-size: 14px;
   }
 
@@ -91,12 +91,12 @@
     font-size: 96px;
     width: 96px;
     height: 96px;
-    color: #FFB6C1;
+    color: var(--color-sand);
     margin-bottom: 24px;
   }
 
   h3 {
-    color: #092436;
+    color: var(--color-espresso);
     margin-bottom: 8px;
   }
 
@@ -112,7 +112,7 @@
 }
 
 .voucher-card {
-  border: 2px solid #FF6B9D;
+  border: 2px solid var(--color-chocolate);
   transition: all 0.3s;
 
   &:hover {
@@ -136,12 +136,12 @@
   gap: 8px;
 
   mat-icon {
-    color: #FF6B9D;
+    color: var(--color-chocolate);
   }
 
   strong {
     font-size: 20px;
-    color: #092436;
+    color: var(--color-espresso);
     letter-spacing: 1px;
     font-family: 'Courier New', monospace;
   }
@@ -183,7 +183,7 @@
 }
 
 .discount-display {
-  background: linear-gradient(135deg, #FF6B9D 0%, #FFB6C1 100%);
+  background: var(--color-chocolate);
   padding: 16px;
   border-radius: 12px;
   text-align: center;
@@ -214,7 +214,7 @@
     font-size: 18px;
     width: 18px;
     height: 18px;
-    color: #FF6B9D;
+    color: var(--color-chocolate);
   }
 }
 

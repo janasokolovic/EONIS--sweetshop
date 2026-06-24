@@ -1,25 +1,28 @@
+// ============================================================
+// Pay Order — Artisan Boutique
+// ============================================================
+
 .pay-order-container {
-  max-width: 1200px;
+  max-width: 1100px;
   margin: 0 auto;
-  padding: 24px;
+  padding: 32px clamp(20px, 4vw, 48px) 64px;
 }
 
 .page-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 24px;
+  margin-bottom: 40px;
   flex-wrap: wrap;
   gap: 16px;
 
-  h1 {
-    margin: 0;
-    color: #092436;
-    font-size: 28px;
-  }
+  h1 { margin: 0; }
 
   .back-link {
-    color: #5EA3D1;
+    color: var(--text-light) !important;
+    font-size: 0.875rem !important;
+
+    &:hover { color: var(--color-chocolate) !important; }
   }
 }
 
@@ -27,37 +30,40 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 80px 0;
+  padding: 100px 0;
 
   .loading-text {
     margin-top: 16px;
-    color: #092436;
+    color: var(--text-light);
+    font-family: 'Lato', sans-serif;
   }
 }
 
 .error-card {
-  max-width: 600px;
-  margin: 40px auto;
+  max-width: 520px;
+  margin: 48px auto;
+  border-radius: var(--radius-md) !important;
 
   .error-content {
     text-align: center;
-    padding: 32px;
+    padding: 40px 32px;
 
     mat-icon {
-      font-size: 64px;
-      width: 64px;
-      height: 64px;
-      color: #E63946;
+      font-size: 48px;
+      width: 48px;
+      height: 48px;
+      color: var(--sweet-red);
       margin-bottom: 16px;
     }
 
     h3 {
-      color: #092436;
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--text-dark);
       margin-bottom: 8px;
     }
 
     p {
-      color: #555;
+      color: var(--text-medium);
       margin-bottom: 24px;
     }
   }
@@ -65,8 +71,8 @@
 
 .pay-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 24px;
+  grid-template-columns: 1fr 340px;
+  gap: 32px;
 
   @media (max-width: 900px) {
     grid-template-columns: 1fr;
@@ -74,60 +80,90 @@
 }
 
 .step-card {
-  background: #E8F2F9;
-  border: 2px solid #FF6B9D;
-}
+  border-radius: var(--radius-md) !important;
+  border: 1px solid rgba(44, 36, 22, 0.06) !important;
 
-.step-title-icon {
-  margin-right: 8px;
+  mat-card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .step-title-icon {
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+      color: var(--accent-gold);
+    }
+  }
 }
 
 .selected-address-info {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 12px;
-  background: #FFF5F7;
-  border-radius: 8px;
+  padding: 16px 20px;
+  background: var(--bg-warm);
+  border-radius: var(--radius-sm);
   margin: 16px 0;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.875rem;
+  color: var(--text-medium);
 
-  mat-icon {
-    color: #FF6B9D;
+  mat-icon { color: var(--accent-gold); }
+
+  strong {
+    display: block;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 2px;
   }
 }
 
-.my-divider {
-  margin: 16px 0;
+.my-divider { margin: 16px 0; }
+
+h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.125rem;
+  color: var(--text-dark);
+  margin: 0 0 12px;
 }
 
 .summary-card {
-  background: #E8F2F9;
-  border: 2px solid #FF6B9D;
+  border-radius: var(--radius-md) !important;
+  border: 1px solid rgba(44, 36, 22, 0.06) !important;
   position: sticky;
-  top: 24px;
+  top: calc(var(--header-height) + 24px);
+
+  mat-card-content { padding: 28px !important; }
 
   h2 {
-    color: #092436;
-    font-size: 20px;
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--text-dark);
+    font-size: 1.375rem;
+    font-weight: 600;
     margin-bottom: 4px;
   }
 
   .order-date {
-    color: #555;
-    font-size: 13px;
+    color: var(--text-muted);
+    font-size: 0.8125rem;
+    font-family: 'Lato', sans-serif;
   }
 }
 
 .summary-divider {
   height: 1px;
-  background: #FFB6C1;
+  background: rgba(44, 36, 22, 0.06);
   margin: 16px 0;
 }
 
 .items-list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 
 .summary-item {
@@ -137,23 +173,25 @@
   gap: 12px;
 
   .item-info {
-    display: flex;
-    flex-direction: column;
-
     strong {
-      color: #092436;
-      font-size: 14px;
+      display: block;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--text-dark);
     }
 
     small {
-      color: #777;
-      font-size: 12px;
+      font-size: 0.75rem;
+      color: var(--text-muted);
     }
   }
 
   .item-total {
-    color: #092436;
+    font-family: 'Lato', sans-serif;
     font-weight: 600;
+    color: var(--text-dark);
+    font-size: 0.875rem;
   }
 }
 
@@ -161,21 +199,17 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 14px;
-  color: #092436;
+  font-size: 0.875rem;
+  color: var(--text-medium);
   margin-bottom: 8px;
+  font-family: 'Lato', sans-serif;
 
-  .free {
-    color: #2E7D32;
-  }
+  .free { color: #4A6350; font-weight: 600; }
 
   &.discount-line {
-    color: #FF6B9D;
+    color: var(--accent-gold);
     font-weight: 600;
-
-    .discount-value {
-      color: #FF6B9D;
-    }
+    .discount-value { color: var(--accent-gold); }
   }
 }
 
@@ -183,10 +217,21 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 18px;
+  font-family: 'Lato', sans-serif;
+
+  span {
+    font-size: 0.875rem;
+    color: var(--text-medium);
+  }
 
   strong {
-    font-size: 22px;
-    color: #FF6B9D;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.625rem;
+    font-weight: 600;
+    color: var(--color-chocolate);
   }
+}
+
+@media (max-width: 900px) {
+  .summary-card { position: static; }
 }

@@ -1,7 +1,7 @@
-<div class="pay-order-container page-enter">
+<div class="pay-order-container page-enter boutique-page">
 
   <div class="page-header">
-    <h1>💳 Plaćanje porudžbine</h1>
+    <h1 class="section-title">Plaćanje porudžbine</h1>
     <a mat-button routerLink="/orders/my" class="back-link">
       <mat-icon>arrow_back</mat-icon>
       Nazad na moje porudžbine
@@ -11,7 +11,7 @@
   @if (isLoading()) {
     <div class="loading">
       <mat-spinner diameter="48"></mat-spinner>
-      <p class="loading-text">Pripremamo plaćanje... 🍬</p>
+      <p class="loading-text">Pripremamo plaćanje...</p>
     </div>
   } @else if (errorMessage()) {
     <mat-card class="error-card">
@@ -27,12 +27,12 @@
   } @else if (order() && clientSecret()) {
     <div class="pay-grid">
 
-      <!-- Glavni deo - Stripe forma -->
       <div class="pay-main">
         <mat-card class="step-card">
           <mat-card-header>
             <mat-card-title>
-              <span class="step-title-icon">💳</span> Podaci o plaćanju
+              <mat-icon class="step-title-icon">credit_card</mat-icon>
+              Podaci o plaćanju
             </mat-card-title>
           </mat-card-header>
           <mat-card-content>
@@ -57,11 +57,10 @@
         </mat-card>
       </div>
 
-      <!-- Sažetak porudžbine -->
       <div class="pay-summary">
         <mat-card class="summary-card">
           <mat-card-content>
-            <h2>📋 Porudžbina #{{ order()!.id }}</h2>
+            <h2>Porudžbina #{{ order()!.id }}</h2>
             <small class="order-date">{{ order()!.orderDate | date:'dd.MM.yyyy. HH:mm' }}</small>
 
             <div class="summary-divider"></div>
@@ -86,14 +85,14 @@
                 <span>{{ order()!.subtotalAmount | number:'1.2-2' }} €</span>
               </div>
               <div class="summary-line discount-line">
-                <span>🎟️ Popust ({{ order()!.voucherCode }}):</span>
+                <span>Popust ({{ order()!.voucherCode }}):</span>
                 <span class="discount-value">-{{ order()!.discountAmount | number:'1.2-2' }} €</span>
               </div>
             }
 
             <div class="summary-line">
               <span>Dostava</span>
-              <span class="free">🚚 Besplatna</span>
+              <span class="free">Besplatna</span>
             </div>
 
             <div class="summary-divider"></div>

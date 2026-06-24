@@ -1,27 +1,23 @@
 @if (isLoading()) {
   <div class="loading">
     <mat-spinner diameter="48"></mat-spinner>
-    <p class="loading-text">Učitavamo detalje... 🍬</p>
+    <p class="loading-text">Učitavamo detalje...</p>
   </div>
 }
 
 @if (!isLoading() && product()) {
-  <div class="product-details-container page-enter">
+  <div class="product-details-container page-enter boutique-page">
 
-    <!-- Breadcrumb -->
     <nav class="breadcrumb">
       <a routerLink="/products">
         <mat-icon>arrow_back</mat-icon>
         <span>Nazad na proizvode</span>
       </a>
-      <span class="breadcrumb-sep">›</span>
+      <span class="breadcrumb-sep">/</span>
       <span class="breadcrumb-current">{{ product()!.name }}</span>
     </nav>
 
-    <!-- Glavni layout: Galerija + Info -->
     <div class="product-main">
-
-      <!-- ===== GALERIJA SLIKA ===== -->
       <div class="image-gallery">
         <div class="main-image">
           @if (product()!.images.length > 0) {
@@ -29,7 +25,7 @@
                  (error)="$any($event.target).style.display='none'">
           } @else {
             <div class="no-image">
-              <span class="no-image-emoji">🍬</span>
+              <mat-icon>cake</mat-icon>
               <p>Nema slike</p>
             </div>
           }
@@ -46,12 +42,10 @@
         }
       </div>
 
-      <!-- ===== INFO PANEL ===== -->
       <div class="product-info">
         <div class="category-chip">{{ product()!.categoryName }}</div>
         <h1>{{ product()!.name }}</h1>
 
-        <!-- Rating summary -->
         @if (product()!.reviewCount > 0) {
           <div class="rating-summary">
             <div class="stars">
@@ -66,33 +60,29 @@
           </div>
         }
 
-        <!-- Cena -->
         <div class="price-block">
           <span class="price">{{ product()!.price | number:'1.2-2' }} €</span>
           <span class="price-tag">Po komadu</span>
         </div>
 
-        <!-- Opis -->
         <p class="description">{{ product()!.description }}</p>
 
-        <!-- Zalihe -->
         <div class="stock-info">
           @if (product()!.stockQuantity === 0) {
             <span class="out-of-stock">
-              <mat-icon>error</mat-icon> Trenutno nije dostupno
+              <mat-icon>error_outline</mat-icon> Trenutno nije dostupno
             </span>
           } @else if (product()!.stockQuantity < 10) {
             <span class="low-stock">
-              <mat-icon>warning</mat-icon> Još samo {{ product()!.stockQuantity }} komada!
+              <mat-icon>info</mat-icon> Još samo {{ product()!.stockQuantity }} komada
             </span>
           } @else {
             <span class="in-stock">
-              <mat-icon>check_circle</mat-icon> Na zalihama: {{ product()!.stockQuantity }} kom
+              <mat-icon>check_circle_outline</mat-icon> Na zalihama: {{ product()!.stockQuantity }} kom
             </span>
           }
         </div>
 
-        <!-- Količina i dodaj u korpu -->
         @if (product()!.stockQuantity > 0) {
           <div class="purchase-section">
             <div class="quantity-selector">
@@ -106,24 +96,23 @@
             </div>
 
             <button mat-raised-button color="primary" class="add-to-cart-btn" (click)="addToCart()">
-              <mat-icon>shopping_cart</mat-icon>
+              <mat-icon>shopping_bag</mat-icon>
               Dodaj u korpu
             </button>
           </div>
         }
 
-        <!-- Trust badges -->
         <div class="trust-badges">
           <div class="trust-item">
-            <span class="trust-icon">🚚</span>
+            <mat-icon>local_shipping</mat-icon>
             <span>Besplatna dostava</span>
           </div>
           <div class="trust-item">
-            <span class="trust-icon">🔒</span>
+            <mat-icon>lock</mat-icon>
             <span>Sigurna kupovina</span>
           </div>
           <div class="trust-item">
-            <span class="trust-icon">↩️</span>
+            <mat-icon>replay</mat-icon>
             <span>Povrat 14 dana</span>
           </div>
         </div>
@@ -132,20 +121,18 @@
 
     <div class="section-divider"></div>
 
-    <!-- ===== RECENZIJE ===== -->
     <section class="reviews-section">
       <div class="reviews-header">
-        <h2>💬 Recenzije <span class="review-counter">({{ reviews().length }})</span></h2>
+        <h2 class="section-title">Recenzije <span class="review-counter">({{ reviews().length }})</span></h2>
       </div>
 
-      <!-- Forma za recenziju -->
       @if (authService.isCustomer()) {
         <mat-card class="review-form-card">
           <mat-card-content>
-            <h3>⭐ Ostavi recenziju</h3>
+            <h3>Ostavite recenziju</h3>
             <form [formGroup]="reviewForm" (ngSubmit)="submitReview()">
               <div class="rating-input">
-                <span>Vaša ocena:</span>
+                <span>Vaša ocena</span>
                 <div class="star-rating">
                   @for (star of [1,2,3,4,5]; track star) {
                     <button mat-icon-button type="button" (click)="setRating(star)" class="star-btn">
@@ -160,7 +147,7 @@
               <mat-form-field appearance="outline" class="full-width">
                 <mat-label>Vaš komentar</mat-label>
                 <textarea matInput formControlName="comment" rows="4"
-                          placeholder="Šta mislite o ovom proizvodu?"></textarea>
+                          placeholder="Podelite svoje utiske o proizvodu..."></textarea>
                 @if (reviewForm.get('comment')?.hasError('required') && reviewForm.get('comment')?.touched) {
                   <mat-error>Komentar je obavezan</mat-error>
                 }
@@ -183,18 +170,17 @@
       } @else if (!authService.isAuthenticated()) {
         <mat-card class="login-prompt">
           <mat-card-content>
-            <span class="prompt-emoji">🔐</span>
+            <mat-icon class="prompt-icon">lock_outline</mat-icon>
             <p>Da biste ostavili recenziju, morate biti prijavljeni.</p>
             <a mat-raised-button color="primary" routerLink="/login">Prijavi se</a>
           </mat-card-content>
         </mat-card>
       }
 
-      <!-- Lista recenzija -->
       @if (reviews().length === 0) {
         <div class="no-reviews">
-          <div class="no-reviews-emoji">💭</div>
-          <p>Još nema recenzija. Budite prvi koji će je ostaviti!</p>
+          <mat-icon class="no-reviews-icon">rate_review</mat-icon>
+          <p>Još nema recenzija. Budite prvi koji će je ostaviti.</p>
         </div>
       } @else {
         <div class="reviews-list">

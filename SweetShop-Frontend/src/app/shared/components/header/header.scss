@@ -1,6 +1,5 @@
 // ============================================================
-// Header Styles — SweetShop
-// Glassmorphism sticky navbar sa candy estetikom
+// Header — Artisan Boutique Navigation
 // ============================================================
 
 :host {
@@ -11,58 +10,74 @@
   position: sticky;
   top: 0;
   z-index: 1000;
-  padding: 0 32px;
-  height: 68px;
-  gap: 8px;
-
-  // Solid plava pozadina
-  background: #fd5d92 !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 2px 15px rgba(9, 36, 54, 0.12);
-
-  // Hrabro sklonjena linija na dnu radi čiste solid boje
-  &::after {
-    display: none;
-  }
+  padding: 0 clamp(20px, 4vw, 48px);
+  height: var(--header-height);
+  gap: 12px;
+  background: rgba(255, 252, 248, 0.92) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(44, 36, 22, 0.08);
+  box-shadow: var(--shadow-xs);
+  color: var(--color-espresso) !important;
 }
 
-// ---- Logo ----
 .logo {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 14px;
   text-decoration: none;
   cursor: pointer;
-  transition: transform var(--transition-base);
+  transition: opacity var(--transition-base);
 
   &:hover {
-    transform: scale(1.04);
-    .logo-icon { animation: float 1.5s ease-in-out infinite; }
+    opacity: 0.85;
   }
 
-  .logo-icon {
-    font-size: 30px;
-    line-height: 1;
-    transition: transform var(--transition-base);
+  .logo-mark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-sm);
+    background: var(--color-chocolate);
+    color: var(--accent-gold);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: 0;
+    flex-shrink: 0;
   }
 
   .logo-text {
-    font-family: 'Fredoka', sans-serif;
-    font-size: 1.65rem;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    color: white !important;
-    -webkit-text-fill-color: initial !important;
-    background: none !important;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  .logo-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--color-espresso) !important;
+    line-height: 1.2;
+  }
+
+  .logo-tagline {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.625rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-taupe);
   }
 }
 
-// ---- Spacer ----
 .spacer {
   flex: 1;
 }
 
-// ---- Nav Links ----
 .nav-links {
   display: flex;
   align-items: center;
@@ -72,70 +87,76 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    font-family: 'Fredoka', sans-serif;
-    font-size: 1rem;
-    font-weight: 600;
-    color: white !important;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-cocoa) !important;
     text-decoration: none;
-    padding: 6px 14px;
-    border-radius: var(--radius-pill);
+    padding: 8px 16px;
+    border-radius: var(--radius-sm);
     transition: all var(--transition-base);
 
     mat-icon {
-      font-size: 20px;
-      width: 20px;
-      height: 20px;
-      color: rgba(255, 255, 255, 0.85) !important;
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+      color: var(--color-taupe) !important;
       transition: color var(--transition-fast);
     }
 
     &:hover {
-      background: rgba(255, 255, 255, 0.15);
-      color: white !important;
-      mat-icon { color: white !important; }
+      background: var(--bg-warm);
+      color: var(--color-espresso) !important;
+
+      mat-icon { color: var(--accent-gold) !important; }
     }
 
     &.active {
-      background: rgba(255, 255, 255, 0.25);
-      color: white !important;
-      mat-icon { color: white !important; }
+      background: var(--bg-warm);
+      color: var(--color-espresso) !important;
+
+      mat-icon { color: var(--accent-gold) !important; }
     }
   }
 }
 
-// ---- Cart Button ----
 .cart-button {
   margin: 0 4px;
-  color: white !important;
+  color: var(--color-cocoa) !important;
   transition: all var(--transition-base) !important;
-  border-radius: var(--radius-pill) !important;
+  border-radius: var(--radius-sm) !important;
 
   &:hover {
-    background: rgba(255, 255, 255, 0.15) !important;
-    color: white !important;
-    transform: scale(1.08);
+    background: var(--bg-warm) !important;
+    color: var(--color-espresso) !important;
   }
 }
 
-// ---- User Menu Button ----
 .user-menu-button {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-family: 'Fredoka', sans-serif;
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: white !important;
-  padding: 6px 14px;
-  border-radius: var(--radius-pill) !important;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-cocoa) !important;
+  padding: 8px 14px;
+  border-radius: var(--radius-sm) !important;
   transition: all var(--transition-base) !important;
 
-  mat-icon { color: rgba(255, 255, 255, 0.85) !important; }
+  mat-icon { color: var(--color-taupe) !important; }
+
+  .dropdown-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+  }
 
   &:hover {
-    background: rgba(255, 255, 255, 0.15) !important;
-    color: white !important;
-    mat-icon { color: white !important; }
+    background: var(--bg-warm) !important;
+    color: var(--color-espresso) !important;
   }
 
   .user-name {
@@ -143,67 +164,62 @@
   }
 }
 
-// ---- Login/Register Buttons ----
-.header-toolbar a[mat-button] {
-  font-family: 'Fredoka', sans-serif;
-  color: white !important;
-  border-radius: var(--radius-pill);
+.login-link {
+  font-family: 'Lato', sans-serif !important;
+  font-size: 0.8125rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+  color: var(--color-cocoa) !important;
+  border-radius: var(--radius-sm);
 
-  &:hover { background: rgba(255, 255, 255, 0.15); }
+  &:hover { background: var(--bg-warm); }
 }
 
-.header-toolbar a[mat-raised-button] {
-  background: white !important;
-  border-radius: var(--radius-pill);
-  font-family: 'Fredoka', sans-serif;
-  font-weight: 600;
-  color: #e650de !important;
-  box-shadow: 0 4px 12px rgba(9, 36, 54, 0.15);
-  transition: all var(--transition-base);
-  padding: 0 20px;
-
-  &:hover {
-    box-shadow: 0 6px 16px rgba(9, 36, 54, 0.25);
-    transform: translateY(-1px);
-  }
+.register-cta {
+  font-size: 0.8125rem !important;
+  height: 40px !important;
+  padding: 0 22px !important;
 }
 
-// ---- Dropdown Menu Header ----
 .menu-header {
-  padding: 14px 18px;
+  padding: 16px 20px;
   display: flex;
   flex-direction: column;
-  gap: 3px;
-  background: linear-gradient(135deg, var(--sweet-pink-pale) 0%, white 100%);
-  border-bottom: 1px solid rgba(255, 107, 157, 0.1);
+  gap: 4px;
+  background: var(--bg-cream);
+  border-bottom: 1px solid rgba(44, 36, 22, 0.06);
 
   strong {
-    font-family: 'Fredoka', sans-serif;
-    font-size: 1rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
     color: var(--text-dark);
   }
 
   small {
-    font-family: 'Quicksand', sans-serif;
-    font-size: 0.78rem;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.75rem;
     color: var(--text-light);
   }
 }
 
-// ---- Responsive ----
 @media (max-width: 768px) {
   .header-toolbar {
     padding: 0 16px;
-    height: 60px;
+    height: 64px;
   }
 
   .logo-text,
   .nav-links span,
-  .user-name {
+  .user-name,
+  .logo-tagline {
     display: none;
   }
 
-  .logo .logo-icon {
-    font-size: 26px;
+  .logo-mark {
+    width: 36px;
+    height: 36px;
+    font-size: 1.2rem;
   }
 }

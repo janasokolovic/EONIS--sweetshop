@@ -1,8 +1,7 @@
-<div class="checkout-container page-enter">
+<div class="checkout-container page-enter boutique-page">
 
-  <!-- Page Header sa progress wizard-om -->
   <div class="page-header">
-    <h1>💳 Plaćanje</h1>
+    <h1 class="section-title">Plaćanje</h1>
 
     <!-- Wizard progress bar -->
     <div class="wizard-progress">
@@ -31,14 +30,14 @@
   @if (isLoading()) {
     <div class="loading">
       <mat-spinner diameter="48"></mat-spinner>
-      <p class="loading-text">Učitavamo... 🍬</p>
+      <p class="loading-text">Učitavamo...</p>
     </div>
   } @else {
     @let cart = cartService.cart();
 
     @if (!cart || cart.items.length === 0) {
       <div class="empty-cart-warning">
-        <span class="empty-emoji">🛒</span>
+        <mat-icon class="empty-icon">shopping_bag</mat-icon>
         <p>Vaša korpa je prazna.</p>
         <a mat-raised-button color="primary" routerLink="/products">Idi na proizvode</a>
       </div>
@@ -53,13 +52,14 @@
             <mat-card class="step-card">
               <mat-card-header>
                 <mat-card-title>
-                  <span class="step-title-icon">📍</span> Adresa isporuke
+                  <mat-icon class="step-title-icon">location_on</mat-icon>
+                  Adresa isporuke
                 </mat-card-title>
               </mat-card-header>
               <mat-card-content>
                 @if (addresses().length === 0) {
                   <div class="no-addresses">
-                    <span class="no-addr-emoji">🏠</span>
+                    <mat-icon class="no-addr-icon">home</mat-icon>
                     <p>Niste još dodali adresu isporuke.</p>
                     <a mat-raised-button color="primary" routerLink="/addresses" [queryParams]="{returnUrl: '/checkout'}">
                       <mat-icon>add_location</mat-icon>
@@ -75,13 +75,13 @@
                             <div class="address-header">
                               <strong>{{ address.recipientName }}</strong>
                               @if (address.isDefault) {
-                                <span class="default-tag">⭐ Podrazumevana</span>
+                                <span class="default-tag">Podrazumevana</span>
                               }
                             </div>
                             <div class="address-line">{{ address.street }}</div>
                             <div class="address-line">{{ address.postalCode }} {{ address.city }}, {{ address.country }}</div>
                             @if (address.phoneNumber) {
-                              <div class="address-phone">📞 {{ address.phoneNumber }}</div>
+                              <div class="address-phone">{{ address.phoneNumber }}</div>
                             }
                           </div>
                         </mat-radio-button>
@@ -113,7 +113,8 @@
             <mat-card class="step-card">
               <mat-card-header>
                 <mat-card-title>
-                  <span class="step-title-icon">💳</span> Podaci o plaćanju
+                  <mat-icon class="step-title-icon">credit_card</mat-icon>
+                  Podaci o plaćanju
                 </mat-card-title>
               </mat-card-header>
               <mat-card-content>
@@ -145,7 +146,7 @@
         <div class="checkout-summary">
           <mat-card class="summary-card">
             <mat-card-content>
-              <h2>📋 Sažetak</h2>
+              <h2>Sažetak</h2>
 
               <div class="items-list">
                 @for (item of cart.items; track item.id) {
@@ -167,7 +168,7 @@
                   @if (!appliedVoucher()) {
                     <div class="voucher-input-row">
                       <mat-form-field appearance="outline" class="voucher-input">
-                        <mat-label>🎟️ Promo kod</mat-label>
+                        <mat-label>Promo kod</mat-label>
                         <input matInput [(ngModel)]="voucherCodeInput" placeholder="npr. WELCOME10" (keyup.enter)="applyVoucher()">
                       </mat-form-field>
                       <button mat-raised-button color="accent" (click)="applyVoucher()" [disabled]="isApplyingVoucher() || !voucherCodeInput" class="voucher-apply-btn">
@@ -204,14 +205,14 @@
 
               @if (appliedVoucher()) {
                 <div class="summary-line discount-line">
-                  <span>🎟️ Popust ({{ appliedVoucher()!.code }})</span>
+                  <span>Popust ({{ appliedVoucher()!.code }})</span>
                   <span class="discount-value">-{{ appliedVoucher()!.discountAmount | number:'1.2-2' }} €</span>
                 </div>
               }
 
               <div class="summary-line">
                 <span>Dostava</span>
-                <span class="free">🚚 Besplatna</span>
+                <span class="free">Besplatna</span>
               </div>
 
               <div class="summary-divider"></div>

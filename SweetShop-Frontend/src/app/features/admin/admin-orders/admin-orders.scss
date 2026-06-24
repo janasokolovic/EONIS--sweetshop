@@ -13,14 +13,14 @@
 
   h1 {
     margin: 0 0 6px 0;
-    color: #092436;
+    color: var(--color-espresso);
     font-size: 32px;
     font-weight: 800;
   }
 
   p {
     margin: 0;
-    color: #8C7A6B;
+    color: var(--text-light);
     font-size: 15px;
     font-weight: 500;
   }
@@ -30,7 +30,7 @@
 .filters-card {
   margin-bottom: 24px;
   border-radius: 20px !important;
-  border: 1px solid #FFE5EC;
+  border: 1px solid rgba(44, 36, 22, 0.08);
   box-shadow: 0 6px 20px rgba(255, 107, 157, 0.02) !important;
   background: white;
 
@@ -63,30 +63,30 @@
     .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__leading,
     .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__notch,
     .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__trailing {
-      border-color: #FFE5EC !important;
+      border-color: rgba(44, 36, 22, 0.08) !important;
       border-width: 1.5px !important;
     }
     .mdc-text-field--outlined:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-notched-outline__leading,
     .mdc-text-field--outlined:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-notched-outline__notch,
     .mdc-text-field--outlined:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-notched-outline__trailing {
-      border-color: #FFB6C1 !important;
+      border-color: var(--color-sand) !important;
     }
     .mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-notched-outline__leading,
     .mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-notched-outline__notch,
     .mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-notched-outline__trailing {
-      border-color: #FF6B9D !important;
+      border-color: var(--color-chocolate) !important;
     }
     .mat-mdc-form-field.mat-focused .mat-mdc-select-arrow {
-      color: #FF6B9D !important;
+      color: var(--color-chocolate) !important;
     }
     .mat-mdc-form-field-prefix {
       margin-right: 8px;
       .mat-icon {
-        color: #FFB6C1;
+        color: var(--color-sand);
       }
     }
     .mat-mdc-form-field-label {
-      color: #8C7A6B !important;
+      color: var(--text-light) !important;
     }
   }
 }
@@ -99,7 +99,7 @@
 
   mat-spinner {
     ::ng-deep circle {
-      stroke: #FF6B9D !important;
+      stroke: var(--color-chocolate) !important;
     }
   }
 }
@@ -107,7 +107,7 @@
 // Empty state
 .empty-state-card {
   border-radius: 24px !important;
-  border: 1px solid #FFE5EC;
+  border: 1px solid rgba(44, 36, 22, 0.08);
   box-shadow: 0 8px 24px rgba(255, 107, 157, 0.03) !important;
   background: white;
 }
@@ -115,20 +115,20 @@
 .empty-state {
   text-align: center;
   padding: 60px 24px;
-  color: #8C7A6B;
+  color: var(--text-light);
 
   mat-icon {
     font-size: 80px;
     width: 80px;
     height: 80px;
-    color: #FFB6C1;
+    color: var(--color-sand);
     margin-bottom: 20px;
   }
 
   h3 {
     font-size: 22px;
     font-weight: 700;
-    color: #092436;
+    color: var(--color-espresso);
     margin-bottom: 8px;
   }
 
@@ -149,7 +149,7 @@
 // Card style for orders list
 .order-card {
   border-radius: 20px !important;
-  border: 1px solid #FFE5EC;
+  border: 1px solid rgba(44, 36, 22, 0.08);
   background: white;
   box-shadow: 0 6px 20px rgba(255, 107, 157, 0.02) !important;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -201,12 +201,12 @@
     display: block;
     font-size: 18px;
     font-weight: 800;
-    color: #FF6B9D;
+    color: var(--color-chocolate);
   }
 
   small {
     display: block;
-    color: #8C7A6B;
+    color: var(--text-light);
     font-size: 12px;
     margin-top: 2px;
   }
@@ -219,7 +219,7 @@
   gap: 12px;
 
   mat-icon {
-    color: #FFB6C1;
+    color: var(--color-sand);
     font-size: 24px;
     width: 24px;
     height: 24px;
@@ -228,14 +228,14 @@
 
   strong {
     display: block;
-    color: #092436;
+    color: var(--color-espresso);
     font-size: 15px;
     font-weight: 700;
   }
 
   small {
     display: block;
-    color: #8C7A6B;
+    color: var(--text-light);
     font-size: 12px;
     margin-top: 1px;
   }
@@ -247,14 +247,14 @@
 
   span {
     display: block;
-    color: #8C7A6B;
+    color: var(--text-light);
     font-size: 12px;
     margin-bottom: 2px;
   }
 
   strong {
     display: block;
-    color: #092436;
+    color: var(--color-espresso);
     font-size: 18px;
     font-weight: 800;
     white-space: nowrap;
@@ -328,8 +328,8 @@
 
   .status-btn {
     width: 100%;
-    border-color: #FFB6C1 !important;
-    color: #FF6B9D !important;
+    border-color: var(--color-sand) !important;
+    color: var(--color-chocolate) !important;
     font-weight: 600;
     border-radius: 16px;
     height: 36px;
@@ -337,8 +337,8 @@
     transition: all 0.2s;
 
     &:hover:not([disabled]) {
-      background-color: #FFF5F7;
-      border-color: #FF6B9D !important;
+      background-color: var(--bg-warm);
+      border-color: var(--color-chocolate) !important;
     }
 
     mat-spinner {
@@ -346,7 +346,7 @@
       margin: 0 auto;
 
       ::ng-deep circle {
-        stroke: #FF6B9D !important;
+        stroke: var(--color-chocolate) !important;
       }
     }
 
@@ -372,11 +372,11 @@
   justify-content: center;
 
   button {
-    color: #8C7A6B;
+    color: var(--text-light);
 
     &:hover {
-      background-color: #FFF5F7;
-      color: #FF6B9D;
+      background-color: var(--bg-warm);
+      color: var(--color-chocolate);
     }
   }
 }
@@ -405,7 +405,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    color: #092436;
+    color: var(--color-espresso);
     margin: 0 0 12px 0;
     font-size: 13px;
     font-weight: 700;
@@ -416,7 +416,7 @@
       font-size: 18px;
       width: 18px;
       height: 18px;
-      color: #FF6B9D;
+      color: var(--color-chocolate);
     }
   }
 }
@@ -433,7 +433,7 @@
   strong {
     display: block;
     margin-bottom: 6px;
-    color: #092436;
+    color: var(--color-espresso);
     font-weight: 600;
   }
 
@@ -459,7 +459,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 8px 0;
-  border-bottom: 1px dashed #FFE5EC;
+  border-bottom: 1px dashed rgba(44, 36, 22, 0.08);
   font-size: 14px;
 
   &:last-child {
@@ -475,11 +475,11 @@
     strong {
       display: block;
       font-weight: 600;
-      color: #092436;
+      color: var(--color-espresso);
     }
 
     small {
-      color: #8C7A6B;
+      color: var(--text-light);
       font-size: 12px;
       display: block;
       margin-top: 2px;
@@ -488,7 +488,7 @@
 
   .item-subtotal {
     font-weight: 700;
-    color: #FF6B9D;
+    color: var(--color-chocolate);
   }
 }
 
@@ -530,7 +530,7 @@
 // Paginator custom
 mat-paginator {
   background: transparent;
-  color: #8C7A6B;
+  color: var(--text-light);
 }
 
 // Voucher indikator u summary redu
@@ -538,7 +538,7 @@ mat-paginator {
   display: flex;
   align-items: center;
   gap: 4px;
-  color: #FF6B9D;
+  color: var(--color-chocolate);
   font-weight: 600;
   font-size: 11px;
   margin-top: 4px;
@@ -552,10 +552,10 @@ mat-paginator {
 
 // Price breakdown u detaljima
 .price-breakdown-section {
-  background: linear-gradient(135deg, #FFF5F7 0%, #FFE5EC 100%);
+  background: var(--bg-warm);
   border-radius: 12px;
   padding: 16px;
-  border: 1px solid #FFB6C1;
+  border: 1px solid var(--color-sand);
 }
 
 .price-breakdown {
@@ -568,21 +568,21 @@ mat-paginator {
     justify-content: space-between;
     align-items: center;
     font-size: 14px;
-    color: #092436;
+    color: var(--color-espresso);
 
     &.discount {
-      color: #FF6B9D;
+      color: var(--color-chocolate);
       font-weight: 600;
     }
 
     &.final {
-      border-top: 2px solid #FFB6C1;
+      border-top: 2px solid var(--color-sand);
       padding-top: 8px;
       margin-top: 4px;
       font-size: 16px;
 
       strong {
-        color: #FF6B9D;
+        color: var(--color-chocolate);
       }
     }
   }

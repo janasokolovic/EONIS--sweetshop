@@ -13,14 +13,14 @@
 
   h1 {
     margin: 0 0 6px 0;
-    color: #092436;
+    color: var(--color-espresso);
     font-size: 32px;
     font-weight: 800;
   }
 
   p {
     margin: 0;
-    color: #8C7A6B;
+    color: var(--text-light);
     font-size: 15px;
     font-weight: 500;
   }
@@ -34,7 +34,7 @@
 
   mat-spinner {
     ::ng-deep circle {
-      stroke: #FF6B9D !important;
+      stroke: var(--color-chocolate) !important;
     }
   }
 }
@@ -42,7 +42,7 @@
 // Empty state moderation finished
 .empty-state-card {
   border-radius: 24px !important;
-  border: 1px solid #FFE5EC;
+  border: 1px solid rgba(44, 36, 22, 0.08);
   box-shadow: 0 8px 24px rgba(255, 107, 157, 0.03) !important;
   background: white;
 }
@@ -50,7 +50,7 @@
 .empty-state {
   text-align: center;
   padding: 64px 24px;
-  color: #8C7A6B;
+  color: var(--text-light);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -67,7 +67,7 @@
   h3 {
     font-size: 22px;
     font-weight: 700;
-    color: #092436;
+    color: var(--color-espresso);
     margin: 0;
   }
 
@@ -97,7 +97,7 @@
   }
 
   strong {
-    color: #092436;
+    color: var(--color-espresso);
   }
 }
 
@@ -111,7 +111,7 @@
 // Moderation Review Card
 .review-card {
   border-radius: 20px !important;
-  border: 1px solid #FFE5EC;
+  border: 1px solid rgba(44, 36, 22, 0.08);
   background: white;
   box-shadow: 0 6px 20px rgba(255, 107, 157, 0.02) !important;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -147,19 +147,19 @@
     font-size: 44px;
     width: 44px;
     height: 44px;
-    color: #FFB6C1;
+    color: var(--color-sand);
   }
 
   strong {
     display: block;
     font-size: 16px;
     font-weight: 700;
-    color: #092436;
+    color: var(--color-espresso);
   }
 
   small {
     display: block;
-    color: #8C7A6B;
+    color: var(--text-light);
     font-size: 12px;
     margin-top: 1px;
   }
@@ -185,13 +185,13 @@
 
   .rating-text {
     margin-left: 8px;
-    color: #092436;
+    color: var(--color-espresso);
     font-weight: 700;
     font-size: 13px;
     background-color: #FFF9FA;
     padding: 2px 8px;
     border-radius: 8px;
-    border: 1px solid #FFE5EC;
+    border: 1px solid rgba(44, 36, 22, 0.08);
   }
 }
 
@@ -209,14 +209,14 @@
   margin-bottom: 16px;
 
   mat-icon {
-    color: #FF6B9D;
+    color: var(--color-chocolate);
     font-size: 20px;
     width: 20px;
     height: 20px;
   }
 
   strong {
-    color: #FF6B9D;
+    color: var(--color-chocolate);
     font-size: 15px;
     font-weight: 700;
   }
@@ -227,12 +227,12 @@
   background-color: #FFF9FA;
   padding: 16px 20px;
   border-radius: 16px;
-  border-left: 4px solid #FF9ebb;
+  border-left: 4px solid var(--color-chocolate);
   margin-bottom: 20px;
 
   p {
     margin: 0;
-    color: #092436;
+    color: var(--color-espresso);
     line-height: 1.6;
     font-size: 15px;
     font-style: italic;
@@ -266,7 +266,7 @@
     }
 
     &[color="primary"] {
-      background: linear-gradient(135deg, #FF6B9D 0%, #FF4F87 100%);
+      background: var(--color-chocolate);
       color: white;
       box-shadow: 0 4px 12px rgba(255, 107, 157, 0.2);
       border: none;
@@ -284,7 +284,7 @@
     }
 
     &[color="warn"] {
-      border-color: #FFB6C1 !important;
+      border-color: var(--color-sand) !important;
       color: #E53935 !important;
       background: transparent;
 

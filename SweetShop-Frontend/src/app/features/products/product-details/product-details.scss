@@ -1,6 +1,5 @@
 // ============================================================
-// Product Details Styles — SweetShop
-// Galerija, info panel, animirane zvezde, recenzije
+// Product Details — Artisan Boutique
 // ============================================================
 
 .loading {
@@ -8,67 +7,59 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 80px 0;
+  padding: 100px 0;
   gap: 20px;
 
   .loading-text {
-    font-family: 'Fredoka', sans-serif;
-    font-size: 1.1rem;
-    color: var(--text-medium);
+    font-family: 'Lato', sans-serif;
+    font-size: 0.9375rem;
+    color: var(--text-light);
     margin: 0;
   }
 }
 
 .product-details-container {
-  max-width: 1200px;
+  max-width: 1120px;
   margin: 0 auto;
-  padding: 32px 24px 56px;
+  padding: 32px clamp(20px, 4vw, 48px) 64px;
 }
 
-// ============================================================
-// BREADCRUMB
-// ============================================================
 .breadcrumb {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 32px;
-  font-family: 'Quicksand', sans-serif;
-  font-size: 0.9rem;
+  gap: 10px;
+  margin-bottom: 40px;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.8125rem;
 
   a {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    color: var(--sweet-pink);
+    color: var(--text-light);
     text-decoration: none;
-    font-weight: 600;
-    padding: 6px 14px 6px 10px;
-    border-radius: var(--radius-pill);
-    background: var(--sweet-pink-pale);
-    transition: all var(--transition-base);
+    font-weight: 500;
+    padding: 6px 0;
+    transition: color var(--transition-base);
 
     mat-icon {
-      font-size: 18px;
-      width: 18px;
-      height: 18px;
+      font-size: 16px;
+      width: 16px;
+      height: 16px;
     }
 
     &:hover {
-      background: var(--sweet-pink-light);
-      color: white;
-      transform: translateX(-2px);
+      color: var(--color-chocolate);
     }
   }
 
   .breadcrumb-sep {
-    color: var(--text-light);
-    font-size: 1rem;
+    color: var(--color-sand);
   }
 
   .breadcrumb-current {
     color: var(--text-medium);
-    font-weight: 600;
+    font-weight: 500;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -76,28 +67,21 @@
   }
 }
 
-// ============================================================
-// GRID: Galerija + Info
-// ============================================================
 .product-main {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 56px;
-  margin-bottom: 56px;
+  gap: clamp(32px, 5vw, 64px);
+  margin-bottom: 64px;
   align-items: start;
 
   @media (max-width: 900px) {
     grid-template-columns: 1fr;
-    gap: 32px;
   }
 }
 
-// ============================================================
-// GALERIJA SLIKA
-// ============================================================
 .image-gallery {
   position: sticky;
-  top: 88px;
+  top: calc(var(--header-height) + 24px);
 
   @media (max-width: 900px) {
     position: static;
@@ -106,27 +90,22 @@
 
 .main-image {
   width: 100%;
-  height: 460px;
-  background: var(--bg-cream);
-  border-radius: var(--radius-xl);
+  height: 480px;
+  background: var(--bg-warm);
+  border-radius: var(--radius-md);
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 3px solid #FF6B9D !important;
-  box-shadow: var(--shadow-pink-md);
-  position: relative;
+  border: 1px solid rgba(44, 36, 22, 0.06);
+  box-shadow: var(--shadow-sm);
 
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s ease;
+    transition: transform 0.6s ease;
     display: block;
-
-    &:hover {
-      transform: scale(1.04);
-    }
   }
 
   .no-image {
@@ -134,17 +113,17 @@
     flex-direction: column;
     align-items: center;
     gap: 12px;
-    color: var(--text-light);
+    color: var(--text-muted);
 
-    .no-image-emoji {
-      font-size: 5rem;
-      animation: float 3s ease-in-out infinite;
+    mat-icon {
+      font-size: 48px;
+      width: 48px;
+      height: 48px;
     }
 
     p {
-      font-family: 'Fredoka', sans-serif;
-      font-size: 1rem;
-      color: var(--text-light);
+      font-family: 'Lato', sans-serif;
+      font-size: 0.875rem;
       margin: 0;
     }
   }
@@ -153,39 +132,35 @@
 .thumbnails {
   display: flex;
   gap: 10px;
-  margin-top: 14px;
+  margin-top: 12px;
   overflow-x: auto;
   padding-bottom: 4px;
 
-  // Hide scrollbar, keep functionality
-  &::-webkit-scrollbar { height: 4px; }
+  &::-webkit-scrollbar { height: 3px; }
   &::-webkit-scrollbar-thumb {
-    background: var(--sweet-pink-light);
+    background: var(--color-sand);
     border-radius: var(--radius-pill);
   }
 
   .thumbnail {
-    width: 80px;
-    height: 80px;
+    width: 72px;
+    height: 72px;
     flex-shrink: 0;
-    border: 2px solid #FF6B9D;
+    border: 1px solid rgba(44, 36, 22, 0.1);
     border-radius: var(--radius-sm);
     overflow: hidden;
     cursor: pointer;
     padding: 0;
     background: none;
     transition: all var(--transition-base);
-    box-shadow: var(--shadow-soft);
 
     &.active {
-      border: 4px solid #FF4F87 !important;
-      box-shadow: var(--shadow-pink-sm);
-      transform: scale(1.06);
+      border: 2px solid var(--color-chocolate);
+      box-shadow: var(--shadow-sm);
     }
 
     &:hover:not(.active) {
-      border-color: #FF3377;
-      transform: scale(1.04);
+      border-color: var(--color-stone);
     }
 
     img {
@@ -197,186 +172,167 @@
   }
 }
 
-// ============================================================
-// INFO PANEL
-// ============================================================
 .product-info {
   display: flex;
   flex-direction: column;
-  gap: 0;
 }
 
 .category-chip {
   display: inline-block;
-  font-family: 'Fredoka', sans-serif;
-  font-size: 0.8rem;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.6875rem;
   font-weight: 600;
-  padding: 4px 14px;
-  border-radius: var(--radius-pill);
-  background: var(--sweet-pink-pale);
-  color: var(--sweet-pink);
-  margin-bottom: 14px;
-  border: 1px solid rgba(255, 107, 157, 0.2);
-  letter-spacing: 0.4px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+  margin-bottom: 12px;
 }
 
 .product-info h1 {
-  font-family: 'Fredoka', sans-serif;
-  font-size: clamp(1.8rem, 3vw, 2.4rem);
-  font-weight: 700;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  font-weight: 600;
   color: var(--text-dark);
   margin: 0 0 16px;
   line-height: 1.2;
 }
 
-// Rating summary
 .rating-summary {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 
   .stars {
     display: flex;
     gap: 2px;
 
     mat-icon {
-      font-size: 22px;
-      width: 22px;
-      height: 22px;
-      color: #ddd;
-      transition: all var(--transition-fast);
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+      color: var(--color-sand);
+      transition: color var(--transition-fast);
 
-      &.filled {
-        color: var(--sweet-gold);
-        animation: star-pop 0.3s ease both;
-        filter: drop-shadow(0 0 3px rgba(244, 196, 48, 0.5));
-      }
+      &.filled { color: var(--accent-gold); }
     }
   }
 
   .rating-text {
-    font-family: 'Fredoka', sans-serif;
-    font-size: 1rem;
-    font-weight: 700;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 600;
     color: var(--text-dark);
   }
 
   .review-count {
-    font-size: 0.85rem;
-    color: var(--text-light);
+    font-size: 0.8125rem;
+    color: var(--text-muted);
   }
 }
 
-// Cena
 .price-block {
   display: flex;
   align-items: baseline;
-  gap: 10px;
-  margin-bottom: 20px;
+  gap: 12px;
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(44, 36, 22, 0.06);
 
   .price {
-    font-family: 'Fredoka', sans-serif;
-    font-size: 2.6rem;
-    font-weight: 700;
-    color: var(--sweet-pink);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--color-chocolate);
     line-height: 1;
   }
 
   .price-tag {
-    font-family: 'Quicksand', sans-serif;
-    font-size: 0.82rem;
-    color: var(--text-light);
-    font-weight: 500;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
   }
 }
 
 .description {
-  font-family: 'Quicksand', sans-serif;
-  font-size: 0.97rem;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.9375rem;
   color: var(--text-medium);
   line-height: 1.8;
-  margin-bottom: 24px;
-  padding: 20px 24px;
-  background: var(--bg-cream);
-  border-radius: 20px !important;
-  border: 3px solid #FF6B9D !important;
+  margin-bottom: 28px;
 }
 
-// Zalihe
 .stock-info {
-  margin-bottom: 24px;
+  margin-bottom: 28px;
 
   span {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 10px 18px;
-    border-radius: var(--radius-pill);
-    font-family: 'Fredoka', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 600;
+    padding: 10px 16px;
+    border-radius: var(--radius-sm);
+    font-family: 'Lato', sans-serif;
+    font-size: 0.8125rem;
+    font-weight: 500;
 
     mat-icon {
-      font-size: 18px;
-      width: 18px;
-      height: 18px;
+      font-size: 16px;
+      width: 16px;
+      height: 16px;
     }
   }
 
   .out-of-stock {
-    background: rgba(230, 57, 70, 0.1);
+    background: rgba(158, 74, 74, 0.08);
     color: var(--sweet-red);
-    border: 1px solid rgba(230, 57, 70, 0.25);
+    border: 1px solid rgba(158, 74, 74, 0.15);
   }
 
   .low-stock {
-    background: rgba(244, 196, 48, 0.15);
-    color: #7a5c00;
-    border: 1px solid rgba(244, 196, 48, 0.4);
-    animation: pulse-pink 2s ease-in-out infinite;
+    background: var(--accent-gold-muted);
+    color: #7A6530;
+    border: 1px solid rgba(201, 169, 98, 0.25);
   }
 
   .in-stock {
-    background: rgba(182, 229, 216, 0.25);
-    color: #0a6b52;
-    border: 1px solid rgba(182, 229, 216, 0.6);
+    background: rgba(122, 139, 126, 0.1);
+    color: #4A6350;
+    border: 1px solid rgba(122, 139, 126, 0.2);
   }
 }
 
-// Količina + dodaj u korpu
 .purchase-section {
   display: flex;
-  gap: 14px;
+  gap: 16px;
   align-items: center;
-  margin-bottom: 28px;
+  margin-bottom: 32px;
   flex-wrap: wrap;
 }
 
 .quantity-selector {
   display: flex;
   align-items: center;
-  border: 2px solid rgba(255, 107, 157, 0.25);
-  border-radius: var(--radius-pill);
-  padding: 4px 8px;
-  background: white;
-  box-shadow: var(--shadow-pink-sm);
+  border: 1px solid var(--color-sand);
+  border-radius: var(--radius-sm);
+  padding: 4px;
+  background: var(--bg-white);
 
   .quantity-value {
     width: 44px;
     text-align: center;
-    font-family: 'Fredoka', sans-serif;
-    font-size: 1.2rem;
-    font-weight: 700;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 600;
     color: var(--text-dark);
   }
 
   button {
-    color: var(--sweet-pink) !important;
-    transition: all var(--transition-fast) !important;
+    color: var(--color-cocoa) !important;
 
     &:hover:not(:disabled) {
-      background: var(--sweet-pink-pale) !important;
+      background: var(--bg-warm) !important;
     }
   }
 }
@@ -384,89 +340,71 @@
 .add-to-cart-btn {
   flex: 1;
   min-width: 200px;
-  height: 52px !important;
-  font-family: 'Fredoka', sans-serif !important;
-  font-size: 1.05rem !important;
-  border-radius: var(--radius-pill) !important;
-  letter-spacing: 0.5px;
+  height: 48px !important;
+  font-size: 0.8125rem !important;
 
-  mat-icon {
-    margin-right: 8px;
-  }
-
-  &:not(:disabled):hover {
-    animation: pulse-pink 0.6s ease;
-  }
+  mat-icon { margin-right: 8px; }
 }
 
-// Trust badges
 .trust-badges {
   display: flex;
-  gap: 14px;
+  gap: 24px;
   flex-wrap: wrap;
-  padding: 16px 0;
-  border-top: 1px solid rgba(255, 107, 157, 0.1);
+  padding: 24px 0 0;
+  border-top: 1px solid rgba(44, 36, 22, 0.06);
 
   .trust-item {
     display: flex;
     align-items: center;
-    gap: 7px;
-    font-family: 'Quicksand', sans-serif;
-    font-size: 0.82rem;
-    font-weight: 600;
-    color: var(--text-medium);
+    gap: 8px;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--text-light);
 
-    .trust-icon {
-      font-size: 1.2rem;
+    mat-icon {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+      color: var(--accent-gold);
     }
   }
 }
 
-// ============================================================
-// DIVIDER
-// ============================================================
 .section-divider {
-  height: 2px;
-  background: linear-gradient(90deg, transparent, rgba(255, 107, 157, 0.3), transparent);
-  border-radius: var(--radius-pill);
-  margin: 8px 0 48px;
+  height: 1px;
+  background: rgba(44, 36, 22, 0.08);
+  margin: 16px 0 56px;
 }
 
-// ============================================================
-// RECENZIJE
-// ============================================================
 .reviews-section {
-  max-width: 900px;
+  max-width: 800px;
 }
 
 .reviews-header {
-  margin-bottom: 28px;
+  margin-bottom: 32px;
 
   h2 {
-    font-family: 'Fredoka', sans-serif;
-    font-size: 1.9rem;
-    font-weight: 600;
-    color: var(--text-dark);
     margin: 0;
 
     .review-counter {
-      font-size: 1.2rem;
-      color: var(--text-light);
+      font-size: 1rem;
+      color: var(--text-muted);
       font-weight: 400;
     }
   }
 }
 
-// Forma za recenziju
 .review-form-card {
-  margin-bottom: 28px;
-  background: var(--bg-cream) !important;
-  border: 1px solid rgba(255, 107, 157, 0.15) !important;
+  margin-bottom: 32px;
+  background: var(--bg-ivory) !important;
+  border: 1px solid rgba(44, 36, 22, 0.06) !important;
 
   h3 {
-    font-family: 'Fredoka', sans-serif;
-    font-size: 1.3rem;
-    color: var(--sweet-pink);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    color: var(--text-dark);
     margin: 0 0 20px;
   }
 }
@@ -474,38 +412,32 @@
 .rating-input {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 16px;
   margin-bottom: 20px;
 
   span {
-    font-family: 'Quicksand', sans-serif;
-    font-weight: 600;
-    color: var(--text-dark);
-    font-size: 0.95rem;
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    color: var(--text-medium);
+    font-size: 0.875rem;
   }
 
   .star-rating {
     display: flex;
     gap: 2px;
 
-    .star-btn {
-      mat-icon {
-        font-size: 28px;
-        width: 28px;
-        height: 28px;
-        color: #ddd;
-        transition: all 0.2s ease;
+    .star-btn mat-icon {
+      font-size: 26px;
+      width: 26px;
+      height: 26px;
+      color: var(--color-sand);
+      transition: color var(--transition-fast);
 
-        &.active {
-          color: var(--sweet-gold);
-          filter: drop-shadow(0 0 4px rgba(244, 196, 48, 0.6));
-        }
-      }
+      &.active { color: var(--accent-gold); }
+    }
 
-      &:hover mat-icon {
-        color: var(--sweet-gold);
-        transform: scale(1.2) rotate(5deg);
-      }
+    .star-btn:hover mat-icon {
+      color: var(--accent-gold);
     }
   }
 }
@@ -515,10 +447,9 @@
   margin-bottom: 16px;
 }
 
-// Login prompt
 .login-prompt {
-  background: var(--bg-cream) !important;
-  margin-bottom: 28px;
+  background: var(--bg-ivory) !important;
+  margin-bottom: 32px;
 
   mat-card-content {
     display: flex;
@@ -526,40 +457,42 @@
     gap: 16px;
     flex-wrap: wrap;
 
-    .prompt-emoji {
-      font-size: 2rem;
+    .prompt-icon {
+      font-size: 28px;
+      width: 28px;
+      height: 28px;
+      color: var(--color-sand);
     }
 
     p {
       margin: 0;
       flex: 1;
-      font-family: 'Quicksand', sans-serif;
+      font-family: 'Lato', sans-serif;
       color: var(--text-medium);
     }
   }
 }
 
-// Nema recenzija
 .no-reviews {
   text-align: center;
-  padding: 56px 24px;
+  padding: 64px 24px;
 
-  .no-reviews-emoji {
-    font-size: 4rem;
+  .no-reviews-icon {
+    font-size: 40px;
+    width: 40px;
+    height: 40px;
+    color: var(--color-sand);
     margin-bottom: 16px;
-    animation: float 3s ease-in-out infinite;
-    display: block;
   }
 
   p {
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'Lato', sans-serif;
     color: var(--text-light);
-    font-size: 1rem;
+    font-size: 0.9375rem;
     margin: 0;
   }
 }
 
-// Lista recenzija
 .reviews-list {
   display: flex;
   flex-direction: column;
@@ -567,14 +500,12 @@
 }
 
 .review-card {
-  transition: all var(--transition-base);
-  border: 3px solid #FF6B9D !important;
-  border-radius: 16px !important;
+  transition: box-shadow var(--transition-base);
+  border: 1px solid rgba(44, 36, 22, 0.06) !important;
+  border-radius: var(--radius-md) !important;
 
   &:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-pink-md) !important;
-    border-color: #FF3377 !important;
+    box-shadow: var(--shadow-sm) !important;
   }
 
   .review-header {
@@ -589,98 +520,69 @@
       gap: 12px;
 
       .avatar-circle {
-        width: 44px;
-        height: 44px;
+        width: 40px;
+        height: 40px;
         border-radius: 50%;
-        background: var(--gradient-pink);
-        color: white;
+        background: var(--color-chocolate);
+        color: var(--accent-gold);
         display: flex;
         align-items: center;
         justify-content: center;
-        font-family: 'Fredoka', sans-serif;
-        font-size: 1.2rem;
-        font-weight: 700;
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.1rem;
+        font-weight: 600;
         flex-shrink: 0;
-        box-shadow: var(--shadow-pink-sm);
       }
 
       .reviewer-info {
         strong {
           display: block;
-          font-family: 'Fredoka', sans-serif;
-          font-size: 1rem;
+          font-family: 'Lato', sans-serif;
+          font-size: 0.875rem;
+          font-weight: 600;
           color: var(--text-dark);
           margin-bottom: 2px;
         }
 
         small {
-          display: block;
-          font-family: 'Quicksand', sans-serif;
-          font-size: 0.78rem;
-          color: var(--text-light);
+          font-family: 'Lato', sans-serif;
+          font-size: 0.75rem;
+          color: var(--text-muted);
         }
       }
     }
 
-    .stars {
-      display: flex;
-      gap: 2px;
+    .stars mat-icon {
+      font-size: 16px;
+      width: 16px;
+      height: 16px;
+      color: var(--color-sand);
 
-      mat-icon {
-        font-size: 18px;
-        width: 18px;
-        height: 18px;
-        color: #ddd;
-
-        &.filled {
-          color: var(--sweet-gold);
-          filter: drop-shadow(0 0 2px rgba(244, 196, 48, 0.5));
-        }
-      }
+      &.filled { color: var(--accent-gold); }
     }
   }
 
   .review-comment {
-    font-family: 'Quicksand', sans-serif;
-    font-size: 0.92rem;
-    line-height: 1.7;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.875rem;
+    line-height: 1.75;
     color: var(--text-medium);
     margin: 0;
-    padding-left: 56px; // Poravnanje sa avatar-om
+    padding-left: 52px;
   }
 }
 
-// ============================================================
-// RESPONSIVE
-// ============================================================
 @media (max-width: 768px) {
-  .product-details-container {
-    padding: 16px;
-  }
-
-  .breadcrumb-current {
-    display: none;
-  }
-
-  .main-image {
-    height: 320px;
-    border-radius: var(--radius-lg);
-  }
+  .product-details-container { padding: 16px; }
+  .breadcrumb-current { display: none; }
+  .main-image { height: 320px; }
 
   .purchase-section {
     flex-direction: column;
     align-items: stretch;
 
-    .add-to-cart-btn {
-      min-width: unset;
-    }
+    .add-to-cart-btn { min-width: unset; }
   }
 
-  .review-card .review-comment {
-    padding-left: 0;
-  }
-
-  .trust-badges {
-    gap: 10px;
-  }
+  .review-card .review-comment { padding-left: 0; }
 }

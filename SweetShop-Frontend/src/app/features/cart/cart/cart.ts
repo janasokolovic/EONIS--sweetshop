@@ -12,6 +12,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 import { CartService } from '../../../core/services/cart.service';
 import { CartItemDto } from '../../../core/models/cart.models';
+import { UploadService } from '../../../core/services/upload.service';
 
 @Component({
   selector: 'app-cart',
@@ -34,6 +35,7 @@ export class Cart implements OnInit {
   protected readonly cartService = inject(CartService);
   private readonly router = inject(Router);
   private readonly snackBar = inject(MatSnackBar);
+  private readonly uploadService = inject(UploadService);
 
   readonly isLoading = signal(true);
   readonly updatingItemId = signal<number | null>(null);
@@ -105,6 +107,10 @@ export class Cart implements OnInit {
         this.snackBar.open(`❌ ${err.error?.message || 'Greška.'}`, 'Zatvori', { duration: 5000 });
       }
     });
+  }
+
+  getItemImage(imageUrl: string | null | undefined): string {
+    return this.uploadService.getFullUrl(imageUrl || undefined);
   }
 
   goToCheckout(): void {

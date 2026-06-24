@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SweetShop.Application.DTOs.Auth;
 using SweetShop.Application.Interfaces;
+using Microsoft.Extensions.Configuration;
 
 namespace SweetShop.API.Controllers;
 
@@ -11,11 +12,13 @@ public class AuthController : ControllerBase
 {
     private readonly IAuthService _authService;
     private readonly ICurrentUserService _currentUser;
+    private readonly IConfiguration _config;
 
-    public AuthController(IAuthService authService, ICurrentUserService currentUser)
+    public AuthController(IAuthService authService, ICurrentUserService currentUser, IConfiguration config)
     {
         _authService = authService;
         _currentUser = currentUser;
+        _config = config;
     }
 
     /// <summary>
@@ -41,6 +44,21 @@ public class AuthController : ControllerBase
     /// <summary>
     /// Dohvata podatke o trenutno prijavljenom korisniku
     /// </summary>
+    [HttpPost("forgot-password")]
+    public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordDto dto)
+    {
+        var frontendBaseUrl = _config["Frontend:BaseUrl"] ?? "http://localhost:4200";
+        await _authService.ForgotPasswordAsync(dto.Email, frontendBaseUrl);
+        return Ok(new { message = "Ako email postoji, poslaćemo vam link za resetovanje." });
+    }
+
+    [HttpPost("reset-password")]
+    public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordDto dto)
+    {
+        await _authService.ResetPasswordAsync(dto.Token, dto.NewPassword);
+        return Ok(new { message = "Lozinka je uspešno promenjena." });
+    }
+
     [HttpGet("me")]
     [Authorize]
     public async Task<ActionResult<UserDto>> GetCurrentUser()

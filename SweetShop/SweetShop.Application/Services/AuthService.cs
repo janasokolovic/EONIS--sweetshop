@@ -4,6 +4,7 @@ using SweetShop.Application.Interfaces;
 using SweetShop.Domain.Entities;
 using SweetShop.Domain.Enums;
 using SweetShop.Domain.Exceptions;
+using System.Security.Cryptography;
 
 namespace SweetShop.Application.Services;
 
@@ -11,11 +12,13 @@ public class AuthService : IAuthService
 {
     private readonly IApplicationDbContext _context;
     private readonly ITokenService _tokenService;
+    private readonly IEmailService _emailService;
 
-    public AuthService(IApplicationDbContext context, ITokenService tokenService)
+    public AuthService(IApplicationDbContext context, ITokenService tokenService, IEmailService emailService)
     {
         _context = context;
         _tokenService = tokenService;
+        _emailService = emailService;
     }
 
     public async Task<AuthResponseDto> RegisterAsync(RegisterDto dto)
@@ -89,6 +92,34 @@ public class AuthService : IAuthService
             throw new NotFoundException(nameof(User), userId);
 
         return MapToUserDto(user);
+    }
+
+    public async Task ForgotPasswordAsync(string email, string frontendBaseUrl)
+    {
+        var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+        if (user == null)
+            return; // Ne otkrivamo da li email postoji
+
+        var token = Convert.ToHexString(RandomNumberGenerator.GetBytes(32));
+        user.PasswordResetToken = token;
+        user.PasswordResetTokenExpiry = DateTime.UtcNow.AddHours(1);
+        await _context.SaveChangesAsync();
+
+        var resetLink = $"{frontendBaseUrl}/reset-password?token={token}";
+        await _emailService.SendPasswordResetEmailAsync(email, resetLink);
+    }
+
+    public async Task ResetPasswordAsync(string token, string newPassword)
+    {
+        var user = await _context.Users.FirstOrDefaultAsync(u => u.PasswordResetToken == token);
+
+        if (user == null || user.PasswordResetTokenExpiry == null || user.PasswordResetTokenExpiry < DateTime.UtcNow)
+            throw new BadRequestException("Token nije validan ili je istekao.");
+
+        user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(newPassword);
+        user.PasswordResetToken = null;
+        user.PasswordResetTokenExpiry = null;
+        await _context.SaveChangesAsync();
     }
 
     private static UserDto MapToUserDto(User user) => new()

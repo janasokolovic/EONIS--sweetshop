@@ -1,17 +1,17 @@
-<mat-toolbar color="primary" class="header-toolbar">
-  <!-- Logo -->
+<mat-toolbar color="primary" class="header-toolbar boutique-header">
   <a routerLink="/" class="logo">
-    <span class="logo-icon">🍬</span>
-    <span class="logo-text">SweetShop</span>
+    <span class="logo-mark">S</span>
+    <span class="logo-text">
+      <span class="logo-name">SweetShop</span>
+      <span class="logo-tagline">Artisan Confectionery</span>
+    </span>
   </a>
 
-  <!-- Spacer da gurne desnu stranu na desno -->
   <span class="spacer"></span>
 
-  <!-- Navigacija -->
   <nav class="nav-links">
     <a mat-button routerLink="/products" routerLinkActive="active">
-      <mat-icon>local_mall</mat-icon>
+      <mat-icon>storefront</mat-icon>
       <span>Proizvodi</span>
     </a>
     @if (authService.isAdmin()) {
@@ -22,26 +22,24 @@
     }
   </nav>
 
-  <!-- Korpa (samo za prijavljene Customer-e) -->
   @if (authService.isCustomer()) {
     <a mat-icon-button routerLink="/cart" aria-label="Korpa" class="cart-button">
       @if (cartItemCount() > 0) {
-        <mat-icon [matBadge]="cartItemCount()" matBadgeColor="accent" matBadgeSize="small">shopping_cart</mat-icon>
+        <mat-icon [matBadge]="cartItemCount()" matBadgeColor="accent" matBadgeSize="small">shopping_bag</mat-icon>
       } @else {
-        <mat-icon>shopping_cart</mat-icon>
+        <mat-icon>shopping_bag</mat-icon>
       }
     </a>
   }
 
-  <!-- User menu -->
   @if (authService.isAuthenticated()) {
     <button mat-button [matMenuTriggerFor]="userMenu" class="user-menu-button">
       <mat-icon>account_circle</mat-icon>
       <span class="user-name">{{ authService.currentUser()?.firstName }}</span>
-      <mat-icon>arrow_drop_down</mat-icon>
+      <mat-icon class="dropdown-icon">expand_more</mat-icon>
     </button>
 
-    <mat-menu #userMenu="matMenu">
+    <mat-menu #userMenu="matMenu" class="boutique-menu">
       <div class="menu-header">
         <strong>{{ authService.currentUser()?.firstName }} {{ authService.currentUser()?.lastName }}</strong>
         <small>{{ authService.currentUser()?.email }}</small>
@@ -66,10 +64,9 @@
       </button>
     </mat-menu>
   } @else {
-    <a mat-button routerLink="/login">
-      <mat-icon>login</mat-icon>
+    <a mat-button routerLink="/login" class="login-link">
       <span>Prijavi se</span>
     </a>
-    <a mat-raised-button color="accent" routerLink="/register">Registracija</a>
+    <a mat-raised-button color="primary" routerLink="/register" class="register-cta">Registracija</a>
   }
 </mat-toolbar>

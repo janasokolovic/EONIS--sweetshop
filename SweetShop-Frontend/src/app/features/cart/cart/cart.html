@@ -1,31 +1,22 @@
-<div class="cart-container page-enter">
+<div class="cart-container page-enter boutique-page">
 
-  <!-- Page Header -->
   <div class="page-header">
-    <h1>🛒 Vaša korpa</h1>
+    <h1 class="section-title">Vaša korpa</h1>
   </div>
 
   @if (isLoading()) {
     <div class="loading">
       <mat-spinner diameter="48"></mat-spinner>
-      <p class="loading-text">Učitavamo korpu... 🍬</p>
+      <p class="loading-text">Učitavamo korpu...</p>
     </div>
   } @else {
     @let cart = cartService.cart();
 
     @if (!cart || cart.items.length === 0) {
-      <!-- Prazna korpa -->
       <div class="empty-cart">
-        <div class="empty-cart-visual">
-          <span class="empty-cart-emoji">🛒</span>
-          <div class="empty-candy-row">
-            <span class="candy-float">🍬</span>
-            <span class="candy-float-2">🍭</span>
-            <span class="candy-float-3">🧁</span>
-          </div>
-        </div>
+        <mat-icon class="empty-cart-icon">shopping_bag</mat-icon>
         <h2>Vaša korpa je prazna</h2>
-        <p>Dodajte slatkiše iz našeg asortimana i uljepšajte dan! 😊</p>
+        <p>Istražite našu kolekciju i pronađite nešto posebno za sebe.</p>
         <a mat-raised-button color="primary" routerLink="/products">
           <mat-icon>storefront</mat-icon>
           Pregledaj proizvode
@@ -35,23 +26,20 @@
     } @else {
       <div class="cart-content">
 
-        <!-- Lista stavki -->
         <div class="cart-items">
           @for (item of cart.items; track item.id) {
             <mat-card class="cart-item">
-              <!-- Slika -->
               <div class="item-image">
                 @if (item.productImageUrl) {
-                  <img [src]="item.productImageUrl" [alt]="item.productName"
+                  <img [src]="getItemImage(item.productImageUrl)" [alt]="item.productName"
                        (error)="$any($event.target).style.display='none'">
                 } @else {
                   <div class="no-image">
-                    <span>🍬</span>
+                    <mat-icon>cake</mat-icon>
                   </div>
                 }
               </div>
 
-              <!-- Info -->
               <div class="item-info">
                 <a [routerLink]="['/products', item.productId]" class="item-name">
                   {{ item.productName }}
@@ -59,12 +47,11 @@
                 <div class="item-price">{{ item.unitPrice | number:'1.2-2' }} € / kom</div>
                 @if (item.availableStock < 10) {
                   <small class="stock-warning">
-                    ⚠️ Još samo {{ item.availableStock }} kom na zalihama
+                    Još samo {{ item.availableStock }} kom na zalihama
                   </small>
                 }
               </div>
 
-              <!-- Količina -->
               <div class="item-quantity">
                 <button mat-icon-button (click)="decreaseQuantity(item)"
                         [disabled]="updatingItemId() === item.id">
@@ -77,12 +64,10 @@
                 </button>
               </div>
 
-              <!-- Subtotal -->
               <div class="item-subtotal">
                 <strong>{{ item.subtotal | number:'1.2-2' }} €</strong>
               </div>
 
-              <!-- Ukloni -->
               <button mat-icon-button class="remove-btn" (click)="removeItem(item)"
                       [disabled]="updatingItemId() === item.id" aria-label="Ukloni">
                 <mat-icon>delete_outline</mat-icon>
@@ -90,7 +75,6 @@
             </mat-card>
           }
 
-          <!-- Isprazni korpu -->
           <div class="cart-actions">
             <button mat-button color="warn" (click)="clearCart()" class="clear-cart-btn">
               <mat-icon>delete_sweep</mat-icon>
@@ -99,11 +83,10 @@
           </div>
         </div>
 
-        <!-- Sažetak narudžbine -->
         <div class="cart-summary-wrapper">
           <mat-card class="cart-summary">
             <mat-card-content>
-              <h2>📋 Sažetak</h2>
+              <h2>Sažetak</h2>
 
               <div class="summary-line">
                 <span>Broj artikala</span>
@@ -112,7 +95,7 @@
 
               <div class="summary-line">
                 <span>Dostava</span>
-                <span class="free">🚚 Besplatna</span>
+                <span class="free">Besplatna</span>
               </div>
 
               <div class="summary-divider"></div>
@@ -128,13 +111,12 @@
               </button>
 
               <a mat-button routerLink="/products" class="continue-shopping">
-                ← Nastavi kupovinu
+                Nastavi kupovinu
               </a>
 
-              <!-- Trust micro-badges -->
               <div class="cart-trust">
-                <span>🔒 Sigurna naplata</span>
-                <span>↩️ Povrat 14 dana</span>
+                <span><mat-icon>lock</mat-icon> Sigurna naplata</span>
+                <span><mat-icon>replay</mat-icon> Povrat 14 dana</span>
               </div>
             </mat-card-content>
           </mat-card>

@@ -1,81 +1,65 @@
-<div class="product-list-container page-enter">
+<div class="product-list-container page-enter boutique-page">
 
-  <!-- ===================== HERO SEKCIJA ===================== -->
-  <section class="hero">
-    <!-- Floating candy dekoracije u pozadini -->
-    <div class="hero-bg-candy" aria-hidden="true">
-      <span class="candy candy-1">🍬</span>
-      <span class="candy candy-2">🍭</span>
-      <span class="candy candy-3">🧁</span>
-      <span class="candy candy-4">🍫</span>
-      <span class="candy candy-5">🍩</span>
-      <span class="candy candy-6">🍰</span>
-      <span class="candy candy-7">🍬</span>
-      <span class="candy candy-8">🍭</span>
-    </div>
-
-    <div class="hero-content">
-      <div class="hero-badge">✨ Novo u ponudi svaki dan</div>
-      <h1>Dobrodošli u <span class="hero-brand">SweetShop</span>!</h1>
-      <p class="hero-subtitle">Otkrijte najukusnije slatkiše po najboljim cenama 🍬</p>
+  <section class="hero boutique-hero">
+    <div class="hero-inner">
+      <span class="hero-eyebrow">Ručno odabrana kolekcija</span>
+      <h1 class="hero-title">Slatki trenutci,<br><em>pažljivo pripremljeni</em></h1>
+      <p class="hero-subtitle">Otkrijte našu kuriranu selekciju finih čokolada, pralina i delikatesa — gde svaki proizvod priča svoju priču.</p>
       <div class="hero-stats">
         <div class="stat">
           <span class="stat-num">200+</span>
           <span class="stat-label">Proizvoda</span>
         </div>
-        <div class="stat-divider">🍭</div>
+        <div class="stat-divider"></div>
         <div class="stat">
           <span class="stat-num">Besplatna</span>
           <span class="stat-label">Dostava</span>
         </div>
-        <div class="stat-divider">🍭</div>
+        <div class="stat-divider"></div>
         <div class="stat">
-          <span class="stat-num">4.9 ⭐</span>
+          <span class="stat-num">4.9</span>
           <span class="stat-label">Ocena kupaca</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===================== CSS MARQUEE KARUSEL ===================== -->
-  <div class="marquee-wrapper" aria-label="Popularni proizvodi">
-    <div class="marquee-label">🔥 Najprodavanije:</div>
+  <div class="marquee-wrapper boutique-marquee" aria-label="Popularni proizvodi">
+    <div class="marquee-label">Izdvajamo</div>
     <div class="marquee-track">
       <div class="marquee-content">
-        <span>🍬 Gumene bombonice</span>
-        <span>🍫 Belgijska čokolada</span>
-        <span>🍭 Lolipopi Rainbow</span>
-        <span>🧁 Mini Cupcakes</span>
-        <span>🍩 Glazirani donatsi</span>
-        <span>🍰 Tiramisu rez</span>
-        <span>🍬 Kisela žvakaća guma</span>
-        <span>🍫 Nutella kremovi</span>
-        <span>🍭 Candy Cane</span>
-        <span>🧁 Macarons Paris</span>
-        <!-- duplikat za bezšavni loop -->
-        <span>🍬 Gumene bombonice</span>
-        <span>🍫 Belgijska čokolada</span>
-        <span>🍭 Lolipopi Rainbow</span>
-        <span>🧁 Mini Cupcakes</span>
-        <span>🍩 Glazirani donatsi</span>
-        <span>🍰 Tiramisu rez</span>
-        <span>🍬 Kisela žvakaća guma</span>
-        <span>🍫 Nutella kremovi</span>
-        <span>🍭 Candy Cane</span>
-        <span>🧁 Macarons Paris</span>
+        <span>Gumene bombonice</span>
+        <span>Belgijska čokolada</span>
+        <span>Lolipopi Rainbow</span>
+        <span>Mini Cupcakes</span>
+        <span>Glazirani donatsi</span>
+        <span>Tiramisu rez</span>
+        <span>Kisela žvakaća guma</span>
+        <span>Nutella kremovi</span>
+        <span>Candy Cane</span>
+        <span>Macarons Paris</span>
+        <span>Gumene bombonice</span>
+        <span>Belgijska čokolada</span>
+        <span>Lolipopi Rainbow</span>
+        <span>Mini Cupcakes</span>
+        <span>Glazirani donatsi</span>
+        <span>Tiramisu rez</span>
+        <span>Kisela žvakaća guma</span>
+        <span>Nutella kremovi</span>
+        <span>Candy Cane</span>
+        <span>Macarons Paris</span>
       </div>
     </div>
   </div>
 
-  <!-- ===================== FILTERI ===================== -->
   <section class="filters-section">
     <div class="filters-header">
-      <h2 class="filters-title">🛍️ Svi proizvodi</h2>
+      <h2 class="filters-title section-title">Naša kolekcija</h2>
     </div>
 
     <div class="filters">
       <mat-form-field appearance="outline" class="search-field">
-        <mat-label>Pretraži slatkiše...</mat-label>
+        <mat-label>Pretraži proizvode...</mat-label>
         <input matInput [formControl]="searchControl" placeholder="Naziv, opis...">
         <mat-icon matPrefix>search</mat-icon>
         @if (searchControl.value) {
@@ -98,27 +82,26 @@
       <mat-form-field appearance="outline" class="filter-field">
         <mat-label>Sortiranje</mat-label>
         <mat-select [value]="sortBy + ':' + (sortDescending ? 'desc' : 'asc')" (selectionChange)="onSortChange($event.value)">
-          <mat-option value="createdAt:desc">⭐ Najnoviji</mat-option>
-          <mat-option value="name:asc">🔤 Naziv A-Z</mat-option>
-          <mat-option value="name:desc">🔤 Naziv Z-A</mat-option>
-          <mat-option value="price:asc">💰 Cena: niža → viša</mat-option>
-          <mat-option value="price:desc">💰 Cena: viša → niža</mat-option>
+          <mat-option value="createdAt:desc">Najnoviji</mat-option>
+          <mat-option value="name:asc">Naziv A–Z</mat-option>
+          <mat-option value="name:desc">Naziv Z–A</mat-option>
+          <mat-option value="price:asc">Cena: niža → viša</mat-option>
+          <mat-option value="price:desc">Cena: viša → niža</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
 
-    <!-- Aktivni filteri -->
     @if (selectedCategoryId !== null || searchControl.value) {
       <mat-chip-set class="active-filters">
         @if (selectedCategoryId !== null) {
           <mat-chip (removed)="onCategoryChange(null)">
-            🏷️ Kategorija
+            Kategorija
             <button matChipRemove><mat-icon>cancel</mat-icon></button>
           </mat-chip>
         }
         @if (searchControl.value) {
           <mat-chip (removed)="clearSearch()">
-            🔍 "{{ searchControl.value }}"
+            "{{ searchControl.value }}"
             <button matChipRemove><mat-icon>cancel</mat-icon></button>
           </mat-chip>
         }
@@ -126,52 +109,46 @@
     }
   </section>
 
-  <!-- ===================== LOADER ===================== -->
   @if (isLoading()) {
     <div class="loading">
       <mat-spinner diameter="48"></mat-spinner>
-      <p class="loading-text">Učitavamo slatkiše za vas... 🍬</p>
+      <p class="loading-text">Učitavamo kolekciju...</p>
     </div>
   }
 
-  <!-- ===================== GRID PROIZVODA ===================== -->
   @if (!isLoading()) {
     @if (products().length === 0) {
       <div class="empty-state">
-        <div class="empty-emoji">🕵️</div>
+        <mat-icon class="empty-icon">search_off</mat-icon>
         <h3>Nema proizvoda</h3>
         <p>Probajte da promenite filtere ili pretragu.</p>
       </div>
     } @else {
       <div class="products-grid">
         @for (product of products(); track product.id) {
-          <mat-card class="product-card" [routerLink]="['/products', product.id]">
+          <mat-card class="product-card boutique-card" [routerLink]="['/products', product.id]">
 
-            <!-- Slika -->
             <div class="product-image">
               @if (product.images.length > 0) {
                 <img [src]="getPrimaryImage(product)" [alt]="product.name"
                      (error)="$any($event.target).style.display='none'">
               } @else {
                 <div class="no-image">
-                  <span class="no-image-emoji">🍬</span>
+                  <mat-icon>cake</mat-icon>
                 </div>
               }
 
-              <!-- Badge -->
               @if (product.stockQuantity === 0) {
                 <span class="stock-badge out-of-stock-badge">Rasprodato</span>
               } @else if (product.stockQuantity < 10) {
-                <span class="stock-badge low-stock-badge">🔥 Samo {{ product.stockQuantity }} kom!</span>
+                <span class="stock-badge low-stock-badge">Samo {{ product.stockQuantity }} kom</span>
               }
 
-              <!-- Hover overlay -->
               <div class="card-hover-overlay">
-                <span>Pogledaj detalje →</span>
+                <span>Pogledaj detalje</span>
               </div>
             </div>
 
-            <!-- Sadržaj kartice -->
             <mat-card-content class="card-body">
               <div class="category-chip">{{ product.categoryName }}</div>
               <h3 class="product-name">{{ product.name }}</h3>
@@ -200,7 +177,6 @@
         }
       </div>
 
-      <!-- Paginacija -->
       <mat-paginator
         [length]="totalCount()"
         [pageSize]="pageSize"

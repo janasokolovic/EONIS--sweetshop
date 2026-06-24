@@ -18,20 +18,20 @@
 
   h1 {
     margin: 0 0 6px 0;
-    color: #092436;
+    color: var(--color-espresso);
     font-size: 32px;
     font-weight: 800;
   }
 
   p {
     margin: 0;
-    color: #8C7A6B;
+    color: var(--text-light);
     font-size: 15px;
     font-weight: 500;
   }
 
   button[mat-raised-button] {
-    background: linear-gradient(135deg, #FF6B9D 0%, #FF4F87 100%);
+    background: var(--color-chocolate);
     color: white;
     padding: 0 24px;
     height: 46px;
@@ -62,7 +62,7 @@
 .form-card {
   margin-bottom: 32px;
   border-radius: 24px !important;
-  border: 1px solid #FFE5EC;
+  border: 1px solid rgba(44, 36, 22, 0.08);
   background: linear-gradient(180deg, #FFF9FA 0%, #FFFFFF 100%) !important;
   box-shadow: 0 10px 30px rgba(255, 107, 157, 0.05) !important;
   padding: 8px;
@@ -70,7 +70,7 @@
   mat-card-title {
     font-size: 22px;
     font-weight: 800;
-    color: #092436;
+    color: var(--color-espresso);
     padding: 16px 16px 8px;
   }
 }
@@ -104,30 +104,30 @@
     .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__leading,
     .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__notch,
     .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__trailing {
-      border-color: #FFE5EC !important;
+      border-color: rgba(44, 36, 22, 0.08) !important;
       border-width: 1.5px !important;
     }
     .mdc-text-field--outlined:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-notched-outline__leading,
     .mdc-text-field--outlined:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-notched-outline__notch,
     .mdc-text-field--outlined:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-notched-outline__trailing {
-      border-color: #FFB6C1 !important;
+      border-color: var(--color-sand) !important;
     }
     .mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-notched-outline__leading,
     .mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-notched-outline__notch,
     .mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-notched-outline__trailing {
-      border-color: #FF6B9D !important;
+      border-color: var(--color-chocolate) !important;
     }
     .mat-mdc-form-field.mat-focused .mat-mdc-select-arrow {
-      color: #FF6B9D !important;
+      color: var(--color-chocolate) !important;
     }
     .mat-mdc-form-field-prefix {
       margin-right: 8px;
       .mat-icon {
-        color: #FFB6C1;
+        color: var(--color-sand);
       }
     }
     .mat-mdc-form-field-label {
-      color: #8C7A6B !important;
+      color: var(--text-light) !important;
     }
   }
 
@@ -135,12 +135,12 @@
     display: flex;
     justify-content: flex-end;
     gap: 16px;
-    border-top: 1px solid #FFE5EC;
+    border-top: 1px solid rgba(44, 36, 22, 0.08);
     padding-top: 20px;
     margin-top: 8px;
 
     button[mat-button] {
-      color: #8C7A6B;
+      color: var(--text-light);
       font-weight: 600;
       border-radius: 20px;
       padding: 0 20px;
@@ -149,7 +149,7 @@
     }
 
     button[mat-raised-button] {
-      background: linear-gradient(135deg, #FF6B9D 0%, #FF4F87 100%);
+      background: var(--color-chocolate);
       color: white;
       font-weight: 600;
       border-radius: 20px;
@@ -176,13 +176,13 @@
     gap: 10px;
     cursor: pointer;
     font-size: 15px;
-    color: #092436;
+    color: var(--color-espresso);
     font-weight: 500;
 
     input[type="checkbox"] {
       width: 20px;
       height: 20px;
-      accent-color: #FF6B9D;
+      accent-color: var(--color-chocolate);
       cursor: pointer;
     }
   }
@@ -202,8 +202,8 @@
   flex-wrap: wrap;
 
   button[mat-stroked-button] {
-    border-color: #FFB6C1;
-    color: #FF6B9D;
+    border-color: var(--color-sand);
+    color: var(--color-chocolate);
     font-weight: 600;
     border-radius: 20px;
     height: 40px;
@@ -212,8 +212,8 @@
     transition: all 0.2s;
 
     &:hover:not([disabled]) {
-      background-color: #FFF5F7;
-      border-color: #FF6B9D;
+      background-color: var(--bg-warm);
+      border-color: var(--color-chocolate);
     }
 
     mat-icon {
@@ -227,7 +227,7 @@
   height: 90px;
   border-radius: 12px;
   overflow: hidden;
-  border: 2px solid #FFE5EC;
+  border: 2px solid rgba(44, 36, 22, 0.08);
   background-color: #FFF9FA;
   box-shadow: 0 3px 10px rgba(255, 107, 157, 0.05);
 
@@ -242,7 +242,7 @@
 .filters-card {
   margin-bottom: 24px;
   border-radius: 20px !important;
-  border: 1px solid #FFE5EC;
+  border: 1px solid rgba(44, 36, 22, 0.08);
   box-shadow: 0 6px 20px rgba(255, 107, 157, 0.02) !important;
   background: white;
 
@@ -271,7 +271,7 @@
 // Table Card
 .table-card {
   border-radius: 24px !important;
-  border: 1px solid #FFE5EC;
+  border: 1px solid rgba(44, 36, 22, 0.08);
   box-shadow: 0 8px 24px rgba(255, 107, 157, 0.03) !important;
   background: white;
   overflow: hidden;
@@ -284,7 +284,7 @@
 
   mat-spinner {
     ::ng-deep circle {
-      stroke: #FF6B9D !important;
+      stroke: var(--color-chocolate) !important;
     }
   }
 }
@@ -292,13 +292,13 @@
 .empty-state {
   text-align: center;
   padding: 80px 24px;
-  color: #8C7A6B;
+  color: var(--text-light);
 
   mat-icon {
     font-size: 64px;
     width: 64px;
     height: 64px;
-    color: #FFB6C1;
+    color: var(--color-sand);
     margin-bottom: 16px;
   }
 }
@@ -309,24 +309,24 @@
   background: transparent;
 
   th {
-    color: #8C7A6B !important;
+    color: var(--text-light) !important;
     font-weight: 700;
     text-transform: uppercase;
     font-size: 12px;
     letter-spacing: 0.8px;
-    border-bottom: 2px solid #FFE5EC !important;
+    border-bottom: 2px solid rgba(44, 36, 22, 0.08) !important;
     padding: 16px 8px !important;
   }
 
   td {
     padding: 14px 8px !important;
-    border-bottom: 1px solid #FFF5F7 !important;
-    color: #092436;
+    border-bottom: 1px solid var(--bg-warm) !important;
+    color: var(--color-espresso);
     font-size: 14px;
     vertical-align: middle;
 
     strong {
-      color: #092436;
+      color: var(--color-espresso);
     }
   }
 
@@ -341,11 +341,11 @@
   height: 50px;
   border-radius: 10px;
   overflow: hidden;
-  background-color: #FFF5F7;
+  background-color: var(--bg-warm);
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid #FFE5EC;
+  border: 1px solid rgba(44, 36, 22, 0.08);
 
   img {
     width: 100%;
@@ -354,7 +354,7 @@
   }
 
   mat-icon {
-    color: #FFB6C1;
+    color: var(--color-sand);
     font-size: 24px;
     width: 24px;
     height: 24px;
@@ -364,7 +364,7 @@
 // Description preview
 .desc-preview {
   display: block;
-  color: #8C7A6B;
+  color: var(--text-light);
   font-size: 12px;
   margin-top: 3px;
   max-width: 280px;
@@ -378,11 +378,11 @@
   display: inline-block;
   padding: 4px 12px;
   background-color: #FFF0F3;
-  color: #FF6B9D;
+  color: var(--color-chocolate);
   border-radius: 12px;
   font-size: 12px;
   font-weight: 700;
-  border: 1px solid rgba(#FF6B9D, 0.1);
+  border: 1px solid rgba(var(--color-chocolate), 0.1);
 }
 
 // Stock states
@@ -441,6 +441,6 @@
 // Paginator custom
 mat-paginator {
   background: transparent;
-  border-top: 1px solid #FFE5EC;
-  color: #8C7A6B;
+  border-top: 1px solid rgba(44, 36, 22, 0.08);
+  color: var(--text-light);
 }

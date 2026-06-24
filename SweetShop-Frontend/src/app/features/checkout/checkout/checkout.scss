@@ -1,155 +1,125 @@
 // ============================================================
-// Checkout Styles — SweetShop
-// Wizard progress, adresa, plaćanje
+// Checkout — Artisan Boutique
 // ============================================================
 
 .checkout-container {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 32px 24px 56px;
+  padding: 32px clamp(20px, 4vw, 48px) 64px;
 }
 
-// ============================================================
-// PAGE HEADER + WIZARD
-// ============================================================
 .page-header {
-  margin-bottom: 36px;
+  margin-bottom: 40px;
 
-  h1 {
-    font-family: 'Fredoka', sans-serif;
-    font-size: 2.2rem;
-    font-weight: 700;
-    color: var(--text-dark);
-    margin: 0 0 24px;
-  }
+  h1 { margin: 0 0 28px; }
 }
 
 .wizard-progress {
   display: flex;
   align-items: center;
-  gap: 0;
-  max-width: 380px;
+  max-width: 360px;
 }
 
 .wizard-step {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
 
   .step-circle {
-    width: 42px;
-    height: 42px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Fredoka', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 700;
-    border: 2.5px solid rgba(255, 107, 157, 0.25);
-    background: white;
-    color: var(--text-light);
+    font-family: 'Lato', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border: 1px solid var(--color-sand);
+    background: var(--bg-white);
+    color: var(--text-muted);
     transition: all var(--transition-base);
-    box-shadow: var(--shadow-soft);
 
     mat-icon {
-      font-size: 20px;
-      width: 20px;
-      height: 20px;
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
     }
   }
 
   .step-label {
-    font-family: 'Quicksand', sans-serif;
-    font-size: 0.78rem;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.6875rem;
     font-weight: 600;
-    color: var(--text-light);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
     transition: color var(--transition-base);
   }
 
   &.active {
     .step-circle {
-      background: var(--gradient-pink);
-      border-color: var(--sweet-pink);
+      background: var(--color-chocolate);
+      border-color: var(--color-chocolate);
       color: white;
-      box-shadow: var(--shadow-pink-md);
-      animation: pulse-pink 2s ease-in-out infinite;
     }
-    .step-label { color: var(--sweet-pink); }
+    .step-label { color: var(--color-chocolate); }
   }
 
   &.done {
     .step-circle {
-      background: var(--gradient-pink);
-      border-color: var(--sweet-pink);
+      background: var(--color-chocolate);
+      border-color: var(--color-chocolate);
       color: white;
-      box-shadow: var(--shadow-pink-sm);
     }
-    .step-label { color: var(--sweet-pink); }
+    .step-label { color: var(--color-cocoa); }
   }
 }
 
 .wizard-line {
   flex: 1;
-  height: 3px;
-  background: rgba(255, 107, 157, 0.2);
-  border-radius: var(--radius-pill);
-  margin: 0 10px;
-  margin-bottom: 22px;
+  height: 1px;
+  background: var(--color-sand);
+  margin: 0 12px;
+  margin-bottom: 24px;
   transition: background var(--transition-slow);
-  position: relative;
-  overflow: hidden;
 
-  &.done {
-    background: var(--gradient-pink);
-  }
+  &.done { background: var(--color-chocolate); }
 }
 
-// ============================================================
-// LOADER + EMPTY
-// ============================================================
 .loading {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 80px 0;
-  gap: 20px;
+  padding: 100px 0;
 
   .loading-text {
-    font-family: 'Fredoka', sans-serif;
-    font-size: 1.1rem;
-    color: var(--text-medium);
+    font-family: 'Lato', sans-serif;
+    color: var(--text-light);
     margin: 0;
   }
 }
 
 .empty-cart-warning {
   text-align: center;
-  padding: 64px 24px;
+  padding: 80px 24px;
 
-  .empty-emoji {
-    font-size: 5rem;
-    display: block;
+  .empty-icon {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+    color: var(--color-sand);
     margin-bottom: 20px;
-    animation: float 3s ease-in-out infinite;
   }
 
   p {
     color: var(--text-medium);
     margin-bottom: 24px;
-    font-size: 1rem;
   }
 }
 
-// ============================================================
-// GRID
-// ============================================================
 .checkout-grid {
   display: grid;
-  grid-template-columns: 1fr 360px;
-  gap: 28px;
+  grid-template-columns: 1fr 340px;
+  gap: 32px;
   align-items: start;
 
   @media (max-width: 968px) {
@@ -157,86 +127,80 @@
   }
 }
 
-// ============================================================
-// STEP CARD
-// ============================================================
 .step-card {
-  border-radius: var(--radius-lg) !important;
-  border: 1.5px solid rgba(255, 107, 157, 0.12) !important;
-  box-shadow: var(--shadow-pink-sm) !important;
-  overflow: visible !important;
+  border-radius: var(--radius-md) !important;
+  border: 1px solid rgba(44, 36, 22, 0.06) !important;
+  box-shadow: var(--shadow-xs) !important;
 
   mat-card-header {
-    padding: 20px 24px 0;
+    padding: 24px 28px 0;
 
     mat-card-title {
-      font-family: 'Fredoka', sans-serif;
-      font-size: 1.35rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
       font-weight: 600;
       color: var(--text-dark);
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
 
       .step-title-icon {
-        font-size: 1.4rem;
+        font-size: 20px;
+        width: 20px;
+        height: 20px;
+        color: var(--accent-gold);
       }
     }
   }
 
   mat-card-content {
-    padding: 20px 24px 24px !important;
+    padding: 20px 28px 28px !important;
   }
 }
 
-// ============================================================
-// ADRESNE OPCIJE
-// ============================================================
 .no-addresses {
   text-align: center;
-  padding: 40px 16px;
+  padding: 48px 16px;
 
-  .no-addr-emoji {
-    font-size: 4rem;
-    display: block;
+  .no-addr-icon {
+    font-size: 40px;
+    width: 40px;
+    height: 40px;
+    color: var(--color-sand);
     margin-bottom: 16px;
-    animation: float 3s ease-in-out infinite;
   }
 
   p {
     color: var(--text-medium);
     margin-bottom: 20px;
-    font-size: 0.95rem;
+    font-size: 0.9375rem;
   }
 }
 
 .address-option {
   margin-bottom: 12px;
-  padding: 16px 18px;
-  border: 2px solid rgba(255, 107, 157, 0.2);
-  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  border: 1px solid rgba(44, 36, 22, 0.1);
+  border-radius: var(--radius-sm);
   cursor: pointer;
   transition: all var(--transition-base);
-  background: white;
+  background: var(--bg-white);
 
   &:hover {
-    background: var(--bg-cream);
-    border-color: rgba(255, 107, 157, 0.4);
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-pink-sm);
+    border-color: var(--color-stone);
+    box-shadow: var(--shadow-xs);
   }
 
   &.selected {
-    border-color: var(--sweet-pink);
-    background: var(--sweet-pink-pale);
-    box-shadow: var(--shadow-pink-sm);
+    border-color: var(--color-chocolate);
+    background: var(--bg-ivory);
   }
 
   mat-radio-button { display: block; }
 
   .address-content {
     margin-left: 8px;
-    line-height: 1.6;
+    line-height: 1.65;
   }
 
   .address-header {
@@ -246,32 +210,34 @@
     margin-bottom: 4px;
 
     strong {
-      font-family: 'Fredoka', sans-serif;
-      font-size: 1rem;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.9375rem;
+      font-weight: 600;
       color: var(--text-dark);
     }
   }
 
   .default-tag {
-    background: var(--gradient-pink);
+    background: var(--color-chocolate);
     color: white;
     padding: 2px 10px;
-    border-radius: var(--radius-pill);
-    font-family: 'Fredoka', sans-serif;
-    font-size: 0.72rem;
+    border-radius: var(--radius-sm);
+    font-family: 'Lato', sans-serif;
+    font-size: 0.625rem;
     font-weight: 600;
-    letter-spacing: 0.3px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
   }
 
   .address-line {
-    font-family: 'Quicksand', sans-serif;
-    font-size: 0.88rem;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.8125rem;
     color: var(--text-medium);
   }
 
   .address-phone {
-    font-family: 'Quicksand', sans-serif;
-    font-size: 0.82rem;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.8125rem;
     color: var(--text-light);
     margin-top: 4px;
   }
@@ -281,69 +247,61 @@
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  margin: 12px 0 20px;
-  font-family: 'Quicksand', sans-serif !important;
-  color: var(--sweet-pink) !important;
-  font-size: 0.88rem !important;
-  border-radius: var(--radius-pill) !important;
+  margin: 12px 0 24px;
+  font-family: 'Lato', sans-serif !important;
+  color: var(--color-chocolate) !important;
+  font-size: 0.8125rem !important;
 
-  &:hover { background: var(--sweet-pink-pale) !important; }
+  &:hover { background: var(--bg-warm) !important; }
 }
 
 .next-button {
   width: 100%;
-  height: 52px !important;
-  font-family: 'Fredoka', sans-serif !important;
-  font-size: 1.05rem !important;
+  height: 48px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   gap: 8px !important;
-  border-radius: var(--radius-pill) !important;
 }
 
-// ============================================================
-// KORAK 2 - PLAĆANJE
-// ============================================================
 .selected-address-info {
   display: flex;
   align-items: flex-start;
   gap: 12px;
-  padding: 14px 18px;
-  background: var(--bg-cream);
-  border-radius: var(--radius-md);
-  border: 1px solid rgba(255, 107, 157, 0.15);
+  padding: 16px 20px;
+  background: var(--bg-warm);
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(44, 36, 22, 0.06);
   margin-bottom: 16px;
 
   mat-icon {
-    color: var(--sweet-pink);
-    font-size: 22px;
+    color: var(--accent-gold);
+    font-size: 20px;
     flex-shrink: 0;
     margin-top: 2px;
   }
 
   div {
     flex: 1;
-    font-family: 'Quicksand', sans-serif;
-    font-size: 0.9rem;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.875rem;
     color: var(--text-medium);
-    line-height: 1.5;
+    line-height: 1.55;
 
     strong {
       display: block;
       color: var(--text-dark);
-      font-family: 'Fredoka', sans-serif;
-      font-size: 0.95rem;
-      margin-bottom: 2px;
+      font-weight: 600;
+      font-size: 0.8125rem;
+      margin-bottom: 4px;
     }
   }
 
   .change-link {
-    font-family: 'Quicksand', sans-serif !important;
-    color: var(--sweet-pink) !important;
-    font-size: 0.82rem !important;
+    font-family: 'Lato', sans-serif !important;
+    color: var(--color-chocolate) !important;
+    font-size: 0.8125rem !important;
     padding: 0 8px !important;
-    border-radius: var(--radius-pill) !important;
     height: auto !important;
     min-height: unset !important;
   }
@@ -352,68 +310,44 @@
 .my-divider { margin: 16px 0; }
 
 h3 {
-  font-family: 'Fredoka', sans-serif;
-  font-size: 1.15rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.125rem;
   color: var(--text-dark);
-  margin: 16px 0 10px;
+  margin: 16px 0 12px;
 }
 
-.test-card-info {
-  background: rgba(244, 196, 48, 0.12);
-  padding: 12px 16px;
-  border-radius: var(--radius-md);
-  font-family: 'Quicksand', sans-serif;
-  font-size: 0.85rem;
-  color: #5D4037;
-  margin: 0 0 20px;
-  border-left: 4px solid var(--sweet-gold);
-  line-height: 1.5;
-}
-
-// ============================================================
-// CHECKOUT SUMMARY
-// ============================================================
 .checkout-summary {
   position: sticky;
-  top: 88px;
+  top: calc(var(--header-height) + 24px);
 }
 
 .summary-card {
-  border-radius: var(--radius-lg) !important;
-  border: 1.5px solid rgba(255, 107, 157, 0.15) !important;
-  overflow: hidden;
-
-  // Gradient top traka
-  &::before {
-    content: '';
-    display: block;
-    height: 4px;
-    background: var(--gradient-pink);
-  }
+  border-radius: var(--radius-md) !important;
+  border: 1px solid rgba(44, 36, 22, 0.06) !important;
 
   mat-card-content {
-    padding: 20px 22px 22px !important;
+    padding: 28px !important;
   }
 
   h2 {
-    font-family: 'Fredoka', sans-serif;
-    font-size: 1.35rem;
-    font-weight: 700;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.375rem;
+    font-weight: 600;
     color: var(--text-dark);
-    margin: 0 0 16px;
+    margin: 0 0 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(44, 36, 22, 0.06);
   }
 }
 
-.items-list {
-  margin-bottom: 8px;
-}
+.items-list { margin-bottom: 8px; }
 
 .summary-item {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 8px 0;
-  border-bottom: 1px dashed rgba(255, 107, 157, 0.15);
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(44, 36, 22, 0.04);
 
   &:last-child { border-bottom: none; }
 
@@ -423,22 +357,22 @@ h3 {
 
     strong {
       display: block;
-      font-family: 'Fredoka', sans-serif;
-      font-size: 0.9rem;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.8125rem;
+      font-weight: 600;
       color: var(--text-dark);
       margin-bottom: 2px;
     }
 
     small {
-      font-family: 'Quicksand', sans-serif;
-      font-size: 0.78rem;
-      color: var(--text-light);
+      font-size: 0.75rem;
+      color: var(--text-muted);
     }
   }
 
   .item-total {
-    font-family: 'Fredoka', sans-serif;
-    font-size: 0.95rem;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.875rem;
     font-weight: 600;
     color: var(--text-dark);
     white-space: nowrap;
@@ -447,8 +381,8 @@ h3 {
 
 .summary-divider {
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 107, 157, 0.3), transparent);
-  margin: 10px 0;
+  background: rgba(44, 36, 22, 0.06);
+  margin: 12px 0;
 }
 
 .summary-line {
@@ -456,14 +390,14 @@ h3 {
   justify-content: space-between;
   align-items: center;
   padding: 6px 0;
-  font-family: 'Quicksand', sans-serif;
-  font-size: 0.9rem;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.875rem;
   color: var(--text-medium);
 
   .free {
-    color: #0a6b52;
-    font-weight: 700;
-    font-size: 0.85rem;
+    color: #4A6350;
+    font-weight: 600;
+    font-size: 0.8125rem;
   }
 }
 
@@ -474,88 +408,71 @@ h3 {
   padding: 12px 0 0;
 
   span {
-    font-family: 'Fredoka', sans-serif;
-    font-size: 1.05rem;
-    font-weight: 600;
-    color: var(--text-dark);
+    font-family: 'Lato', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-medium);
   }
 
   strong {
-    font-family: 'Fredoka', sans-serif;
-    font-size: 1.7rem;
-    font-weight: 700;
-    color: var(--sweet-pink);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.625rem;
+    font-weight: 600;
+    color: var(--color-chocolate);
   }
 }
 
-// ============================================================
-// RESPONSIVE
-// ============================================================
-@media (max-width: 768px) {
-  .checkout-container { padding: 16px; }
-  .checkout-summary { position: static; }
-  .wizard-progress { max-width: 100%; }
-}
-
-// Voucher sekcija
-.voucher-section {
-  margin: 16px 0;
-}
+.voucher-section { margin: 16px 0; }
 
 .voucher-input-row {
   display: flex;
   gap: 8px;
   align-items: flex-start;
 
-  .voucher-input {
-    flex: 1;
-  }
-
-  .voucher-apply-btn {
-    height: 56px;
-    min-width: 100px;
-  }
+  .voucher-input { flex: 1; }
+  .voucher-apply-btn { height: 56px; min-width: 100px; }
 }
 
 .voucher-applied {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
-  border-left: 4px solid #2E7D32;
-  border-radius: 8px;
-  padding: 12px 16px;
+  background: rgba(122, 139, 126, 0.08);
+  border-left: 3px solid var(--accent-sage);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
 
   .voucher-applied-info {
     display: flex;
     align-items: center;
     gap: 12px;
 
-    mat-icon {
-      color: #2E7D32;
-    }
+    mat-icon { color: var(--accent-sage); }
 
     strong {
       display: block;
-      font-size: 16px;
-      color: #1B5E20;
-      letter-spacing: 1px;
-      font-family: 'Courier New', monospace;
+      font-size: 0.9375rem;
+      color: var(--text-dark);
+      letter-spacing: 0.04em;
+      font-family: 'Lato', monospace;
     }
 
     small {
       display: block;
-      font-size: 12px;
-      color: #2E7D32;
+      font-size: 0.75rem;
+      color: var(--text-light);
     }
   }
 }
 
 .discount-line {
-  color: #FF6B9D;
+  color: var(--accent-gold);
   font-weight: 600;
 
-  .discount-value {
-    color: #FF6B9D;
-  }
+  .discount-value { color: var(--accent-gold); }
+}
+
+@media (max-width: 768px) {
+  .checkout-summary { position: static; }
+  .wizard-progress { max-width: 100%; }
 }

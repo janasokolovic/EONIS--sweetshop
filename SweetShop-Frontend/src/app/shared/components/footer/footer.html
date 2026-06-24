@@ -1,52 +1,45 @@
-<footer class="footer">
-  <div class="footer-content">
-    <!-- Brand kolona -->
-    <div class="footer-section">
-      <h3>
-        <span class="logo-icon">🍬</span> SweetShop
-      </h3>
-      <p>Vaša omiljena online prodavnica slatkiša. Dostavljamo sreću na vaša vrata! 🚪</p>
-      <div class="footer-tagline">
-        <span>🍭</span>
-        <span>🧁</span>
-        <span>🍫</span>
-        <span>🍰</span>
-        <span>🍩</span>
+<footer class="footer boutique-footer">
+  <div class="footer-inner">
+    <div class="footer-content">
+      <div class="footer-section footer-brand">
+        <div class="footer-logo">
+          <span class="footer-logo-mark">S</span>
+          <span class="footer-logo-name">SweetShop</span>
+        </div>
+        <p class="footer-description">Kurirana kolekcija finih slatkiša i čokolada. Svaki proizvod pažljivo odabran za nezaboravan doživljaj.</p>
+      </div>
+
+      <div class="footer-section">
+        <h4>Navigacija</h4>
+        <ul class="footer-links">
+          <li><a routerLink="/products">Svi proizvodi</a></li>
+          <li><a routerLink="/login">Prijava</a></li>
+          <li><a routerLink="/register">Registracija</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h4>Kontakt</h4>
+        <ul class="footer-contact">
+          <li>
+            <mat-icon>email</mat-icon>
+            <span>info&#64;sweetshop.com</span>
+          </li>
+          <li>
+            <mat-icon>phone</mat-icon>
+            <span>+381 60 123 4567</span>
+          </li>
+          <li>
+            <mat-icon>location_on</mat-icon>
+            <span>Novi Sad, Srbija</span>
+          </li>
+        </ul>
       </div>
     </div>
 
-    <!-- Brzi linkovi -->
-    <div class="footer-section">
-      <h4>Brzi linkovi</h4>
-      <ul>
-        <li><mat-icon>storefront</mat-icon><a routerLink="/products">Svi proizvodi</a></li>
-        <li><mat-icon>login</mat-icon><a routerLink="/login">Prijava</a></li>
-        <li><mat-icon>person_add</mat-icon><a routerLink="/register">Registracija</a></li>
-      </ul>
+    <div class="footer-bottom">
+      <p>&copy; {{ currentYear }} SweetShop. Sva prava zadržana.</p>
+      <span class="footer-accent-line"></span>
     </div>
-
-    <!-- Kontakt -->
-    <div class="footer-section">
-      <h4>Kontakt</h4>
-      <ul>
-        <li><mat-icon>email</mat-icon> info&#64;sweetshop.com</li>
-        <li><mat-icon>phone</mat-icon> +381 60 123 4567</li>
-        <li><mat-icon>location_on</mat-icon> Novi Sad, Srbija</li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- Dekorativni candy strip -->
-  <div class="footer-candy-strip">
-    <span>🍬</span>
-    <span>🍭</span>
-    <span>🧁</span>
-    <span>🍫</span>
-    <span>🍰</span>
-    <span>🍩</span>
-  </div>
-
-  <div class="footer-bottom">
-    <p>&copy; {{ currentYear }} SweetShop. Sva prava zadržana. Made with 💕</p>
   </div>
 </footer>

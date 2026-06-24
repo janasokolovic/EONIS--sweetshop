@@ -1,16 +1,28 @@
-﻿bin/
-obj/
+# Visual Studio
+.vs/
+**/bin/
+**/obj/
+
+# User-specific files
 *.user
 *.suo
-.vs/
-.vscode/
+*.userprefs
+
+# NuGet
+*.nupkg
 packages/
-[Dd]ebug/
-[Rr]elease/
-*.log
-appsettings.Production.json
-appsettings.Local.json
-*.mdf
-*.ldf
+project.lock.json
+
+# Stripe / secrets
+**/appsettings.Local.json
+**/appsettings.Development.Local.json
 Stripe/
-stripe.exe
+*.pem
+
+# Logs
+*.log
+logs/
+
+# OS files
+.DS_Store
+Thumbs.db

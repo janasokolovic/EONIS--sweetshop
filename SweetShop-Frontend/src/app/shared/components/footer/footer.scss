@@ -1,6 +1,5 @@
 // ============================================================
-// Footer Styles — SweetShop
-// Bogati footer sa kolonama i candy estetikom
+// Footer — Artisan Boutique
 // ============================================================
 
 :host {
@@ -8,189 +7,148 @@
 }
 
 .footer {
-  background: #fd5d92 !important;
-  color: white;
-  padding: 56px 32px 0;
+  background: var(--color-espresso);
+  color: rgba(255, 255, 255, 0.85);
+  padding: 64px 0 0;
   margin-top: auto;
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
   position: relative;
-  overflow: hidden;
+}
 
-  // Sklonjeni roze mehurići
-  &::before,
-  &::after {
-    display: none;
-  }
+.footer-inner {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: 0 clamp(24px, 4vw, 48px);
 }
 
 .footer-content {
   display: grid;
-  grid-template-columns: 1.4fr 1fr 1fr;
-  gap: 40px;
-  max-width: 1100px;
-  margin: 0 auto 40px;
-  position: relative;
-  z-index: 1;
+  grid-template-columns: 1.6fr 1fr 1fr;
+  gap: 48px;
+  padding-bottom: 48px;
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
-    gap: 32px;
+    gap: 36px;
   }
 }
 
 .footer-section {
-
-  h3, h4 {
-    font-family: 'Fredoka', sans-serif;
-    margin-bottom: 20px;
-    color: white !important;
+  h4 {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent-gold);
+    margin: 0 0 20px;
   }
+}
 
-  // Brand/Logo kolona
-  h3 {
-    font-size: 1.8rem;
+.footer-brand {
+  .footer-logo {
     display: flex;
     align-items: center;
-    gap: 8px;
-    background: none !important;
-    -webkit-text-fill-color: initial !important;
-    color: white !important;
-
-    .logo-icon {
-      font-size: 1.8rem;
-      color: white !important;
-      animation: float 4s ease-in-out infinite;
-    }
+    gap: 12px;
+    margin-bottom: 16px;
   }
 
-  h4 {
-    font-size: 1.05rem;
-    font-weight: 600;
-    letter-spacing: 0.3px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
-    display: inline-block;
-    width: 100%;
-  }
-
-  p {
-    margin: 0;
-    line-height: 1.8;
-    color: rgba(255, 255, 255, 0.85);
-    font-size: 0.92rem;
-  }
-
-  // Slogan
-  .footer-tagline {
+  .footer-logo-mark {
     display: flex;
-    gap: 10px;
-    margin-top: 16px;
-    font-size: 1.3rem;
-    line-height: 1;
-
-    span {
-      display: inline-block;
-      transition: transform var(--transition-base);
-      cursor: default;
-
-      &:hover { transform: scale(1.3) rotate(10deg); }
-    }
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--accent-gold);
+    border-radius: var(--radius-sm);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent-gold);
   }
 
-  ul {
-    list-style: none;
-    padding: 0;
+  .footer-logo-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: white;
+    letter-spacing: 0.04em;
+  }
+
+  .footer-description {
     margin: 0;
+    font-size: 0.9375rem;
+    line-height: 1.75;
+    color: rgba(255, 255, 255, 0.65);
+    max-width: 340px;
+  }
+}
 
-    li {
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.92rem;
-      color: rgba(255, 255, 255, 0.85);
-      transition: color var(--transition-fast);
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 
-      mat-icon {
-        font-size: 17px;
-        width: 17px;
-        height: 17px;
-        color: white !important;
-        flex-shrink: 0;
-      }
+  li {
+    margin-bottom: 12px;
+  }
 
-      a {
-        color: rgba(255, 255, 255, 0.85) !important;
-        text-decoration: none;
-        font-family: 'Quicksand', sans-serif;
-        font-weight: 500;
-        transition: all var(--transition-base);
-        position: relative;
+  a {
+    color: rgba(255, 255, 255, 0.65) !important;
+    text-decoration: none;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.9375rem;
+    font-weight: 400;
+    transition: color var(--transition-base);
+    position: relative;
 
-        &::after {
-          content: '';
-          position: absolute;
-          bottom: -2px;
-          left: 0;
-          width: 0;
-          height: 2px;
-          background: white;
-          border-radius: var(--radius-pill);
-          transition: width var(--transition-base);
-        }
-
-        &:hover {
-          color: white !important;
-          &::after { width: 100%; }
-        }
-      }
+    &:hover {
+      color: white !important;
     }
   }
 }
 
-// Dekorativna linija sa emojima
-.footer-candy-strip {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  padding: 16px 0;
-  font-size: 1.4rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-  margin: 0 auto;
-  max-width: 1100px;
-  position: relative;
-  z-index: 1;
+.footer-contact {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 
-  span {
-    display: inline-block;
-    animation: float 3s ease-in-out infinite;
-    cursor: default;
+  li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+    font-size: 0.9375rem;
+    color: rgba(255, 255, 255, 0.65);
 
-    &:nth-child(2) { animation-delay: 0.4s; }
-    &:nth-child(3) { animation-delay: 0.8s; }
-    &:nth-child(4) { animation-delay: 1.2s; }
-    &:nth-child(5) { animation-delay: 1.6s; }
-    &:nth-child(6) { animation-delay: 2.0s; }
+    mat-icon {
+      font-size: 16px;
+      width: 16px;
+      height: 16px;
+      color: var(--accent-gold) !important;
+      flex-shrink: 0;
+    }
   }
-}
-
-.footer-divider {
-  max-width: 1100px;
-  margin: 0 auto;
 }
 
 .footer-bottom {
-  text-align: center;
-  padding: 18px 32px;
-  position: relative;
-  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 0 28px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 
   p {
-    margin: 0;
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.7);
-    font-family: 'Quicksand', sans-serif;
-    font-weight: 500;
+    margin: 0 0 12px;
+    font-size: 0.8125rem;
+    color: rgba(255, 255, 255, 0.45);
+    font-family: 'Lato', sans-serif;
+    letter-spacing: 0.02em;
+  }
+
+  .footer-accent-line {
+    width: 48px;
+    height: 2px;
+    background: var(--accent-gold);
+    border-radius: var(--radius-pill);
   }
 }

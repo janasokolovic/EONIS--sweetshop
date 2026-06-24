@@ -10,6 +10,14 @@ export const routes: Routes = [
     loadComponent: () => import('./features/auth/register/register').then(m => m.Register)
   },
   {
+    path: 'forgot-password',
+    loadComponent: () => import('./features/auth/forgot-password/forgot-password').then(m => m.ForgotPassword)
+  },
+  {
+    path: 'reset-password',
+    loadComponent: () => import('./features/auth/reset-password/reset-password').then(m => m.ResetPassword)
+  },
+  {
     path: 'products',
     loadComponent: () => import('./features/products/product-list/product-list').then(m => m.ProductList)
   },
@@ -51,6 +59,10 @@ export const routes: Routes = [
       {
         path: 'dashboard',
         loadComponent: () => import('./features/admin/admin-dashboard/admin-dashboard').then(m => m.AdminDashboard)
+      },
+      {
+        path: 'customers',
+        loadComponent: () => import('./features/admin/admin-customers/admin-customers').then(m => m.AdminCustomers)
       },
       {
         path: 'products',

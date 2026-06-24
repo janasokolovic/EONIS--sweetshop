@@ -1,192 +1,157 @@
 // ============================================================
-// Product List Styles — SweetShop
-// Hero sekcija, CSS marquee, product kartice
+// Product List — Artisan Boutique
 // ============================================================
 
 .product-list-container {
-  max-width: 1400px;
+  max-width: var(--content-max-width);
   margin: 0 auto;
-  padding: 32px 24px 48px;
+  padding: 0 clamp(20px, 4vw, 48px) 64px;
 }
 
 // ============================================================
-// HERO SEKCIJA
+// HERO
 // ============================================================
 .hero {
   position: relative;
   overflow: hidden;
-  text-align: center;
-  padding: 72px 24px 64px;
-  margin-bottom: 0;
-  border-radius: var(--radius-xl);
+  margin: 0 calc(-1 * clamp(20px, 4vw, 48px));
+  padding: clamp(36px, 5vw, 56px) clamp(24px, 5vw, 64px);
   background: var(--gradient-hero);
   color: white;
+  text-align: center;
 
-  // Sjajni glow krugovi u pozadini
   &::before {
     content: '';
     position: absolute;
-    top: -40px; right: -40px;
-    width: 260px; height: 260px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.12);
-    pointer-events: none;
-  }
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: -60px; left: -60px;
-    width: 320px; height: 320px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.08);
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(201, 169, 98, 0.10) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 30%, rgba(201, 169, 98, 0.07) 0%, transparent 40%);
     pointer-events: none;
   }
 }
 
-// Plutajuće bombonice u hero-u
-.hero-bg-candy {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  overflow: hidden;
-
-  .candy {
-    position: absolute;
-    font-size: 1.8rem;
-    opacity: 0.35;
-    user-select: none;
-  }
-
-  .candy-1  { top: 12%; left: 5%;   animation: float 4.0s ease-in-out infinite 0.0s; }
-  .candy-2  { top: 25%; left: 15%;  animation: float 5.0s ease-in-out infinite 0.5s; font-size: 2.2rem; }
-  .candy-3  { top: 8%;  left: 78%;  animation: float 4.5s ease-in-out infinite 1.0s; }
-  .candy-4  { top: 60%; left: 3%;   animation: float 6.0s ease-in-out infinite 1.5s; font-size: 1.5rem; }
-  .candy-5  { top: 70%; left: 88%;  animation: float 4.2s ease-in-out infinite 0.3s; font-size: 2rem; }
-  .candy-6  { top: 20%; left: 88%;  animation: float 5.5s ease-in-out infinite 0.8s; }
-  .candy-7  { top: 78%; left: 45%;  animation: float 4.8s ease-in-out infinite 1.2s; font-size: 1.4rem; }
-  .candy-8  { top: 50%; left: 92%;  animation: float 5.2s ease-in-out infinite 2.0s; font-size: 1.6rem; }
-}
-
-.hero-content {
+.hero-inner {
   position: relative;
   z-index: 1;
+  max-width: 680px;
+  margin: 0 auto;
 }
 
-.hero-badge {
+.hero-eyebrow {
   display: inline-block;
-  background: rgba(255, 255, 255, 0.22);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  border-radius: var(--radius-pill);
-  padding: 6px 20px;
-  font-family: 'Quicksand', sans-serif;
-  font-size: 0.85rem;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.6875rem;
   font-weight: 600;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-gold);
   margin-bottom: 20px;
-  color: white;
 }
 
-.hero h1 {
-  font-family: 'Fredoka', sans-serif;
-  font-size: clamp(2.2rem, 5vw, 3.4rem);
-  font-weight: 700;
-  margin: 0 0 16px;
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 500;
+  margin: 0 0 20px;
   color: white;
-  text-shadow: 0 2px 12px rgba(0,0,0,0.12);
-  line-height: 1.2;
-}
+  line-height: 1.15;
 
-.hero-brand {
-  display: inline-block;
-  background: rgba(255, 255, 255, 0.3);
-  padding: 2px 14px;
-  border-radius: var(--radius-sm);
-  text-shadow: none;
+  em {
+    font-style: italic;
+    color: var(--accent-gold-light);
+  }
 }
 
 .hero-subtitle {
-  font-family: 'Quicksand', sans-serif;
-  font-size: clamp(1rem, 2.5vw, 1.25rem);
-  color: rgba(255, 255, 255, 0.92);
-  margin: 0 0 32px;
+  font-family: 'Lato', sans-serif;
+  font-size: clamp(0.9375rem, 2vw, 1.0625rem);
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.72);
+  margin: 0 auto 28px;
+  max-width: 520px;
+  line-height: 1.75;
 }
 
 .hero-stats {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 24px;
+  gap: 32px;
   flex-wrap: wrap;
+  padding-top: 32px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .stat {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2px;
+  gap: 4px;
 
   .stat-num {
-    font-family: 'Fredoka', sans-serif;
-    font-size: 1.4rem;
-    font-weight: 700;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
     color: white;
     line-height: 1;
   }
 
   .stat-label {
-    font-family: 'Quicksand', sans-serif;
-    font-size: 0.78rem;
-    color: rgba(255, 255, 255, 0.8);
+    font-family: 'Lato', sans-serif;
+    font-size: 0.6875rem;
     font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.55);
   }
 }
 
 .stat-divider {
-  font-size: 1.3rem;
-  opacity: 0.7;
+  width: 1px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.15);
 }
 
 // ============================================================
-// CSS MARQUEE KARUSEL
+// MARQUEE
 // ============================================================
 .marquee-wrapper {
   display: flex;
   align-items: center;
-  gap: 16px;
-  background: white;
-  border: 1px solid rgba(255, 107, 157, 0.18);
-  border-radius: var(--radius-md);
-  margin: 20px 0;
-  padding: 0 20px;
+  gap: 24px;
+  background: var(--color-espresso);
+  border: none;
+  border-radius: 0;
+  margin: 32px calc(-1 * clamp(20px, 4vw, 48px));
+  padding: 0 24px;
   overflow: hidden;
-  box-shadow: var(--shadow-pink-sm);
-  height: 52px;
+  height: 44px;
 }
 
 .marquee-label {
-  font-family: 'Fredoka', sans-serif;
-  font-size: 0.95rem;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.625rem;
   font-weight: 700;
-  color: var(--sweet-pink);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent-gold);
   white-space: nowrap;
   flex-shrink: 0;
-  padding-right: 16px;
-  border-right: 2px solid rgba(255, 107, 157, 0.2);
+  padding-right: 24px;
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .marquee-track {
   flex: 1;
   overflow: hidden;
-  position: relative;
-  mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
 }
 
 .marquee-content {
   display: flex;
-  gap: 0;
   width: max-content;
-  animation: marquee 30s linear infinite;
+  animation: marquee 40s linear infinite;
 
   &:hover { animation-play-state: paused; }
 
@@ -194,45 +159,45 @@
     display: inline-flex;
     align-items: center;
     padding: 0 28px;
-    font-family: 'Quicksand', sans-serif;
-    font-size: 0.88rem;
-    font-weight: 600;
-    color: var(--text-medium);
+    font-family: 'Lato', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: rgba(255, 255, 255, 0.65);
     white-space: nowrap;
-    border-right: 1px solid rgba(255, 107, 157, 0.15);
-    height: 52px;
+    height: 44px;
     transition: color var(--transition-fast);
 
-    &:hover { color: var(--sweet-pink); }
+    &::after {
+      content: '—';
+      margin-left: 28px;
+      color: rgba(255, 255, 255, 0.2);
+      font-size: 0.625rem;
+    }
+
+    &:hover { color: var(--accent-gold); }
   }
 }
 
 // ============================================================
-// FILTERI
+// FILTERS
 // ============================================================
 .filters-section {
-  margin: 12px 0 8px;
+  margin: 48px 0 32px;
 }
 
 .filters-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
 }
 
 .filters-title {
-  font-family: 'Fredoka', sans-serif;
-  font-size: 1.6rem;
-  font-weight: 600;
-  color: var(--text-dark);
   margin: 0;
 }
 
 .filters {
   display: flex;
   gap: 16px;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
   flex-wrap: wrap;
 }
 
@@ -247,86 +212,77 @@
 }
 
 .active-filters {
-  margin-bottom: 16px;
+  margin-bottom: 8px;
 }
 
 // ============================================================
-// LOADER
+// LOADING & EMPTY
 // ============================================================
 .loading {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 80px 0;
-  gap: 20px;
+  padding: 100px 0;
+
+  .loading-text {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.9375rem;
+    color: var(--text-light);
+    margin: 0;
+    letter-spacing: 0.02em;
+  }
 }
 
-.loading-text {
-  font-family: 'Fredoka', sans-serif;
-  font-size: 1.1rem;
-  color: var(--text-medium);
-  margin: 0;
-}
-
-// ============================================================
-// EMPTY STATE
-// ============================================================
 .empty-state {
   text-align: center;
-  padding: 80px 20px;
+  padding: 100px 24px;
 
-  .empty-emoji {
-    font-size: 5rem;
+  .empty-icon {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+    color: var(--color-sand);
     margin-bottom: 20px;
-    animation: float 3s ease-in-out infinite;
-    display: block;
   }
 
   h3 {
-    font-family: 'Fredoka', sans-serif;
-    font-size: 1.8rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.75rem;
     color: var(--text-dark);
     margin: 0 0 10px;
   }
 
   p {
     color: var(--text-light);
-    font-size: 1rem;
+    font-size: 0.9375rem;
   }
 }
 
 // ============================================================
-// GRID PROIZVODA
+// PRODUCT GRID
 // ============================================================
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-  gap: 24px;
-  margin: 24px 0 32px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 28px;
+  margin: 32px 0 40px;
 }
 
-// ============================================================
-// PRODUCT CARD
-// ============================================================
 .product-card {
   cursor: pointer;
-  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: all var(--transition-base);
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  border-radius: var(--radius-lg) !important;
-  border: 3px solid #FF6B9D !important;
-  background: #E8F2F9 !important;
-  box-shadow: var(--shadow-pink-sm) !important;
+  border-radius: 0 !important;
+  border: 1.5px solid rgba(44, 36, 22, 0.14) !important;
+  background: var(--bg-white) !important;
+  box-shadow: 0 2px 12px rgba(44, 36, 22, 0.07) !important;
 
   &:hover {
-    transform: translateY(-10px) scale(1.015);
-    box-shadow: var(--shadow-pink-lg) !important;
-    border-color: #FF3377 !important;
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(44, 36, 22, 0.14) !important;
+    border-color: var(--color-chocolate) !important;
 
     .product-image img {
-      transform: scale(1.08);
+      transform: scale(1.05);
     }
 
     .card-hover-overlay {
@@ -335,19 +291,18 @@
   }
 }
 
-// Slika proizvoda
 .product-image {
   position: relative;
   width: 100%;
-  height: 210px;
+  height: 240px;
   overflow: hidden;
-  background: var(--bg-cream);
+  background: var(--bg-warm);
 
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s ease;
+    transition: transform 0.6s ease;
     display: block;
   }
 
@@ -357,87 +312,88 @@
     align-items: center;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, var(--sweet-pink-pale), var(--bg-cream));
+    background: var(--bg-linen);
 
-    .no-image-emoji {
-      font-size: 3.5rem;
-      animation: float 3s ease-in-out infinite;
+    mat-icon {
+      font-size: 40px;
+      width: 40px;
+      height: 40px;
+      color: var(--color-sand);
     }
   }
 
-  // Hover overlay
   .card-hover-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(255, 107, 157, 0.55);
-    backdrop-filter: blur(2px);
+    background: rgba(44, 36, 22, 0.52);
     display: flex;
     align-items: center;
     justify-content: center;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity var(--transition-base);
 
     span {
       color: white;
-      font-family: 'Fredoka', sans-serif;
-      font-size: 1.1rem;
-      font-weight: 600;
-      letter-spacing: 0.5px;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 10px 22px;
+      border: 1.5px solid rgba(255, 255, 255, 0.7);
+      border-radius: 0;
     }
   }
 }
 
-// Stock badge-evi
 .stock-badge {
   position: absolute;
   top: 12px;
   left: 12px;
-  padding: 4px 12px;
-  border-radius: var(--radius-pill);
-  font-family: 'Fredoka', sans-serif;
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.3px;
-  backdrop-filter: blur(4px);
+  padding: 5px 12px;
+  border-radius: 0;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .out-of-stock-badge {
-  background: rgba(230, 57, 70, 0.88);
+  background: rgba(44, 36, 22, 0.75);
   color: white;
-  border: 1px solid rgba(255,255,255,0.2);
 }
 
 .low-stock-badge {
-  background: rgba(244, 196, 48, 0.92);
-  color: var(--text-dark);
-  border: 1px solid rgba(255,255,255,0.3);
+  background: var(--bg-white);
+  color: var(--color-cocoa);
+  border: 1px solid var(--color-sand);
 }
 
-// Sadržaj kartice
 .card-body {
   display: flex;
   flex-direction: column;
   flex: 1;
-  padding: 18px 20px 20px !important;
+  padding: 20px 22px 22px !important;
 }
 
 .category-chip {
   display: inline-block;
-  font-family: 'Fredoka', sans-serif;
-  font-size: 0.75rem;
-  font-weight: 600;
-  padding: 3px 12px;
-  border-radius: var(--radius-pill);
-  background: var(--sweet-pink-pale);
-  color: var(--sweet-pink);
+  font-family: 'Lato', sans-serif;
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  color: var(--color-espresso);
+  background: var(--bg-linen);
+  border-left: 2px solid var(--accent-gold);
   margin-bottom: 10px;
-  letter-spacing: 0.3px;
-  border: 1px solid rgba(255, 107, 157, 0.2);
 }
 
 .product-name {
-  font-family: 'Fredoka', sans-serif;
-  font-size: 1.15rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.25rem;
   font-weight: 600;
   margin: 0 0 8px;
   color: var(--text-dark);
@@ -445,42 +401,42 @@
 }
 
 .product-description {
-  font-family: 'Quicksand', sans-serif;
-  font-size: 0.85rem;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.8125rem;
   color: var(--text-light);
-  margin: 0 0 12px;
+  margin: 0 0 14px;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  min-height: 38px;
-  line-height: 1.6;
+  min-height: 40px;
+  line-height: 1.65;
 }
 
 .rating {
   display: flex;
   align-items: center;
   gap: 5px;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
 
   .star {
-    color: var(--sweet-gold);
-    font-size: 17px;
-    width: 17px;
-    height: 17px;
+    color: var(--accent-gold);
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
   }
 
   .rating-value {
-    font-family: 'Fredoka', sans-serif;
-    font-size: 0.9rem;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.8125rem;
     font-weight: 600;
     color: var(--text-dark);
   }
 
   .review-count {
-    font-size: 0.78rem;
-    color: var(--text-light);
+    font-size: 0.75rem;
+    color: var(--text-muted);
   }
 }
 
@@ -489,32 +445,28 @@
   justify-content: space-between;
   align-items: center;
   margin-top: auto;
-  padding-top: 14px;
-  border-top: 1px solid rgba(255, 107, 157, 0.1);
+  padding-top: 16px;
+  border-top: 1.5px solid rgba(44, 36, 22, 0.10);
 
   .price {
-    font-family: 'Fredoka', sans-serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--sweet-pink);
+    color: var(--color-espresso);
     line-height: 1;
   }
 
   .add-btn {
-    height: 38px;
+    height: 36px !important;
     padding: 0 16px !important;
-    font-size: 0.88rem !important;
-    border-radius: var(--radius-pill) !important;
+    font-size: 0.6875rem !important;
+    min-width: unset !important;
 
     mat-icon {
-      font-size: 18px;
-      width: 18px;
-      height: 18px;
+      font-size: 16px;
+      width: 16px;
+      height: 16px;
       margin-right: 4px;
-    }
-
-    &:hover:not(:disabled) {
-      animation: pulse-pink 0.6s ease;
     }
   }
 }
@@ -523,17 +475,12 @@
 // RESPONSIVE
 // ============================================================
 @media (max-width: 768px) {
-  .product-list-container {
-    padding: 16px;
-  }
-
-  .hero {
-    padding: 48px 16px 40px;
-    border-radius: var(--radius-lg);
-  }
-
   .hero-stats {
-    gap: 16px;
+    gap: 20px;
+  }
+
+  .stat-divider {
+    display: none;
   }
 
   .products-grid {
@@ -541,7 +488,7 @@
     gap: 16px;
   }
 
-  .product-image { height: 160px; }
+  .product-image { height: 180px; }
 
   .filters {
     flex-direction: column;
@@ -551,10 +498,6 @@
   .filter-field {
     min-width: unset;
     flex: 1 1 100%;
-  }
-
-  .marquee-wrapper {
-    padding: 0 12px;
   }
 
   .marquee-label {
